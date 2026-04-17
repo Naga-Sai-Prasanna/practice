@@ -1,10 +1,5 @@
 #!/bin/bash
 USERID=$(id -u)
-LOGS_FOLDER="/var/log/shell"
-LOGS_FILE="/var/log/shell/$0.log"
-
-mkdir -p $LOGS_FOLDER
-
 
 if [ $USERID -ne 0 ]; then
  echo "please run the script with root access"
@@ -22,9 +17,14 @@ fi
 }
 
 
-dnf install nginx -y &>> $LOGS_FILE
+dnf install nginx -y 
 VALIDATE $? "installing nginx" 
 
+dnf remove nginx -y
+VALIDATE $? "removing nginx"
 
-dnf install nodejs -y &>> $LOGS_FILE
+dnf install nodejs -y 
 VALIDATE $? "installing nodejs"
+
+dnf remove nodejs -y
+VALIDATE $? "removing nodejs"
