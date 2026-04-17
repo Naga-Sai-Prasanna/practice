@@ -19,6 +19,10 @@ fi
 
 dnf install nginx -y
 VALIDATE $? installing nginx
+dnf remove nginx -y
+VALIDATE $? removing nginx
 
 dnf install nodejs -y
 VALIDATE $? installing nodejs
+dnf remove nodejs -y
+VALIDATE $? removing nodejs
