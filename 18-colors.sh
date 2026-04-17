@@ -3,6 +3,12 @@ USERID=$(id -u)
 LOGS_FOLDER="/var/log/shell"
 LOGS_FILE="/var/log/shell/$0.log"
 
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+
+
 mkdir -p $LOGS_FOLDER
 
 if [ $USERID -ne 0 ]; then
