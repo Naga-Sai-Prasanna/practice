@@ -7,7 +7,7 @@ LOGS_FILE="/var/log/shell/$0.log"
 
 
 if [ $USERID -ne 0 ]; then
- echo "please run the script with root access"
+ echo "please run the script with root access" | tee -a $LOGS_FILE
  exit 1
 fi
 
@@ -16,9 +16,9 @@ mkdir -p $LOGS_FOLDER
 VALIDATE(){
 
 if [ $1 -ne 0 ]; then
-   echo "$2 failure"
+   echo "$2 failure" | tee -a $LOGS_FILE
 else 
-  echo "$2 success"
+  echo "$2 success" | tee -a $LOGS_FILE
 fi
 
 }
