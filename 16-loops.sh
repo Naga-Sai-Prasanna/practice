@@ -28,6 +28,7 @@ do
    echo "$app is not installed installing now"
   else
    echo "$app is installed already"  
+  fi 
   dnf install $app -y &>>$LOGS_FILE
   VALIDATE $? "$app installation" 
 done
