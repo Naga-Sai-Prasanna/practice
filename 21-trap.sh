@@ -23,15 +23,13 @@ fi
 
 
 
-for app in "$@"
+for app in $@
 do
   dnf list installed $app &>>$LOGS_FILE
   if [ $? -ne 0 ]; then
-   echo "$app is not installed, installing now"
-  else
-   echo -e "$G $app is installed already $N"  
-   exit 1
-  fi 
-  dnf install $app -y &>>$LOGS_FILE
-   
+    echo "$app is not installed, installing now"
+    dnf install $app -y &>>$LOGS_FILE
+   else
+     echo -e "$G $app is installed already $N"  
+    fi 
 done
