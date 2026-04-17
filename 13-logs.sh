@@ -26,10 +26,7 @@ fi
 
 dnf install nginx -y &>> $LOGS_FILE
 VALIDATE $? "installing nginx"
-dnf remove nginx -y
-VALIDATE $? "removing nginx"
+
 
 dnf install nodejs -y &>> $LOGS_FILE
 VALIDATE $? "installing nodejs"
-dnf remove nodejs -y
-VALIDATE $? "removing nodejs"
