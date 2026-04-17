@@ -2,6 +2,7 @@
 
 set -e
 trap 'echo "there is an error in $LINENO, command: $BASH_COMMAND"' ERR
+
 USERID=$(id -u)
 LOGS_FOLDER="/var/log/shell"
 LOGS_FILE="/var/log/shell/$0.log"
