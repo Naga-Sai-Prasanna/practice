@@ -13,9 +13,9 @@ mkdir -p $LOGS_FOLDER
 VALIDATE(){
 
 if [ $1 -ne 0 ]; then
-   echo "$2 failure" | tee -a $LOGS_FILE
+   echo "$2 ... failure" | tee -a $LOGS_FILE
 else 
-  echo "$2 success" | tee -a $LOGS_FILE
+  echo "$2 ... success" | tee -a $LOGS_FILE
 fi
 
 }
@@ -24,5 +24,5 @@ fi
 for app in $@
 do
  dnf install $app -y &>>$LOGS_FILE
- VALIDATE $? "installing $app is success" 
+ VALIDATE $? "$app installation" 
 done
