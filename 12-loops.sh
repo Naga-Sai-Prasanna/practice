@@ -9,20 +9,20 @@ fi
 VALIDATE(){
 
 if [ $1 -ne 0 ]; then
-   echo "$2.... failure"
+   echo "$2 failure"
 else 
-  echo "$2.... success"
+  echo "$2 success"
 fi
 
 }
 
 
 dnf install nginx -y
-VALIDATE $? installing nginx
+VALIDATE $? "installing nginx"
 dnf remove nginx -y
-VALIDATE $? removing nginx
+VALIDATE $? "removing nginx"
 
 dnf install nodejs -y
-VALIDATE $? installing nodejs
+VALIDATE $? "installing nodejs"
 dnf remove nodejs -y
-VALIDATE $? removing nodejs
+VALIDATE $? "removing nodejs"
