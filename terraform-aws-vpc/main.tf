@@ -9,7 +9,7 @@ resource "aws_vpc" "main" {
 
 #2. internet gateway
 
-resource "aws_internet_gateway" "main" {
+resource "aws_internet_gateway" "igw" {
     vpc_id = aws_vpc.main.id #vpc association
     
     tags = local.igw_final_tags
@@ -125,7 +125,7 @@ resource "aws_route_table" "database" {
 resource "aws_route" "public" {
     route_table_id = aws_route_table.public.id
     destination_cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.main.id
+    gateway_id = aws_internet_gateway.igw.id
 }
 
 # we need to create nat for private.so first we have to create elastic ip.
@@ -150,7 +150,7 @@ resource "aws_eip" "elastic" {
 
 resource "aws_nat_gateway" "nat" {
     allocation_id = aws_eip.elastic.id
-    subnet_id = aws_route.public[0].id
+    subnet_id = aws_subnet.public[0].id
 
     tags = merge(
         local.common_tags,
@@ -163,7 +163,7 @@ resource "aws_nat_gateway" "nat" {
     # to emsure proper ordering, it is recommended to add an explicit dependency
     # on the igw for the vpc
 
-    depends_on = [ aws_internet_gateway.main ]
+    depends_on = [ aws_internet_gateway.igw ]
 }
 
 # # route for private subnet --> open nat access
@@ -171,7 +171,7 @@ resource "aws_nat_gateway" "nat" {
 resource "aws_route" "private" {
     route_table_id = aws_route_table.private.id
     destination_cidr_block = "0.0.0.0/0"
-    nat_gateway_id = aws_aws_gateway.main.id
+    nat_gateway_id = aws_nat_gateway.nat.id
 }
 
 # route for database subnet --> open nat access 
@@ -179,7 +179,7 @@ resource "aws_route" "private" {
 resource "aws_route" "database" {
     route_table_id = aws_route_table.database.id
     destination_cidr_block = "0.0.0.0/0"
-    nat_gateway_id = aws_aws_gateway.main.id
+    nat_gateway_id = aws_nat_gateway.nat.id
 }
 
 

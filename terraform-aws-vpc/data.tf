@@ -1,4 +1,4 @@
-data "aws_availability_zones" "avaialble" {
+data "aws_availability_zones" "available" {
   state = "available"
 }
 
@@ -9,7 +9,7 @@ data "aws_vpc" "default" {
 data "aws_route_table" "default" {
     vpc_id = data.aws_vpc.default.id
     filter {
-      name = "association_main"
+      name = "association.main"
       values = ["true"]
     }
 }
