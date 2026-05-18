@@ -1,0 +1,49 @@
+# connection from internet to bastion
+
+resource "aws_security_group_rule" "bastion_internet" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    #cidr_blocks = ["0.0.0.0/0"] or we can dynamically add our ip address
+    #for this data.tf file add the query
+    cidr_blocks = [local.my_ip]
+    # which sg you are creating this rule
+    security_group_id = local.bastion_sg_id
+}
+
+# connection from bastion to mongodb
+
+resource "aws_security_group_rule" "mongodb_bastion" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.bastion_sg_id
+    security_group_id = local.mongodb_sg_id
+}
+
+# connection from catalogue
+
+resource "aws_security_group_rule" "mongodb_catalogue" {
+    type = "ingress"
+    from_port = 27017
+    to_port = 27017
+    protocol = "tcp"
+    #we can use either cidr or sec group
+    source_security_group_id = local.catalogue_sg_id
+    security_group_id = local.mongodb_sg_id
+}
+
+# connection from user
+
+resource "aws_security_group_rule" "mongodb_user" {
+    type = "ingress"
+    from_port = 27017
+    to_port = 27017
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.user_sg_id
+    security_group_id = local.mongodb_sg_id
+}
