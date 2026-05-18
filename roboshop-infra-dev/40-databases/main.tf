@@ -33,7 +33,7 @@ resource "terraform_data"  "bootstrap" {
   provisioner "file" {
 
     source = "bootstrap.sh" #local file path
-    destination = "tmp/bootstrap.sh"  # Destination path on the remote machine
+    destination = "/tmp/bootstrap.sh"  # Destination path on the remote machine
 
 }
 
