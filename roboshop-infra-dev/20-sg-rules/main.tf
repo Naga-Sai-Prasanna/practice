@@ -50,7 +50,7 @@ resource "aws_security_group_rule" "mongodb_user" {
 
 # connection from bastion to redis
 
-resource "aws_security_group_rule" "mongodb_bastion" {
+resource "aws_security_group_rule" "redis_bastion" {
     type = "ingress"
     from_port = 22
     to_port = 22
