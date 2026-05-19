@@ -24,3 +24,10 @@ resource "aws_iam_role" "mysql" {
     local.common_tags
   )
 }
+
+# polict creation
+resource "aws_iam_policy" "mysql" {
+  name = local.mysql_policy_name
+  description = "A policy for MYSQL Ec2 instance"
+  policy = file("mysql-iam-policy.json")
+}
