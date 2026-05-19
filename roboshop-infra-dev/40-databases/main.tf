@@ -65,7 +65,7 @@ resource "aws_instance" "redis" {
     )
 }
 
-# connecting to mongodb instance through remote-exec
+# connecting to redis instance through remote-exec
 
 resource "terraform_data"  "bootstrap_redis" {
   triggers_replace = [
@@ -81,7 +81,7 @@ resource "terraform_data"  "bootstrap_redis" {
   }
  
 
-# installing ansible in mongodb through boostrap.sh
+# installing ansible in redis through boostrap.sh
   provisioner "file" {
 
     source = "bootstrap.sh" #local file path
@@ -95,6 +95,57 @@ provisioner "remote-exec" {
     inline = [
        "chmod +x /tmp/bootstrap.sh",
        "sudo sh /tmp/bootstrap.sh redis"
+    ]
+}
+}
+
+# mysql
+
+resource "aws_instance" "redis" {
+    ami  = local.ami_id
+    instance_type = "t3.micro"
+    subnet_id = local.database_subnet_id
+    vpc_security_group_ids = [local.mysql_sg_id]
+      
+    tags = merge(
+        {
+            Name = "${var.project}-${var.environment}-mysql"
+        },
+        local.common_tags
+
+    )
+}
+
+# connecting to redis instance through remote-exec
+
+resource "terraform_data"  "bootstrap_mysql" {
+  triggers_replace = [
+    aws_instance.mysql.id
+  ]
+
+  connection {
+    type = "ssh"
+    user = "ec2-user"
+    password = "DevOps321"
+    host = aws_instance.mysql.private_ip
+
+  }
+ 
+
+# installing ansible in redis through boostrap.sh
+  provisioner "file" {
+
+    source = "bootstrap.sh" #local file path
+    destination = "/tmp/bootstrap.sh"  # Destination path on the remote machine
+
+}
+
+# giving executor access to the script
+  
+provisioner "remote-exec" {
+    inline = [
+       "chmod +x /tmp/bootstrap.sh",
+       "sudo sh /tmp/bootstrap.sh mysql"
     ]
 }
 }
