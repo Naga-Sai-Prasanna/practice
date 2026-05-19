@@ -10,7 +10,7 @@
                 "ssm:GetParametersByPath",
                 "ssm:DescribeParameters"
             ],
-            "Resource": "arn:aws:ssm:us-east-1:370400270361:parameter/roboshop/*"
+            "Resource": "arn:aws:ssm:us-east-1:370400270361:parameter/roboshop/dev/mysql_root_password"
         },
         {
             "Sid": "KMSDecrypt",
