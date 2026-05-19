@@ -2,15 +2,22 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "VisualEditor0",
+            "Sid": "SSMRead",
             "Effect": "Allow",
-            "Action": "ssm:GetParameter",
-            "Resource": "arn:aws:ssm:us-east-1:370400270361:parameter/root/dev/mysql_root_password"
+            "Action": [
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "ssm:GetParametersByPath",
+                "ssm:DescribeParameters"
+            ],
+            "Resource": "arn:aws:ssm:us-east-1:370400270361:parameter/roboshop/*"
         },
         {
-            "Sid": "VisualEditor1",
+            "Sid": "KMSDecrypt",
             "Effect": "Allow",
-            "Action": "ssm:DescribeParameters",
+            "Action": [
+                "kms:Decrypt"
+            ],
             "Resource": "*"
         }
     ]
