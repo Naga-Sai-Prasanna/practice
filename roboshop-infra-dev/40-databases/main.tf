@@ -101,7 +101,7 @@ provisioner "remote-exec" {
 
 # mysql
 
-resource "aws_instance" "redis" {
+resource "aws_instance" "mysql" {
     ami  = local.ami_id
     instance_type = "t3.micro"
     subnet_id = local.database_subnet_id
