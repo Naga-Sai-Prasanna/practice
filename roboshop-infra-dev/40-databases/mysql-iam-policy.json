@@ -8,7 +8,7 @@
                 "ssm:GetParameter",
                 "ssm:DescribeParameters"
             ],
-            "Resource": "arn:aws:ssm:us-east-1:370400270361:parameter/roboshop/${env}/mysql_root_password"
+            "Resource": "arn:aws:ssm:us-east-1:370400270361:parameter/roboshop/${environment}/mysql_root_password"
         },
         {
             "Sid": "KMSDecrypt",
