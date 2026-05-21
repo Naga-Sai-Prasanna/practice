@@ -85,3 +85,37 @@ resource "aws_security_group_rule" "rabbitmq_bastion" {
     security_group_id = local.rabbitmq_sg_id
 }
 
+# connection from bastion to backend alb
+
+resource "aws_security_group_rule" "backend_alb_bastion" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    source_security_group_id = local.bastion_sg_id
+    security_group_id = local.backend_alb_sg_id
+}
+
+# connection from bastion to catalogue
+
+resource "aws_security_group_rule" "catalogue_bastion" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.bastion_sg_id
+    security_group_id = local.catalogue_sg_id
+}
+
+# connection from backend alb to catalogue
+
+resource "aws_security_group_rule" "catalogue_backend_alb" {
+    type = "ingress"
+    from_port = 8080
+    to_port = 8080
+    protocol = "tcp"
+    #we can use either cidr or sec group
+    source_security_group_id = local.backend_alb_sg_id
+    security_group_id = local.catalogue_sg_id
+}
