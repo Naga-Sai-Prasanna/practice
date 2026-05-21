@@ -10,7 +10,7 @@ terraform {
 
   backend "s3" {
     bucket       = "remote-state-prasanna-dev" #replace with your bucket anme
-    key          = "roboshop-dev-sg-rules"  # to what it shoulb be saved can't we reuse the same name
+    key          = "roboshop-dev-bastion"  # to what it shoulb be saved can't we reuse the same name
     region       = "us-east-1"
     use_lockfile = true # to avoid multiple people working on same state file at the same time
   }
