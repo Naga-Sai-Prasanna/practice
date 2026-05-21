@@ -6,8 +6,6 @@
             "Effect": "Allow",
             "Action": [
                 "ssm:GetParameter",
-                "ssm:GetParameters",
-                "ssm:GetParametersByPath",
                 "ssm:DescribeParameters"
             ],
             "Resource": "arn:aws:ssm:us-east-1:370400270361:parameter/roboshop/${environment}/mysql_root_password"
