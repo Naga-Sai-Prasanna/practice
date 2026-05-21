@@ -2,7 +2,7 @@
     "Sid": "SSMRead",
     "Effect": "Allow",
     "Action": ["ssm:GetParameter", "ssm:DescribeParameters"],
-    "Resource": "arn:aws:ssm:us-east-1:370400270361:parameter/roboshop/*",
+    "Resource": "arn:aws:ssm:us-east-1:370400270361:parameter/roboshop/${environment}/mysql_root_password",
     "Condition": {
         "StringEquals": {
             "aws:ResourceTag/environment": "${aws:PrincipalTag/environment}"
