@@ -7,6 +7,6 @@ locals {
         Terraform = "true"
     }
     catalogue_sg_id = data.aws_ssm_parameter.catalogue_sg_id.value
-    private_subnet_id = split(",", data.aws.private_subnet_ids.value)[0]
+    private_subnet_id = split(",", data.aws.ssm_parameter_private_subnet_ids.value)[0]
 
 }
