@@ -13,7 +13,7 @@ resource "aws_instance" "catalogue" {
     )
 }
 
-# connecting to mongodb instance through remote-exec
+# connecting to catalogue instance through remote-exec
 
 resource "terraform_data"  "catalogue" {
   triggers_replace = [
@@ -29,7 +29,7 @@ resource "terraform_data"  "catalogue" {
   }
  
 
-# installing ansible in mongodb through boostrap.sh
+# installing ansible in catalogue through boostrap.sh
   provisioner "file" {
 
     source = "bootstrap.sh" #local file path
