@@ -5,8 +5,8 @@ resource "aws_lb" "backend_alb" {
   name               = "${var.project}-${var.environment}"  #roboshop-dev
   internal           = true
   load_balancer_type = "application"
-  security_groups    = [local.backend.alb_sg.id]
-  subnets            = local.private_subnet.ids
+  security_groups    = [local.backend_alb_sg_id]
+  subnets            = local.private_subnet_id
 
 # keeping it has false, just to delete using terraform while practice
   enable_deletion_protection = false
@@ -24,7 +24,7 @@ resource "aws_lb" "backend_alb" {
 # lb listner
 
 resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_lb.backend_alb_.arn
+  load_balancer_arn = aws_lb.backend_alb.arn
   port              = "80"
   protocol          = "HTTP"
   
