@@ -1,0 +1,53 @@
+resource "aws_instance" "catalogue" {
+    ami  = local.ami_id
+    instance_type = "t3.micro"
+    subnet_id = local.private_subnet_id
+    vpc_security_group_ids = [local.catalogue_sg_id]
+      
+    tags = merge(
+        {
+            Name = "${var.project}-${var.environment}-catalogue"
+        },
+        local.common_tags
+
+    )
+}
+
+# connecting to mongodb instance through remote-exec
+
+resource "terraform_data"  "bootstrap" {
+  triggers_replace = [
+    aws_instance.catalogue.id
+  ]
+
+  connection {
+    type = "ssh"
+    user = "ec2-user"
+    password = "DevOps321"
+    host = aws_instance.catalogue.private_ip
+
+  }
+ 
+
+# installing ansible in mongodb through boostrap.sh
+  provisioner "file" {
+
+    source = "bootstrap.sh" #local file path
+    destination = "/tmp/bootstrap.sh"  # Destination path on the remote machine
+
+}
+
+# giving executor access to the script
+  
+provisioner "remote-exec" {
+    inline = [
+       "chmod +x /tmp/bootstrap.sh",
+       "sudo sh /tmp/bootstrap.sh catalogue"
+    ]
+}
+}
+
+action "aws_ec2_instance_state" "catalogue" {
+  instance_id = aws_instance.catalogue.id
+  state = "stopped"
+}
