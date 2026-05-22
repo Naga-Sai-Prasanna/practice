@@ -47,7 +47,7 @@ provisioner "remote-exec" {
 }
 }
 
-action "aws_ec2_instance_state" "catalogue" {
-  instance_id = aws_instance.catalogue.id
-  state = "stopped"
-}
+# action "aws_ec2_instance_state" "catalogue" {
+#   instance_id = aws_instance.catalogue.id
+#   state = "stopped"
+# }
