@@ -27,27 +27,14 @@ resource "terraform_data"  "bootstrap" {
     host = aws_instance.catalogue.private_ip
 
   }
- 
 
-# installing ansible in mongodb through boostrap.sh
-  provisioner "file" {
 
-    source = "bootstrap.sh" #local file path
-    destination = "/tmp/bootstrap.sh"  # Destination path on the remote machine
+} 
 
-}
-
-# giving executor access to the script
-  
-provisioner "remote-exec" {
-    inline = [
-       "chmod +x /tmp/bootstrap.sh",
-       "sudo sh /tmp/bootstrap.sh catalogue"
-    ]
-}
-}
+# stopping instance for ami
 
 # action "aws_ec2_instance_state" "catalogue" {
 #   instance_id = aws_instance.catalogue.id
 #   state = "stopped"
 # }
+
