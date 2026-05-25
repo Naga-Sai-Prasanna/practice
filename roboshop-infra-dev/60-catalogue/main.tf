@@ -208,13 +208,13 @@ resource "aws_autoscaling_policy" "catalogue" {
 
 #listner rule
 
-resource "aws_lb_lisetner_rule" "catalogue" {
-  listner_arn = local.backend_alb_arn
+resource "aws_lb_listener_rule" "catalogue" {
+  listener_arn = local.backend_alb_listener_arn
   priority = 10
 
   action {
     type = "forward"
-    traget_group_arn = aws_lb_target_group.catalogue.arn
+    target_group_arn = aws_lb_target_group.catalogue.arn
   }
   condition {
     host_header {
