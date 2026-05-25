@@ -21,3 +21,7 @@ variable "domain_name" {
   default = "prasanna.fun"
 
 }
+
+variable "app_version" {
+  default = "v3"
+}
