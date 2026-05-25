@@ -158,7 +158,7 @@ resource "aws_autoscaling_group" "catalogue" {
     version = "$latest"
   }
 
-  vpc_zone_identifier       = [aws_subnet.example1.id, aws_subnet.example2.id]
+  vpc_zone_identifier       = [local.private_subnet_id]
   target_group_arns = [aws_lb_target_group.catalogue.arn]
 
   instance_refresh {
@@ -208,7 +208,7 @@ resource "aws_autoscaling_policy" "catalogue" {
 
 #listner rule
 
-resource "aws_lb_listner_rule" "catalogue" {
+resource "aws_lb_lisetner_rule" "catalogue" {
   listner_arn = local.backend_alb_arn
   priority = 10
 
