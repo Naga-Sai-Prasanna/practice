@@ -60,6 +60,32 @@ resource "aws_security_group_rule" "redis_bastion" {
     security_group_id = local.redis_sg_id
 }
 
+# connection from user to redis
+
+resource "aws_security_group_rule" "redis_user" {
+    type = "ingress"
+    from_port = 6379
+    to_port = 6379
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.user_sg_id
+    security_group_id = local.redis_sg_id
+}
+
+
+# connection from cart to redis
+
+resource "aws_security_group_rule" "redis_cart" {
+    type = "ingress"
+    from_port = 6379
+    to_port = 6379
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.cart_sg_id
+    security_group_id = local.redis_sg_id
+}
+
+
 # connection from bastion to mysql
 
 resource "aws_security_group_rule" "mysql_bastion" {
@@ -69,6 +95,18 @@ resource "aws_security_group_rule" "mysql_bastion" {
     protocol = "tcp"
     # which sg you are creating this rule
     source_security_group_id = local.bastion_sg_id
+    security_group_id = local.mysql_sg_id
+}
+
+# connection from shippping to mysql
+
+resource "aws_security_group_rule" "mysql_shipping" {
+    type = "ingress"
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.shipping_sg_id
     security_group_id = local.mysql_sg_id
 }
 
@@ -85,16 +123,18 @@ resource "aws_security_group_rule" "rabbitmq_bastion" {
     security_group_id = local.rabbitmq_sg_id
 }
 
-# connection from bastion to backend alb
+# connection from payment to rabbitmq
 
-resource "aws_security_group_rule" "backend_alb_bastion" {
+resource "aws_security_group_rule" "rabbitmq_payment" {
     type = "ingress"
-    from_port = 80
-    to_port = 80
+    from_port = 5672
+    to_port = 5672
     protocol = "tcp"
-    source_security_group_id = local.bastion_sg_id
-    security_group_id = local.backend_alb_sg_id
+    # which sg you are creating this rule
+    source_security_group_id = local.payment_sg_id
+    security_group_id = local.rabbitmq_sg_id
 }
+
 
 # connection from bastion to catalogue
 
@@ -118,4 +158,249 @@ resource "aws_security_group_rule" "catalogue_backend_alb" {
     #we can use either cidr or sec group
     source_security_group_id = local.backend_alb_sg_id
     security_group_id = local.catalogue_sg_id
+}
+
+
+
+# connection from bastion to user
+
+resource "aws_security_group_rule" "user_bastion" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.bastion_sg_id
+    security_group_id = local.user_sg_id
+}
+
+# connection from backend alb to user
+
+resource "aws_security_group_rule" "user_backend_alb" {
+    type = "ingress"
+    from_port = 8080
+    to_port = 8080
+    protocol = "tcp"
+    #we can use either cidr or sec group
+    source_security_group_id = local.backend_alb_sg_id
+    security_group_id = local.user_sg_id
+}
+
+
+# connection from bastion to cart
+
+resource "aws_security_group_rule" "cart_bastion" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.bastion_sg_id
+    security_group_id = local.cart_sg_id
+}
+
+# connection from backend alb to cart
+
+resource "aws_security_group_rule" "cart_backend_alb" {
+    type = "ingress"
+    from_port = 8080
+    to_port = 8080
+    protocol = "tcp"
+    #we can use either cidr or sec group
+    source_security_group_id = local.backend_alb_sg_id
+    security_group_id = local.cart_sg_id
+}
+
+
+# connection from bastion to shipping
+
+resource "aws_security_group_rule" "shipping_bastion" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.bastion_sg_id
+    security_group_id = local.shipping_sg_id
+}
+
+# connection from backend alb to shipping
+
+resource "aws_security_group_rule" "shipping_backend_alb" {
+    type = "ingress"
+    from_port = 8080
+    to_port = 8080
+    protocol = "tcp"
+    #we can use either cidr or sec group
+    source_security_group_id = local.backend_alb_sg_id
+    security_group_id = local.shipping_sg_id
+}
+
+
+# connection from bastion to payment
+
+resource "aws_security_group_rule" "payment_bastion" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    # which sg you are creating this rule
+    source_security_group_id = local.bastion_sg_id
+    security_group_id = local.payment_sg_id
+}
+
+# connection from backend alb to user
+
+resource "aws_security_group_rule" "payment_backend_alb" {
+    type = "ingress"
+    from_port = 8080
+    to_port = 8080
+    protocol = "tcp"
+    #we can use either cidr or sec group
+    source_security_group_id = local.backend_alb_sg_id
+    security_group_id = local.payment_sg_id
+}
+
+
+# connection from bastion to backend alb
+
+resource "aws_security_group_rule" "backend_alb_bastion" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    source_security_group_id = local.bastion_sg_id
+    security_group_id = local.backend_alb_sg_id
+}
+
+# backend alb should accept connections form all components
+
+resource "aws_security_group_rule" "backend_alb_catalogue" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    source_security_group_id = local.catalogue_sg_id
+    security_group_id = local.backend_alb_sg_id
+}
+
+resource "aws_security_group_rule" "backend_alb_user" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    source_security_group_id = local.user_sg_id
+    security_group_id = local.backend_alb_sg_id
+}
+
+resource "aws_security_group_rule" "backend_alb_cart" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    source_security_group_id = local.cart_sg_id
+    security_group_id = local.backend_alb_sg_id
+}
+
+
+resource "aws_security_group_rule" "backend_alb_shipping" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    source_security_group_id = local.shipping_sg_id
+    security_group_id = local.backend_alb_sg_id
+}
+
+resource "aws_security_group_rule" "backend_alb_payment" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    source_security_group_id = local.payment_sg_id
+    security_group_id = local.backend_alb_sg_id
+}
+
+
+# backend alb should accept from frontend
+
+resource "aws_security_group_rule" "backend_alb_frontend" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    source_security_group_id = local.frontend_sg_id
+    security_group_id = local.backend_alb_sg_id
+}
+
+# frontend will accept from bastion
+
+resource "aws_security_group_rule" "frontend_bastion" {
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    source_security_group_id = local.bastion_sg_id
+    security_group_id = local.frontend_sg_id
+
+}    
+
+# frontend will accept form frontend_alb
+
+resource "aws_security_group_rule" "frontend_frontend_alb" {
+    type = "ingress"
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    source_security_group_id = local.frontend_alb_sg_id
+    security_group_id = local.frontend_sg_id
+}
+
+# frontend alb connection from internet
+
+resource "aws_security_group_rule" "frontend_alb_public" {
+    type = "ingress"
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    # which sg you are creating this rule
+    security_group_id = local.frontend_alb_sg_id
+}
+
+# oprnvpn from public 443
+
+resource "aws_security_group_rule" "openvpn_public_443" {
+  type      = "ingress"
+  from_port = 443
+  to_port   = 443
+  protocol  = "tcp"
+  # where traffic is coming from
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id        = local.openvpn_sg_id
+}
+
+# oprnvpn from public 943
+
+resource "aws_security_group_rule" "openvpn_public_943" {
+  type      = "ingress"
+  from_port = 943
+  to_port   = 943
+  protocol  = "tcp"
+  # where traffic is coming from
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id        = local.openvpn_sg_id
+}
+
+# backend alb from openvpn
+
+resource "aws_security_group_rule" "backend_alb_openvpn" {
+  type      = "ingress"
+  from_port = 80
+  to_port   = 80
+  protocol  = "tcp"
+  # where traffic is coming from
+  cidr_blocks = ["0.0.0.0/0"]
+  source_security_group_id = local.openvpn_sg_id
+  security_group_id        = local.backend_alb_sg_id
 }

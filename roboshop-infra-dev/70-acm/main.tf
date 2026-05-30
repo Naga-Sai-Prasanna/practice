@@ -4,11 +4,12 @@ resource "aws_acm_certificate" "roboshop" {
 
   tags = merge(
     {
-      
+      Name = "${var.project}-${var.environment}-${var.domain_name}"
     },
      local.common_tags
   )
     
+   # we added beacsue first terraform will destroy everuthing and then it will create.but here it is reverse first create and then destroy. 
   lifecycle {
     create_before_destroy = true
   }
