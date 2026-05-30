@@ -1,0 +1,48 @@
+
+variable "environment" {
+    type = string
+    default = "Dev"
+   
+  
+}
+variable "project" {
+    type = string
+    default = "roboshop"
+  
+}
+
+
+
+variable "zone_id" {
+  default = "Z08746742X3NL30KWK535"
+
+}
+
+variable "domain_name" {
+  default = "prasanna.fun"
+
+}
+
+
+variable "components" {
+
+    type = string
+}
+
+variable "health_check_path" {
+    default = "/health"
+  
+}
+variable "port_number" {
+    default = 8080
+}
+
+variable "app_version" {
+  type = string
+  default = "v3"
+}
+
+variable "rule_priority" {
+
+  
+}
