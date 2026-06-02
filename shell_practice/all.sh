@@ -3,12 +3,14 @@ USERID=$(id -u)
 LOG_FOLDER="/var/log/shell-script"
 LOG_FILE="/LOG_FOLDER/$0.log"
 
+mkdir -p $LOGS_FOLDER
+
 if [ $USERID -ne 0 ]; then
   echo "please run the script with root access"
   exit 1
 fi  
 
-mkdir -p $LOGS_FOLDER
+
 
 VALIDATE(){
    if [ $1 -ne 0 ]; then
