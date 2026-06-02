@@ -63,10 +63,11 @@ if [ $USERID -ne 0 ]; then
 fi  
 
 VALIDATE(){
-if [ $1 -ne 0 ]; then
- echo "$2 ....failure"
-else
-  echo "$2...sucees" 
+   if [ $1 -ne 0 ]; then
+    echo "$2 ....failure"
+   else
+    echo "$2...sucees" 
+   fi
 }    
 
 dnf install nginx -y
