@@ -40,7 +40,7 @@ set -e
 
 
 set -e
-trap "echo 'error in $LINENO, command: $BASH_COMMAND ERR"'
+trap 'echo "error in $LINENO, command: $BASH_COMMAND ERR"'
 
 USERID=$(id -u)
 LOG_FOLDER="/var/log/shell-script"
