@@ -60,7 +60,7 @@ do
   dnf list installed $package &>> $LOG_FILE
   if [ $? -ne 0 ]; then
     echo "$package is not installed, installing now"
-    dnf install $package -y
+    dnfF install $package -y
   else
    echo "already installed skipping..now"
   fi  
