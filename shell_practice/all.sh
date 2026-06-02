@@ -73,9 +73,9 @@
 
 
 
-  R="\e["31m"
-  G="\e["32m"
-  B="\e["33m"
-  N="\e["0m"
+  R="\e[31m"
+  G="\e[32m"
+  B="\e[33m"
+  N="\e[0m"
 
   echo -e "$R hello $N, $B i am learning linux $N"
