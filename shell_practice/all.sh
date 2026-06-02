@@ -84,10 +84,3 @@ done
 #   N="\e[0m"
 
 #   echo -e "$R hello $N, $B i am learning linux $N"
-
-
-# set -e
-# trap 'echo "there is aN error in $LINENO, command: $BASH_COMMAND"' ERR 
-
-# echo "hello"
-# echoo "bye"
