@@ -78,4 +78,4 @@
   B="\e["33m"
   Y="\e["0m"
 
-  echo -e "$R hello $N, $Y i am learning linux $N"
+  echo -e "$R hello $N", "$Y i am learning linux $N"
