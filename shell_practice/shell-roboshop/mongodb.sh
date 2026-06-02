@@ -27,21 +27,21 @@ fi
 
 }
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo  &>> $LOG_FILE
-VALIDATE $? "copying mongo repo" | tee -a  $LOG_FILE
+cp mongo.repo /etc/yum.repos.d/mongo.repo  &>> $LOGS_FILE
+VALIDATE $? "copying mongo repo" | tee -a  $LOGs_FILE
 
 dnf install mongodb-org -y &>> $LOG_FILE
-VALIDATE $? "mongodb installation" | tee -a  $LOG_FILE
+VALIDATE $? "mongodb installation" | tee -a  $LOGS_FILE
 
 systemctl enable mongod  &>> $LOG_FILE
 systemctl start mongod
-VALIDATE $? "enable and start of the mongodb" | tee -a  $LOG_FILE
+VALIDATE $? "enable and start of the mongodb" | tee -a  $LOGS_FILE
 
 sed -i 's/127.0.0.1/0.0.0.0/g' etc/mongod.conf
-VALIDATE $? "allowing remote connections" | tee -a  $LOG_FILE
+VALIDATE $? "allowing remote connections" | tee -a  $LOGS_FILE
 
 systemctl restart mongod
-VALIDATE $? "restarted mongodb" | tee -a  $LOG_FILE
+VALIDATE $? "restarted mongodb" | tee -a  $LOGS_FILE
 
 
 
