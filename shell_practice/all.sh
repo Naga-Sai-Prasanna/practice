@@ -39,40 +39,42 @@ set -e
 # done
 
 
+set -e
+trap "echo 'error in $LINENO, command: $BASH_COMMAND"'
 
-# USERID=$(id -u)
-# LOG_FOLDER="/var/log/shell-script"
-# LOG_FILE="/var/log/shell-script/$0.log"
+USERID=$(id -u)
+LOG_FOLDER="/var/log/shell-script"
+LOG_FILE="/var/log/shell-script/$0.log"
 
 
 
-# if [ $USERID -ne 0 ]; then
-#   echo "please run the script with root access"
-#   exit 1
-# fi  
+if [ $USERID -ne 0 ]; then
+  echo "please run the script with root access"
+  exit 1
+fi  
 
-# mkdir -p $LOG_FOLDER
+mkdir -p $LOG_FOLDER
 
-# VALIDATE(){
-#    if [ $1 -ne 0 ]; then
-#     echo "$2 ....failure" | tee -a $LOG_FILE
-#     exit 1
-#    else
-#     echo "$2...sucees" | tee -a $LOG_FILE
-#    fi
-# }    
+VALIDATE(){
+   if [ $1 -ne 0 ]; then
+    echo "$2 ....failure" | tee -a $LOG_FILE
+    exit 1
+   else
+    echo "$2...sucees" | tee -a $LOG_FILE
+   fi
+}    
 
-# for package in $@
-# do 
-#   dnf list installed $package &>> $LOG_FILE
-#   if [ $? -ne 0 ]; then
-#     echo "$package is not installed, installing now"
-#     dnf install $package -y
-#     # VALIDATE $? "$package success"
-#   else
-#    echo "already installed skipping..now"
-#   fi  
-# done  
+for package in $@
+do 
+  dnf list installed $package &>> $LOG_FILE
+  if [ $? -ne 0 ]; then
+    echo "$package is not installed, installing now"
+    dnf install $package -y
+    # VALIDATE $? "$package success"
+  else
+   echo "already installed skipping..now"
+  fi  
+done  
 
 
 
@@ -84,8 +86,8 @@ set -e
 #   echo -e "$R hello $N, $B i am learning linux $N"
 
 
-set -e
-trap 'echo "there is aN error in $LINENO, command: $BASH_COMMAND"' ERR 
+# set -e
+# trap 'echo "there is aN error in $LINENO, command: $BASH_COMMAND"' ERR 
 
-echo "hello"
-echoo "bye"
+# echo "hello"
+# echoo "bye"
