@@ -88,4 +88,4 @@ set -e
 
 echo "hello"
 echoo "bye"
-trap 'echo "there is a error in $LINENO, command: $BASH_COMMAND"' ERR 
+trap 'echo "there is aN error in $LINENO, command: $BASH_COMMAND"' ERR 
