@@ -1,15 +1,15 @@
 #!/bin/bash
 
-SG-ID="sg-087c084eb6ac49917"
-AMI-ID="ami-0220d79f3f480ecf5"
+SG_ID="sg-087c084eb6ac49917"
+AMI_ID="ami-0220d79f3f480ecf5"
 
 for instance in $@
 do
     INSTANCE_ID=$(aws ec2 run-instances \
     --ami-id $AMI_ID \
     --instance-type "t3.micro" \
-    --security-group-ids $SG-ID \
-    --tag specifications "ResourceType=instnace, Tags=[{Key=Name,Value=$instnace}]" \
+    --security-group-ids $SG_ID \
+    --tag-specifications "ResourceType=instnace, Tags=[{Key=Name,Value=$instance}]" \
     --query 'Instnaces[0].InstanceId' \
     --output text )
 
