@@ -28,12 +28,12 @@ fi
 }
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo  &>> $LOGS_FILE
-VALIDATE $? "copying mongo repo" | tee -a  $LOGs_FILE
+VALIDATE $? "copying mongo repo" | tee -a  $LOGS_FILE
 
-dnf install mongodb-org -y &>> $LOG_FILE
+dnf install mongodb-org -y &>> $LOGS_FILE
 VALIDATE $? "mongodb installation" | tee -a  $LOGS_FILE
 
-systemctl enable mongod  &>> $LOG_FILE
+systemctl enable mongod  &>> $LOGS_FILE
 systemctl start mongod
 VALIDATE $? "enable and start of the mongodb" | tee -a  $LOGS_FILE
 
