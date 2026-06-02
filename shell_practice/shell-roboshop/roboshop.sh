@@ -26,10 +26,12 @@ do
         IP=$(
             aws ec2 describe-instances \
             -- instance-ids $INSTANCE_ID \
-            -- query 'Reservations[].Instances[].PublicIpAddress' \
+            -- query 'Reservations[].Instances[].PrivateIpAddress' \
             -- output text
         
         )
     fi
+
     echo "ip address: $IP"
+    
 done        
