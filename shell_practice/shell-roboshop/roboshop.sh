@@ -2,6 +2,9 @@
 
 SG_ID="sg-087c084eb6ac49917"
 AMI_ID="ami-0220d79f3f480ecf5"
+ZONE_ID="Z08746742X3NL30KWK535"
+DOMAIN_NAME="prasanna.fun"
+
 
 for instance in $@
 do
@@ -21,6 +24,7 @@ do
             --output text
         
         )
+        RECORD_NAME="$DOMAIN_NAME"
 
     else
         IP=$(
@@ -30,8 +34,36 @@ do
             --output text
         
         )
+        RECORD_NAME="$instance.$DOMAIN_NAME"
     fi
 
     echo "ip address: $IP"
+
+    aws route53 change-resource-record-sets \
+    --hosted-zone-id $ZONE_ID \
+    --change-batch '
+    {
+       "Comment" : "Updating record",
+       "Changes" : [
+          {
+          "Action": "UPSERT"
+          "ResourceRecordSet": {
+             "Name": "'$RECORD_NAME'",
+             "Type": "A",
+             "TTL": 1,
+             ResourceRecords": [
+             {
+                 "Value":  "'$IP'"
+             
+            }]
+          
+        }
+          
+          
+       }
+       
+      ]   
+    
+    }
 
 done        
