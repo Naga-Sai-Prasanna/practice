@@ -1,5 +1,7 @@
 #!/bin/bash
 USERID=$(id -u)
+LOG_FOLDER="/var/log/shell-script"
+LOG_FILE="/LOG_FOLDER/$0.log"
 
 if [ $USERID -ne 0 ]; then
   echo "please run the script with root access"
@@ -15,8 +17,8 @@ VALIDATE(){
    fi
 }    
 
-dnf install nginx -y
-VALIDATE $? "installing nginx" 
+dnf install mysql -y &>> 
+VALIDATE $? "installing mysql" 
 
 
 
