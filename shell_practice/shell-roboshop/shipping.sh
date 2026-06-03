@@ -85,14 +85,14 @@ dnf install mysql -y
 VALIDATE $? "Client installation"
 
 
-mysql -h MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql
 VALIDATE $? "load schema"
 
-mysql -h MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql 
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql 
 VALIDATE $? "create app user"
 
 
-mysql -h MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql
 
 VALIDATE $? "load master data"
 
