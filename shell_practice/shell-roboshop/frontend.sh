@@ -31,22 +31,22 @@ fi
 }
 
 
-dnf module disable nginx -y
+dnf module disable nginx -y  &>> $LOGS_FILE
 VALIDATE $? "disable the nginx"
 
-dnf module enable nginx:1.24 -y
+dnf module enable nginx:1.24 -y  &>> $LOGS_FILE
 VALIDATE $? "enable the version"
 
-dnf install nginx -y
+dnf install nginx -y.  &>> $LOGS_FILE
 VALIDATE $? "install the nginx"
-
-systemctl enable nginx 
+ 
+systemctl enable nginx   &>> $LOGS_FILE
 VALIDATE $? "enable the nginx"
 
-systemctl start nginx 
+systemctl start nginx   &>> $LOGS_FILE
 VALIDATE $? "start the nginx"
 
-rm -rf /usr/share/nginx/html/* 
+rm -rf /usr/share/nginx/html/*   &>> $LOGS_FILE
 VALIDATE $? "remove the existing content"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
@@ -58,8 +58,8 @@ VALIDATE $? "going to html location"
 unzip /tmp/frontend.zip
 VALIDATE $? "unzip the app code"
 
-cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf | tee -a $LOGS_FILE
 VALIDATE $? "copying the config"
 
 systemctl restart nginx 
-VALIDATE $? "restart the app"
+VALIDATE $? "restart the application"
