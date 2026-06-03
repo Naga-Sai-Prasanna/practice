@@ -27,6 +27,9 @@ fi
 
 }
 
+cp shipping.service  /etc/yum.repos.d/rabbitmq.repo
+VALIDATE $? "rabbitmq repo file"
+
 dnf install rabbitmq-server -y
 VALIDATE $? "install rabbitmq"
 
