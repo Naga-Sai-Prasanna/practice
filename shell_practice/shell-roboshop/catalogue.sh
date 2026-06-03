@@ -39,7 +39,7 @@ dnf install nodejs -y
 VALIDATE $? "installation of nodejs"
 
 id roboshop &>> $LOGS_FILE
-if [ $? - ne 0 ]; then
+if [ $? -ne 0 ]; then
   echo "adding user"
   useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
   VALIDATE $? "useradding"
@@ -87,7 +87,7 @@ VALIDATE $? "Client installation"
 INDEX=$(mongosh --host $MONGODB_HOST --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 
     if [ $INDEX -le 0 ]; then
-        mongosh --host MONGODB_HOST </app/db/master-data.js
+        mongosh --host $MONGODB_HOST </app/db/master-data.js
         VALIDATE $? "loading products"
     else
        echo -e "products are already loaded.....$Y skipping $N"
