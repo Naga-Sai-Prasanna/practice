@@ -37,7 +37,7 @@ VALIDATE $? "disable the nginx"
 dnf module enable nginx:1.24 -y  &>> $LOGS_FILE
 VALIDATE $? "enable the version"
 
-dnf install nginx -y.  &>> $LOGS_FILE
+dnf install nginx -y  &>> $LOGS_FILE
 VALIDATE $? "install the nginx"
  
 systemctl enable nginx   &>> $LOGS_FILE
