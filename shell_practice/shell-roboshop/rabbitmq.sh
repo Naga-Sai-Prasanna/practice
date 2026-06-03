@@ -2,6 +2,7 @@
 USERID=$(id -u)
 LOGS_FOLDER="/var/log/robpshop"
 LOGS_FILE="/$LOGS_FOLDER/$0.log"
+SCRIPT_DIR=$PWD
 
 R="\e[31m"
 G="\e[32m"
@@ -27,7 +28,7 @@ fi
 
 }
 
-cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 VALIDATE $? "rabbitmq repo file"
 
 dnf install rabbitmq-server -y
