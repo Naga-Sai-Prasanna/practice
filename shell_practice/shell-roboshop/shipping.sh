@@ -84,18 +84,19 @@ VALIDATE $? "enabling and start"
 dnf install mysql -y 
 VALIDATE $? "Client installation"
 
-
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql
-VALIDATE $? "load schema"
-
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql 
-VALIDATE $? "create app user"
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 'use cities'
+if [ $? -ne 0 ]; then
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql
 
 
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql 
 
-VALIDATE $? "load master data"
 
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql
+    VALIDATE $? "load  data"
+
+else
+   echo -e "data is loaded......$Y SKIPPING $N"
 
 systemctl restart shipping
 VALIDATE $? "Restaring shipping"
