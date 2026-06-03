@@ -86,13 +86,9 @@ VALIDATE $? "Client installation"
 
 mysql -h $MYSQL_HOST -uroot -pRoboShop@1 'use cities'
 if [ $? -ne 0 ]; then
-    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql
-
-
-    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql 
-
-
-    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql  | tee -a $LOG_FILE
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql    | tee -a $LOG_FILE
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql | tee -a $LOG_FILE
     VALIDATE $? "load  data"
 
 else
