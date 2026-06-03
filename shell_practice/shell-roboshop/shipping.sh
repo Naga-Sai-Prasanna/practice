@@ -96,7 +96,7 @@ if [ $? -ne 0 ]; then
     VALIDATE $? "load  data"
 
 else
-   echo -e "data is loaded......$Y SKIPPING $N"
+   echo -e "data is loaded......$Y SKIPPING $N" | tee -a $LOG_FILE
 fi 
 
 systemctl restart shipping
