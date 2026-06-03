@@ -58,7 +58,9 @@ VALIDATE $? "going to html location"
 unzip /tmp/frontend.zip
 VALIDATE $? "unzip the app code"
 
-cp -f $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf | tee -a $LOGS_FILE
+rm -rf /etc/nginx/nginx.conf
+
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf | tee -a $LOGS_FILE
 VALIDATE $? "copying the config"
 
 systemctl restart nginx 
