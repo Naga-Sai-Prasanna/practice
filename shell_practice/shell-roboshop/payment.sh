@@ -64,8 +64,6 @@ VALIDATE $? "unzip the code"
 pip3 install -r requirements.txt
 VALIDATE $? "downloading dependencies"
 
-mv target/payment-1.0.jar payment.jar 
-VALIDATE $? "renaming"
 
 cp $SCRIPT_DIR/payment.service /etc/systemd/system/payment.service
 VALIDATE $? "creating systemctl service"
