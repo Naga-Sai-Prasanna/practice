@@ -41,8 +41,8 @@ VALIDATE $? "installation of nodejs"
 id roboshop &>> $LOGS_FILE
 if [ $? -ne 0 ]; then
   echo "adding cart"
-  cartadd --system --home /app --shell /sbin/nologin --comment "roboshop system cart" roboshop
-  VALIDATE $? "cartadding"
+  useradd --system --home /app --shell /sbin/nologin --comment "roboshop system cart" roboshop
+  VALIDATE $? "cart adding"
 else
   echo -e  "cart is already existed ....$Y SKIPPING $N"
 fi  
