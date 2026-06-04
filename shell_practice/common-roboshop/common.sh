@@ -4,7 +4,7 @@
 
 USERID=$(id -u)
 LOGS_FOLDER="/var/log/robpshop"
-LOGS_FILE="/$LOGS_FOLDER/$0.log"
+LOGS_FILE="$LOGS_FOLDER/$0.log"
 START_TIME=$(date +%s)
 
 R="\e[31m"
@@ -15,7 +15,7 @@ N="\e[0m"
 
 mkdir -p $LOGS_FOLDER
 
-echo  $(date +"%Y-%m-%d %H:%M:%S") | script executed on: $(date) at $START_TIME |  tee -a $LOGS_FILE
+echo  "$(date +"%Y-%m-%d %H:%M:%S") | script executed on: $(date) at $START_TIME" |  tee -a $LOGS_FILE
 
 
 check_root(){
@@ -29,9 +29,9 @@ check_root(){
 VALIDATE(){
 
     if [ $1 -ne 0 ]; then
-    echo -e $(date +"%Y-%m-%d %H:%M:%S") | "$R $2 ... failure $N" | tee -a $LOGS_FILE
+    echo -e "$(date +"%Y-%m-%d %H:%M:%S") | $R $2 ... failure $N" | tee -a $LOGS_FILE
     else 
-    echo -e $(date +"%Y-%m-%d %H:%M:%S") | "$G $2 ... success $N" | tee -a $LOGS_FILE
+    echo -e "$(date +"%Y-%m-%d %H:%M:%S") | $G $2 ... success $N" | tee -a $LOGS_FILE
     fi
 
 }
