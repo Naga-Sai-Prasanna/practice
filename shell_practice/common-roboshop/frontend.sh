@@ -39,5 +39,5 @@ VALIDATE $? "copying the config"
 systemctl restart nginx 
 VALIDATE $? "restart the application"
 
-prtint_total_time
+print_total_time
 
