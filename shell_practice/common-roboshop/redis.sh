@@ -1,5 +1,9 @@
 #!/bin/bash
 
+source ./common.sh
+app_name=redis
+check_root
+
 
 dnf module disable redis -y
 VALIDATE $? "disabling redis"
@@ -18,3 +22,4 @@ systemctl enable redis  &>> $LOGS_FILE
 systemctl start redis
 VALIDATE $? "enable and start of the redis" | tee -a  $LOGS_FILE
 
+print_total_time

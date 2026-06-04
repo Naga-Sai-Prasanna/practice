@@ -8,6 +8,8 @@ LOGS_FILE="$LOGS_FOLDER/$0.log"
 SCRIPT_DIR=$PWD
 START_TIME=$(date +%s)
 MONGODB_HOST=mongodb.prasanna.fun
+MYSQL_HOST=mysql.prasanna.fun
+
 
 R="\e[31m"
 G="\e[32m"
@@ -51,6 +53,31 @@ nodejs_setup(){
     npm install
     VALIDATE $? "downloading dependencies"
 }
+
+java_setup(){
+
+    dnf install maven -y
+    VALIDATE $? "installation of maven"
+
+    cd /app
+    
+    mvn clean package
+    VALIDATE $? "downloading dependencies"
+
+    mv target/shipping-1.0.jar shipping.jar 
+    VALIDATE $? "renaming"
+}
+
+python_setup(){
+
+    dnf install python3 gcc python3-devel -y
+    VALIDATE $? "installation of python"
+    
+    cd /app
+    pip3 install -r requirements.txt
+    VALIDATE $? "downloading dependencies"
+}
+
 
 app_setup(){
 
