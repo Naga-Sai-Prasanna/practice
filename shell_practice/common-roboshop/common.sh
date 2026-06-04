@@ -5,6 +5,7 @@
 USERID=$(id -u)
 LOGS_FOLDER="/var/log/robpshop"
 LOGS_FILE="$LOGS_FOLDER/$0.log"
+SCRIPT_DIR=$PWD
 START_TIME=$(date +%s)
 
 R="\e[31m"
@@ -36,6 +37,67 @@ VALIDATE(){
 
 }
 
+nodejs_setup(){
+    dnf module disable nodejs -y
+    VALIDATE $? "disabling nodejs"
+
+    dnf module enable nodejs:20 -y
+    VALIDATE $? "enabling nodejs"
+
+    dnf install nodejs -y
+    VALIDATE $? "installation of nodejs"
+
+    npm install
+    VALIDATE $? "downloading dependencies"
+}
+
+app_setup(){
+
+    id roboshop &>> $LOGS_FILE
+        if [ $? -ne 0 ]; then
+        echo "adding user"
+        useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+        VALIDATE $? "useradding"
+    else
+        echo -e  "user is already existed ....$Y SKIPPING $N"
+    fi  
+
+    mkdir -p /app
+    VALIDATE $? "creating app dir"
+
+
+    curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip 
+    VALIDATE $? "downloading nodejs"
+
+    cd /app 
+    VALIDATE $? "Moving to app dir"
+
+    rm -rf /app/*
+    VALIDATE $? "removing the data"
+
+    unzip /tmp/$app_name.zip
+    VALIDATE $? "unzip the code"
+    
+}
+
+systemd_setup(){
+    
+    cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
+
+    systemctl daemon-reload
+    VALIDATE $? "reload"
+
+    systemctl enable $app_name 
+    systemctl start $app_name 
+    VALIDATE $? "enabling and start"
+}
+
+
+app_restart(){
+    systemctl restart $app_name
+    VALIDATE $? "Restaring $app_name"
+
+}
 print_total_time(){
     END_TIME=$(date +%s)
     TOTAL_TIME=$(( $END_TIME - $START_TIME ))
