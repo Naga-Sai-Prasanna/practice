@@ -60,7 +60,7 @@ java_setup(){
     VALIDATE $? "installation of maven"
 
     cd /app
-    
+
     mvn clean package
     VALIDATE $? "downloading dependencies"
 
@@ -110,7 +110,7 @@ app_setup(){
 
 systemd_setup(){
     
-    cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
+    cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
 
     systemctl daemon-reload
     VALIDATE $? "reload"
