@@ -7,6 +7,7 @@ LOGS_FOLDER="/var/log/robpshop"
 LOGS_FILE="$LOGS_FOLDER/$0.log"
 SCRIPT_DIR=$PWD
 START_TIME=$(date +%s)
+MONGODB_HOST=mongodb.prasanna.fun
 
 R="\e[31m"
 G="\e[32m"

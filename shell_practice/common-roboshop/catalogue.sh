@@ -2,6 +2,7 @@
 
 source ./common.sh
 app_name=catalogue
+MONGODB_HOST=mongodb.prasanna.fun
 check_root
 app_setup
 nodejs_setup
