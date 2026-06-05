@@ -28,12 +28,12 @@ if [ $# -lt 2 ]; then
    USAGE
 fi
 
-if [ -d $SOURCE_DIR ]; then 
+if [ ! -d $SOURCE_DIR ]; then 
   echo -e "$R $SOURCE_DIR does not exist $N"
   exit 1
 fi  
 
-if [ -d $SOURCE_DIR ]; then 
+if [ ! -d $SOURCE_DIR ]; then 
   echo -e "$R $DEST_DIR does not exist $N"
   exit 1
 fi  
