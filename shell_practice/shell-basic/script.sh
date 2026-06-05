@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /home/ec2-user
-mkdir app-logs
+mkdir -p app-logs
 cd app-logs
 
 files=(users.log cart.log shipping.log payment.log)
