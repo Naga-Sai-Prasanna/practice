@@ -64,7 +64,7 @@ else
    log "Files found to archieve: $FILES"
    TIMESTAMP=$(date +%F-%H-%M-%S)
    ZIP_FILE_NAME="$DEST_DIR/app-logs-$TIMESTAMP.tar.gz"
-   echo "Archieve name: $ZIP_FILE_NAME"
+   log "Archieve name: $ZIP_FILE_NAME"
    tar -zcvf $ZIP_FILE_NAME $(find $SOURCE_DIR -name "*log" -type f -mtime +$DAYS) 
 
    # check archive is success or not
@@ -74,9 +74,9 @@ else
     while IFS= read -r filepath
     do
     # processing each line
-    echo "Deleting file: $filepath"
+    log "Deleting file: $filepath"
     rm -f $filepath
-    echo "deleted the file: $filepath"
+    log "deleted the file: $filepath"
     done <<< "$FILES"
 
    else
