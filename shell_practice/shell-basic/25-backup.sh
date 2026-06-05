@@ -92,17 +92,17 @@ else
 fi
 
 
-USERID=$(id -u)
-R="/e[31m"
-G="/e[32m"
-Y="/e[33m"
-N="/e[0m"
+# USERID=$(id -u)
+# R="\e[31m"
+# G="\e[32m"
+# Y="\e[33m"
+# N="\e[0m"
 
-LOG_FOLDER="/var/log/shell"
-LOG_FILE="$LOG_FOLDER/backup.log"
-SOURCE_DIR=$1
-DEST_DIR=$2
-DAYS=${3:-14}
+# LOG_FOLDER="/var/log/shell"
+# LOG_FILE="$LOG_FOLDER/backup.log"
+# SOURCE_DIR=$1
+# DEST_DIR=$2
+# DAYS=${3:-14}
 
 #root user or not
 # source dir and destination available or not
