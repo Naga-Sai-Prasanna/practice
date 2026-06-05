@@ -50,3 +50,9 @@ log "Source Directory: $SOURCE_DIR"
 log "Destination Directory: $DEST_DIR"
 log "Days: $DAYS"
 
+
+### check varibales is empty or not
+
+if [ -z $FILES ]; then
+  log "No files to archieve ... $Y Skipping $N"
+fi  
