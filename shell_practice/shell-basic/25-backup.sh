@@ -12,6 +12,12 @@ SOURCE_DIR=$1
 DEST_DIR=$2
 DAYS=${3:-14} # 14 days is the default value, if user is not supplied.if supplied then 3.
 
+
+log(){
+    echo -e "$(date "+%Y-%m-%d %H:%M-%S") | $1" | tee -a $LOGS_FILE
+}
+
+
 # verify the root user
 
 if [ $USERID -ne 0 ]; then
@@ -22,26 +28,24 @@ fi
 mkdir -p $LOGS_FOLDER
 
 USAGE(){
-    echo -e "$R sudo backup <SOURCE_DIR> <DEST_DIR> <DAYS>[default 14 days] $N"
+    log "$R USAGE:: sudo backup <SOURCE_DIR> <DEST_DIR> <DAYS>[default 14 days] $N"
     exit 1
-}
-
-log(){
-    echo -e "$(date "+%Y-%m-%d %H:%M-%S") | $1" | tee -a $LOGS_FILE
 }
 if [ $# -lt 2 ]; then
    USAGE
 fi
 
+
+
 # verify the dir
 
 if [ ! -d $SOURCE_DIR ]; then 
-  echo -e "$R source directory: $SOURCE_DIR does not exist $N"
+  log -e "$R source directory: $SOURCE_DIR does not exist $N"
   exit 1
 fi  
 
 if [ ! -d $DEST_DIR ]; then 
-  echo -e "$R destination directory: $DEST_DIR does not exist $N"
+  log -e "$R destination directory: $DEST_DIR does not exist $N"
   exit 1
 fi  
 
