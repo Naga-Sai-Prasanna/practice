@@ -60,5 +60,5 @@ else
    log "Files found to archieve: $FILES"
    TIMESTAMP=$(date +%F-%H-%M-%S)
    ZIP_FILE_NAME="$DEST_DIR/app-logs-$TIMESTAMP.tar.zip"
-   echo "Archieve name: $ZIP_FILE_NAME
+   echo "Archieve name: $ZIP_FILE_NAME"
 fi  
