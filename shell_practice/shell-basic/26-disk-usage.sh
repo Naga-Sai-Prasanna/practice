@@ -8,7 +8,7 @@ MESSAGE=""
 
 
 log(){
-    echo -e "$(date "+%Y-%m-%d %H:%M-%S") | $1" | tee -a $LOGS_FILE
+    echo -e "$(date "+%Y-%m-%d %H:%M%S") | $1" 
 }
 
 DISK_USAGE=$(df -hT | grep -v Filesystem)
@@ -21,8 +21,8 @@ do
 
  if [ "$USAGE" -ge "$USAGE_THRESHOLD" ]; then
   
-    MESSAGE+="High Disk Usage On $PARTITION:$USAGE% \n"
+    MESSAGE+="High Disk Usage On $PARTITION:$USAGE%  \n"
  fi   
-done <<< $DISK_USAGE
+done <<< "$DISK_USAGE"
 
 echo "$MESSAGE"

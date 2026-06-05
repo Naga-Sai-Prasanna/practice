@@ -14,7 +14,7 @@ DAYS=${3:-14} # 14 days is the default value, if user is not supplied.if supplie
 
 
 log(){
-    echo -e "$(date "+%Y-%m-%d %H:%M-%S") | $1" | tee -a $LOGS_FILE
+    echo -e "$(date "+%Y-%m-%d %H:%M:%S") | $1" | tee -a $LOGS_FILE
 }
 
 
