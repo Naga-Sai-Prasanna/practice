@@ -53,6 +53,6 @@ log "Days: $DAYS"
 
 ### check varibales is empty or not
 
-if [ -z $FILES ]; then
+if [ -z "$FILES" ]; then
   log "No files to archieve ... $Y Skipping $N"
 fi  
