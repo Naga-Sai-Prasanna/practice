@@ -7,10 +7,12 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+# user should pass source and dest dir and default 14 days but user can ovveride
 SOURCE_DIR=$1
 DEST_DIR=$2
 DAYS=${3:-14} # 14 days is the default value, if user is not supplied.if supplied then 3.
 
+# verify the root user
 
 if [ $USERID -ne 0 ]; then
   echo -e "$R Please run the script with root access $N"
@@ -31,12 +33,14 @@ if [ $# -lt 2 ]; then
    USAGE
 fi
 
+# verify the dir
+
 if [ ! -d $SOURCE_DIR ]; then 
   echo -e "$R source directory: $SOURCE_DIR does not exist $N"
   exit 1
 fi  
 
-if [ ! -d $SOURCE_DIR ]; then 
+if [ ! -d $DEST_DIR ]; then 
   echo -e "$R destination directory: $DEST_DIR does not exist $N"
   exit 1
 fi  
@@ -51,7 +55,7 @@ log "Destination Directory: $DEST_DIR"
 log "Days: $DAYS"
 
 
-### check varibales is empty or not
+### check varibales is empty or not if it is there archive them 
 
 if [ -z "${FILES}" ]; then
   log "No files to archieve ... $Y Skipping $N"
@@ -59,23 +63,24 @@ else
    # app-logs-$timestamp.zip
    log "Files found to archieve: $FILES"
    TIMESTAMP=$(date +%F-%H-%M-%S)
-   ZIP_FILE_NAME="$DEST_DIR/app-logs-$TIMESTAMP.tar.zip"
+   ZIP_FILE_NAME="$DEST_DIR/app-logs-$TIMESTAMP.tar.gz"
    echo "Archieve name: $ZIP_FILE_NAME"
    find $SOURCE_DIR -name "*log" -type f -mtime +$DAYS | tar -zcvf $ZIP_FILE_NAME
 
    # check archive is success or not
-   if [ -f ZIP_FILE_NAME ]; then
+   if [ -f $ZIP_FILE_NAME ]; then
     log "archival is ...$G SUCCESS $N"
-    #if success then
-    while IFS= read r $filepath
+    #if success then delte from source dir
+    while IFS= read -r filepath
+    do
     # processing each line
     echo "Deleting file: $filepath"
     rm -f $filepath
     echo "deleted the file: $filepath"
-    done <<< $FILES
+    done <<< "$FILES"
 
    else
-    log "archival is ...$G FAILURE $N"
+    log "archival is ...$R FAILURE $N"
     exit 1
 
    fi  
