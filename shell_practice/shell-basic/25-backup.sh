@@ -90,3 +90,75 @@ else
    fi  
 
 fi
+
+
+USERID=$(id -u)
+R="/e[31m"
+G="/e[32m"
+Y="/e[33m"
+N="/e[0m"
+
+LOG_FOLDER="/var/log/shell"
+LOG_FILE="$LOG_FOLDER/backup.log"
+SOURCE_DIR=$1
+DEST_DIR=$2
+DAYS=${3:-14}
+
+#root user or not
+# source dir and destination available or not
+# find olde rtahn 14 days file
+# if avialble archive them 
+#then deelete
+
+# if [ $USERID -ne 0 ]; then
+#    echo -e " $R please run with root access $N"
+#    exit 1
+# fi
+
+# log(){
+#     echo -e "$(date "+%Y-%m-%d %H:%M:%S") | $1" | tee -a $LOG_FILE
+# }
+# USAGE(){
+#     log  "$R Usage: sudo backup <SOURCE_DIR> <DEST_DIR> DAYS[default 14 days] $N"
+#     exit 1
+#}
+
+# if [ $# -lt 2 ]; then
+#  USAGE
+# fi
+
+# if [ ! -d $SOURCE_DIR ]; then
+#   log  "source dir is not available"
+# fi
+
+
+# if [ ! -d $DEST_DIR ]; then
+#   log  "dest dir is not available"
+# fi
+ 
+
+# FILES=$(find $SOURCE_DIR -type f -mtime +$DAYS) 
+
+# if [ -z "${FILES}" ]; then
+#   log "file is empty ... $Y SKIPPING $N"
+# else
+#   log  "files are ready to archieve: $FILES"
+#   TIMESTAMP=$(date +%F-%H-%M-%S)
+#   ZIP_FILE_NAME="$DEST_DIR/app-logs-$TIMESTAMP.tar.gz"
+#   tar -zcvf $ZIP_FILE_NAME $(find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS)
+
+
+#   if [ -f $ZIP_FILE_NAME ]; then
+#    log "archieval is .. $G success $N"
+#    while IFS= read -r filepath
+#    do
+#     log "deleting files: $filepath"
+#     rm -f $filepath
+#     log  "deleted the files: $filepath" 
+#    done <<< "$FILES"
+
+#    else
+#     log  "archivela is  ...$R failure $N"
+
+#    fi
+# fi   
