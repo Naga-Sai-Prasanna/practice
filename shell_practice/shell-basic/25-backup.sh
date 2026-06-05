@@ -53,7 +53,7 @@ log "Days: $DAYS"
 
 ### check varibales is empty or not
 
-if [ -z "$FILES" ]; then
+if [ -z "${FILES}" ]; then
   log "No files to archieve ... $Y Skipping $N"
 else
    # app-logs-$timestamp.zip
@@ -61,4 +61,23 @@ else
    TIMESTAMP=$(date +%F-%H-%M-%S)
    ZIP_FILE_NAME="$DEST_DIR/app-logs-$TIMESTAMP.tar.zip"
    echo "Archieve name: $ZIP_FILE_NAME"
-fi  
+   find $SOURCE_DIR -name "*log" -type f -mtime +$DAYS | tar -zcvf $ZIP_FILE_NAME
+
+   # check archive is success or not
+   if [ -f ZIP_FILE_NAME ]; then
+    log "archival is ...$G SUCCESS $N"
+    #if success then
+    while IFS= read r $filepath
+    # processing each line
+    echo "Deleting file: $filepath"
+    rm -f $filepath
+    echo "deleted the file: $filepath"
+    done <<< $FILES
+
+   else
+    log "archival is ...$G FAILURE $N"
+    exit 1
+
+   fi  
+
+fi
