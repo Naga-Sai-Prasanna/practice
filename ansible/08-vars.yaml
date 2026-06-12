@@ -1,0 +1,7 @@
+- name: variabes form args
+  hosts: local
+  connection: local
+  tasks:
+  - name: print the anem
+    ansible.builtin.debug:
+      msg: "hi {{NAME}}"
