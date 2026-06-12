@@ -1,0 +1,21 @@
+- name: "prasanna kopparthi"
+  dob: "2001-05-08"
+  mobileNumber: 123232343
+  addresses:
+  - flatNumber: 3-131
+    street: "muthyalamma temple" 
+
+  
+  - flatNumber: 3-132
+    street: "muthyalamma temple"   
+
+- name: "prasanna"
+  dob: "2001-05-08"
+  mobileNumber: 123232343
+  addresses:
+  - flatNumber: 3-131
+    street: "muthyalamma temple" 
+
+  
+  - flatNumber: 3-132
+    street: "muthyalamma temple"       

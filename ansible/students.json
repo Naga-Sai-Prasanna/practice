@@ -1,0 +1,29 @@
+{
+
+    "students": [ {
+
+        "firstname": "prasanna",
+   "dob": "2001-05-08",
+   "addresses": [
+    {
+        "type": "perm",
+        "flatnumber": "3-131/1"
+
+    },
+    {
+        
+        "type": "current",
+        "flatnumber": "3-131/1"
+    
+    
+    }
+
+   ],
+   "skills":  ["linux", "shell", "terrraform"]
+
+    }
+   
+
+
+    ]
+}
