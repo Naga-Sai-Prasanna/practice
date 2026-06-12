@@ -1,10 +1,12 @@
 - name: play level variables
   hosts: local
   connection: local
-  vars:
-    COURSE: "devops"
-    DURATION: "140HRS"
-    TRAINER: "U"
+  # vars:
+  #   COURSE: "devops"
+  #   DURATION: "140HRS"
+  #   TRAINER: "U"
+  vars_file:
+  - course.yaml
   tasks:
   - name: print var
     vars:
