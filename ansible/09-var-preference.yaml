@@ -6,10 +6,10 @@
   # vars_files:
 
   # - course.yaml  
-  vars_prompt:
-  - name: NAME
-    prompt: please enter ur name
-    private: false
+  # vars_prompt:
+  # - name: NAME
+  #   prompt: please enter ur name
+  #   private: false
   tasks:
   - name: print name from taks level
     # vars:
@@ -21,3 +21,5 @@
 # args cmd
 # tasks
 # files
+# prompt
+# 
