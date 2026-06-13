@@ -55,38 +55,3 @@
     ansible.builtin.debug:
      msg: "{{ student_yaml | to_nice_json }}"
 
-# 1.  msg: "{{ topics  |  split(',') }}"
-
-#  [localhost] => {
-#     "msg": [
-#         "linux",
-#         " shell",
-#         " terraform"       
-
-
-# 2. map to string
-# [
-#         {
-#             "key": "name",
-#             "value": "ansible"
-#         },
-#         {
-#             "key": "project",
-#             "value": "roboshop"
-#         },
-#         {
-#             "key": "component",
-#             "value": "catalogue"
-#         }
-#     ]
-# }
-
-# 3. list to map
-
-# {
-#         "component": "catalogue",
-#         "name": "ansible",
-#         "project": "roboshop"
-#     }
-
-
