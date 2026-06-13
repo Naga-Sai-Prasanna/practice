@@ -106,3 +106,22 @@
 #     }
 
 
+# TASK [convert yaml to json] ***********************************************************
+# ok: [localhost] => {
+#     "msg": "[\n    {\n        \"addresses\": [\n            {\n                \"flatNumber\": \"3-131\",\n                \"street\": \"muthyalamma temple\"\n            },\n            {\n                \"flatNumber\": \"3-132\",\n                \"street\": \"muthyalamma temple\"\n            }\n        ],\n        \"dob\": \"2001-05-08\",\n        \"mobileNumber\": 123232343,\n        \"name\": \"prasanna kopparthi\"\n    },\n    {\n        \"addresses\": [\n            {\n                \"flatNumber\": \"3-131\",\n                \"street\": \"muthyalamma temple\"\n            },\n            {\n                \"flatNumber\": \"3-132\",\n                \"street\": \"muthyalamma temple\"\n            }\n        ],\n        \"dob\": \"2001-05-08\",\n        \"mobileNumber\": 123232343,\n        \"name\": \"prasanna\"\n    }\n]"
+# }
+
+# TASK [convert to uppercase] ***********************************************************
+# ok: [localhost] => {
+#     "msg": "DEVOPS WITH"
+# }
+
+# TASK [convert to lowercase] ***********************************************************
+# ok: [localhost] => {
+#     "msg": "devops with"
+# }
+
+# TASK [check ip address] ***************************************************************
+# ok: [localhost] => {
+#     "msg": false
+# }
