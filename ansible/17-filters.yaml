@@ -3,6 +3,8 @@
   connection: local
   vars:
     topics: linux, shell, terraform
+    course: "devops WITH"
+    myIP: 256.780.770.654
     tagsMap:
       name: ansible
       project: roboshop
@@ -24,7 +26,7 @@
         }
     ]
 
-
+  
   tasks:
   - name: greeting
     ansible.builtin.debug:
@@ -55,7 +57,17 @@
     ansible.builtin.debug:
      msg: "{{ student_yaml | to_nice_json }}"
 
+  - name: convert to uppercase
+    ansible.builtin.debug:
+     msg: "{{ course | upper }}"
 
+  - name: convert to lowercase
+    ansible.builtin.debug:
+     msg: "{{ course | lower }}"   
+
+  - name: check ip address 
+    ansible.builtin.debug:
+     msg: "{{ myIP | ansible.utils.ipv4 }}"   
 
 
 
