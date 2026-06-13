@@ -1,6 +1,7 @@
 - name: create ec2 instance 
   hosts: all
   connection: local
+  become: yes
   vars:
    sg_id: sg-06cf4cbd02e607cf6  
    image_id: ami-0220d79f3f480ecf5
@@ -23,6 +24,6 @@
     loop: "{{ instances}}"
     register: ec2_output
 
-    
+
 
      
