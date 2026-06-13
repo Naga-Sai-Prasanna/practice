@@ -1,7 +1,20 @@
 - name: demo on filters
   hosts: local
   connection: local
+  vars:
+    topics: linux, shell, terraform
+    tagsMap:
+      name: ansible
+      project: roboshop
+      component: catalogue
   tasks:
   - name: greeting
     ansible.builtin.debug:
-      msg: "hi prassu, {{GREETING}}"
+      msg: "hi prassu, {{GREETING | default('good mrng ')}}"
+  
+  - name: convert string to list
+    ansible.builtin.debug:
+     msg: "{{ topics  |  split(',') }}"
+
+
+        
