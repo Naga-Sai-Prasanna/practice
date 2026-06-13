@@ -3,9 +3,9 @@
   connection: local
   vars:
     NAME: :ansible form play
-  vars_files:
+  # vars_files:
 
-  - course.yaml  
+  # - course.yaml  
   vars_prompt:
   - name: NAME
     prompt: please enter ur name
@@ -20,3 +20,4 @@
 
 # args cmd
 # tasks
+# files
