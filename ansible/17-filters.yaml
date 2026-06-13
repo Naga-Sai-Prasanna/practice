@@ -16,5 +16,22 @@
     ansible.builtin.debug:
      msg: "{{ topics  |  split(',') }}"
 
+  - name: convert map to list
+    ansible.builtin.debug:
+     msg: "{{ tagsMap | dict2items }}"   
+
 
         
+
+
+
+
+# 1.  msg: "{{ topics  |  split(',') }}"
+
+#  [localhost] => {
+#     "msg": [
+#         "linux",
+#         " shell",
+#         " terraform"       
+
+
