@@ -1,0 +1,35 @@
+- name: catalogue server
+  hosts: catalogue
+  become: yes
+  tasks:
+  - name: enable nodejs
+    ansible.builtin.command: dnf module enable nodejs:20 -y
+
+  - name: install nodejs
+    ansible.builtin.dnf:
+     name: nodejs
+     state: present
+
+  - name: create system user roboshop
+    ansible.builtin.user:
+     name: roboshop
+     system: true
+     home: /app
+     shell: /sbin/nologin
+     comment: "Roboshop system user"     
+ 
+  - name: create dir
+    ansible.builtin.file:
+      path: /app
+      state: directory
+
+  - name: dowmloading the app
+    ansible.builtin.get_url:
+     url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
+     dest: /tmp/catalogue.zip 
+
+  - name: unzip the file
+    ansinle.builtin.unarchive:
+     src: /tmp/catalogue.zip 
+     dest: /app
+     remote_src: yes # beacsue file is already in remote machine(catalogue)
