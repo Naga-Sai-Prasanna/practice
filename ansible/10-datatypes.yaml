@@ -20,3 +20,4 @@
        duration: {{DURATION}}
        topics: {{TOPICS}}
        is_live: {{IS_LIVE}}
+       details: {{DETAILS}}
