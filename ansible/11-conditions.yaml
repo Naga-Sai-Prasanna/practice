@@ -1,6 +1,6 @@
 - name: check conditions
   hosts: local
-  connections: local
+  connection: local
   vars:
     NUMBER_OF_SESSIONS: 7
     IS_LIVE: true
