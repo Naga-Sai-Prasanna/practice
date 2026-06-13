@@ -8,4 +8,4 @@
   - name : is ansible more than 5 sessions and is it live
     ansible.buitin.debug:
      msg: "yes it is more than 5"
-    when: NUMBER_OF_SESSIONS > 5 & IS_LIVE
+    when: NUMBER_OF_SESSIONS > 5 
