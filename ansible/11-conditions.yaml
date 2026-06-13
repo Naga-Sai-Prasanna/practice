@@ -1,5 +1,5 @@
 - name: check conditions
-  host: local
+  hosts: local
   connections: local
   vars:
     NUMBER_OF_SESSIONS: 7
