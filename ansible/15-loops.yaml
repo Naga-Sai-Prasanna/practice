@@ -1,0 +1,11 @@
+- name: loops
+  hosts: local
+  connection: local
+  become: yes
+  tasks:
+  - name: install packages
+    ansible.builtin.debug:
+     msg: "{{item}}" #reserved word
+    loop: # list of strings
+    - mysql
+    - python
