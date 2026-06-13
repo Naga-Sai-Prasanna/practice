@@ -7,15 +7,9 @@
    ami_id: ami-0220d79f3f480ecf5
    env: dev
    instances:
-  #  - mongodb
-  #  - catalogue
-   - user
-   - cart
-   - redis
-   - shipping
-   - mysql
-   - payment
-   - rabbitmq
+   - mongodb
+   - catalogue
+   
 
    domain_name: "prasanna.fun"
    action: create
@@ -72,7 +66,7 @@
   
   
   - name: delete route53
-    amazon.aws.ec2_instance:
+    amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
       record: "{{ item }}-{{ env }}.{{ domain_name }}" # mongodb-dev.prasana.fun
