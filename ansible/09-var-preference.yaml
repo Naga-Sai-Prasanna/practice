@@ -2,7 +2,7 @@
   hosts: local
   connection: local
   vars:
-    NAME: :ansible form play
+    # NAME: :ansible form play
   # vars_files:
 
   # - course.yaml  
@@ -22,4 +22,5 @@
 # tasks
 # files
 # prompt
+# play
 # 
