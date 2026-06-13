@@ -2,18 +2,18 @@
   hosts: local
   connection: local
   vars:
-    # NAME: :ansible form play
-  # vars_files:
+    NAME: :ansible form play
+  vars_files:
 
-  # - course.yaml  
+  - course.yaml  
   vars_prompt:
-  # - name: NAME
-  #   prompt: please enter ur name
-  #   private: false
+  - name: NAME
+    prompt: please enter ur name
+    private: false
   tasks:
   - name: print name from taks level
-    # vars:
-    #   NAME: "ansible from task" 
+    vars:
+      NAME: "ansible from task" 
     ansible.builtin.debug:
       msg: "hi {{NAME}}" 
 
@@ -23,4 +23,4 @@
 # files
 # prompt
 # play
-# 
+# inventory
