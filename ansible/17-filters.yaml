@@ -7,6 +7,24 @@
       name: ansible
       project: roboshop
       component: catalogue
+
+    tagsList:
+     [
+        {
+            "key": "name",
+            "value": "ansible"
+        },
+        {
+            "key": "project",
+            "value": "roboshop"
+        },
+        {
+            "key": "component",
+            "value": "catalogue"
+        }
+    ]
+
+
   tasks:
   - name: greeting
     ansible.builtin.debug:
@@ -18,8 +36,12 @@
 
   - name: convert map to list
     ansible.builtin.debug:
-     msg: "{{ tagsMap | dict2items }}"   
+     msg: "{{ tagsMap | dict2items }}"  
 
+
+  - name: convert list to map
+    ansible.builtin.debug:
+     msg: "{{ tagsList | items2dict }}"  
 
         
 
@@ -35,3 +57,19 @@
 #         " terraform"       
 
 
+# 2. map to string
+# [
+#         {
+#             "key": "name",
+#             "value": "ansible"
+#         },
+#         {
+#             "key": "project",
+#             "value": "roboshop"
+#         },
+#         {
+#             "key": "component",
+#             "value": "catalogue"
+#         }
+#     ]
+# }
