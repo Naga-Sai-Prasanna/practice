@@ -3,7 +3,7 @@
   connection: local
   vars:
     NUMBER_OF_SESSIONS: 7
-    IS_LIVE: true
+    IS_LIVE: false
   tasks:
   - name: is ansible more than 5 sessions and is it live
     ansible.builtin.debug:
