@@ -1,0 +1,22 @@
+- name: demo on datatypes
+  hosts: local
+  connection: local
+  vars:
+   PROGRAM: "devsecops"
+   DURATION: 140
+   IS_LIVE: true
+   DETAILS:
+    MONTHS: 4
+    TRAINER: "Siva"
+   TOPICS:
+   - linux
+   - shell
+   - terrform
+  tasks:
+  - name: print var
+    ansible.builtin.debug:
+     msg: |
+       program: {{PROGRAM}}
+       duration: {{DURATION}}
+       topics: {{TOPICS}}
+       is_live: {{IS_LIVE}}
