@@ -4,6 +4,7 @@
   vars:
     NAME: :ansible form play
   vars_files:
+  - name: from files
   - course.yaml  
   vars_prompt:
   - name: NAME
