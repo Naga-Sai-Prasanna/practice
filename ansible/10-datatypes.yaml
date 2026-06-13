@@ -2,13 +2,13 @@
   hosts: local
   connection: local
   vars:
-   PROGRAM: "devsecops"
-   DURATION: 140
-   IS_LIVE: true
-   DETAILS:
+   PROGRAM: "devsecops" #STRING
+   DURATION: 140 #INT
+   IS_LIVE: true #BOOL
+   DETAILS: #MAP
     MONTHS: 4
     TRAINER: "Siva"
-   TOPICS:
+   TOPICS: #LIST
    - linux
    - shell
    - terrform
