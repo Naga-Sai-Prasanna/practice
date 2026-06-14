@@ -54,7 +54,7 @@
      state: present
 
   - name: load the data
-    ansible.builtin.command: mongosh --host "{{ MONGODB_HOST }}" --quiet --eval 'db.getMongo().getDBNames().indexof("catalogue")'
+    ansible.builtin.command: mongosh --host "{{ MONGODB_HOST }}" --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
     register: catalogue_output
 
   - name: print the output
