@@ -50,7 +50,7 @@
      path: /app
     
 
-  - name: copy user system servie
+  - name: copy user system service
     ansible.builtin.template:
       src: user.service
       dest: /etc/systemd/system/user.service
@@ -61,7 +61,7 @@
 
   - name: start and enable the service
     ansible.builtin.service:
-     name: catalogue
+     name: user
      state: restarted
      enabled: yes
 
