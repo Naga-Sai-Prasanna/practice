@@ -39,7 +39,7 @@
    
 
   - name: copy the config
-    ansible.builtin.file:
+    ansible.builtin.template:
      src: nginx.conf
      dest: /etc/nginx/nginx.conf
 
