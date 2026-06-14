@@ -77,7 +77,7 @@
     loop:
     - app/db/schema.sql  
     - app/db/user.sql  
-    - /app/db/master-data.sql
+    - app/db/master-data.sql
 
 
   - name: start and enable the service
