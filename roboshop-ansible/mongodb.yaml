@@ -13,7 +13,7 @@
      state: present
 
  
-  - name:  allow ewmote conections
+  - name:  allow remote conections
     ansible.builtin.replace:
       path: /etc/yum.repos.d/mongo.repo
       regexp: '127.0.0.1'  
