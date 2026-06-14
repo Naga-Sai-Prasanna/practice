@@ -45,6 +45,7 @@
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
       wait: true
+      overwrite: true
     loop: "{{ ec2_output.results }}"  
     when: action == "create"
 
@@ -86,3 +87,5 @@
     loop: "{{ instances }}"  
     when: action == "destroy"
    
+
+# ansible-playbook -i localhost, -e '{"instances":["mongodb","catalogue",redis","cart","user","mysql","shipping","payment","rabbitmq","frontend"]}' roboshop.yaml

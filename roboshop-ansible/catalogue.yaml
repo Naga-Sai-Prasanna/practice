@@ -33,3 +33,19 @@
      src: /tmp/catalogue.zip 
      dest: /app
      remote_src: yes # beacsue file is already in remote machine(catalogue)
+
+  - name: install dependencies
+    community.general.npm:
+      path: /app
+
+  - name: copy catalogue services
+    ansible.builtin.copy:
+     src: catalogue.service
+     dest: /etc/systemd/system/catalogue.service
+
+  - name: copy mongorepo
+    ansible.builtin.copy:
+     src: mongo.repo
+     dest: /etc/yum.repos.d/mongo.repo
+
+  - name:           
