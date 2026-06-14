@@ -14,7 +14,7 @@
 
   - name: enable and start the service
     ansible.builtin.service:
-     name: rabbitmq
+     name: rabbitmq-server
      state: restarted
      enabled: yes
 
@@ -28,6 +28,6 @@
         read_priv: .*
         write_priv: .*
      state: present
-         
+
 
     

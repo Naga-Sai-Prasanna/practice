@@ -59,11 +59,19 @@
   - name: systemd service
     ansible.builtin.template:
      src: shipping.service   
-     dest: /etc/systemd/system/shipping.service
+     dest: /etc/systemd/system/shipping.service 
 
   - name: system daemon reload
     ansible.builtin.systemd_service:
      daemon_reload: true
+
+  - name: install dependencies
+    ansible.builtin.pip:
+      name: "{{ item }}"
+      executable: pip3.9
+    loop:
+    - PyMySQL
+    - cryptography    
 
 
   - name: import shipping data
@@ -75,9 +83,9 @@
       login_password: RoboShop@1
       target: "{{ item }}"
     loop:
-    - app/db/schema.sql  
-    - app/db/user.sql  
-    - app/db/master-data.sql
+    - /app/db/schema.sql  
+    - /app/db/user.sql  
+    - /app/db/master-data.sql
 
 
   - name: start and enable the service
