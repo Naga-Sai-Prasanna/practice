@@ -16,12 +16,23 @@
      system: true
      home: /app
      shell: /sbin/nologin
-     comment: "Roboshop system user"     
+     comment: "Roboshop system user"   
+
+  - name: Delete dir
+    ansible.builtin.file:
+      path: /app
+      state: absent     
  
   - name: create dir
     ansible.builtin.file:
       path: /app
       state: directory
+
+  
+  - name: deleting the zip file
+    ansible.builtin.file:
+     path: /tmp/catalogue.zip 
+     state: absent
 
   - name: dowmloading the app
     ansible.builtin.get_url:
