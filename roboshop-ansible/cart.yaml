@@ -61,6 +61,6 @@
 
   - name: start and enable the service
     ansible.builtin.service:
-     name: catalogue
+     name: cart
      state: restarted
      enabled: yes
