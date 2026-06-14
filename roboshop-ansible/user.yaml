@@ -36,7 +36,7 @@
 
   - name: download the file   
     ansible.builtin.get_url:
-     src: https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip
+     url: https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip
      dest: /tmp/user.zip
 
   - name: unzip the file
