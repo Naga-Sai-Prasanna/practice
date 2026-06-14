@@ -31,6 +31,13 @@
      dest: /usr/share/nginx/html
      remote_src: yes
 
+  
+  - name: remove default nginx
+    ansible.builtin.file:
+     path: /etc/nginx/nginx.conf
+     state: absent
+   
+
   - name: copy the config
     ansible.builtin.file:
      src: nginx.conf
