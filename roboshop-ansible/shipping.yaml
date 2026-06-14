@@ -29,13 +29,13 @@
      state: directory
 
   - name: delete  the zip
-    ansibe.builtin.file:
+    ansible.builtin.file:
      path: /tmp/shipping.zip
      state: absent
 
 
   - name: download the code
-    ansibe.builtin.get_url:
+    ansible.builtin.get_url:
      url:  https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
      dest: /tmp/shipping.zip
 
