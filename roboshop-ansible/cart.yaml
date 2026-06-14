@@ -55,6 +55,10 @@
       src: cart.service
       dest: /etc/systemd/system/cart.service
 
+  - name: daemon reload
+    ansible.builtin.systemd_service:
+     daemon_reload: true      
+
   - name: start and enable the service
     ansible.builtin.service:
      name: catalogue
