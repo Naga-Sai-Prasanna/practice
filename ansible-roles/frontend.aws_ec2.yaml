@@ -21,12 +21,38 @@
 #             "ec2-32-197-31-199.compute-1.amazonaws.com"
 #         ]
 
-
+ # ===================================================================
 # 2. if we want to get public address
+
+# plugin: amazon.aws.aws_ec2
+# regions:
+# - us-east-1
+# hostnames:
+# - ip-address
+
+# at end you can see
+
+# "aws_ec2": {
+#         "hosts": [
+#             "54.242.36.98",
+#             "100.54.44.254",
+#             "98.80.206.19",
+#             "3.219.31.160",
+#             "13.218.221.191",
+#             "44.204.208.134",
+#             "44.200.12.145",
+#             "100.31.199.215",
+#             "44.202.203.43",
+#             "3.239.121.15",
+#             "44.197.187.82",
+#             "32.197.31.199"
+
+ # ===================================================================
+
+ # 3.if we want private address
 
 plugin: amazon.aws.aws_ec2
 regions:
 - us-east-1
 hostnames:
-- ip-address
-
+- private-ip-address
