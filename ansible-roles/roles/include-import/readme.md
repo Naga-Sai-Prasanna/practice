@@ -22,6 +22,10 @@ now if we use import playbook won't run beacsue import_roles parse the playbook 
 but include _role directly execute the playbook,it will not parse like import_role before execution.
 
 
+5.now under roles--> include-import create a folder vars.under this give a variable 
+os: "RedHat
+now in mainfile under ansible roles give a when condition.so playbook will execute.
+now for include role under common -->tasks-->here set a var dynamically using set_fact
 
 
 

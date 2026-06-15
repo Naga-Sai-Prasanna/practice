@@ -2,6 +2,11 @@
   ansible.builtin.debug:
    msg: "hi from prasanna"
 
+- name: set the os fact
+  ansible.builtin.set_fact:
+   os: "debian"
+      
+
 - name: message-2
   ansible.builtin.debug:
    msg: "hi from prasa"  
