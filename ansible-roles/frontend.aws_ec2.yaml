@@ -78,6 +78,24 @@
 #====================================
 
 # 4. if we want to filter specific adddresses
+# plugin: amazon.aws.aws_ec2
+# regions:
+# - us-east-1
+# hostnames:
+# - private-ip-address
+# filters:
+#  instance-state-name : running
+#  tag:Name: frontend-dev
+
+#  at end we can see
+#  "aws_ec2": {
+#         "hosts": [
+#             "172.31.5.82"
+
+# =====================
+
+# 5.if we see for every output we can see address under hosts but we want to see frontend or any component then 
+
 plugin: amazon.aws.aws_ec2
 regions:
 - us-east-1
@@ -86,3 +104,6 @@ hostnames:
 filters:
  instance-state-name : running
  tag:Name: frontend-dev
+keyed_groups:
+- prefix: ""
+  key: frontend 
