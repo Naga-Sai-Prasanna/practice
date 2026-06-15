@@ -2,11 +2,10 @@
   ansible.builtin.debug:
    msg: "hi from prasanna"
 
-- name: message-1
+- name: message-2
   ansible.builtin.debug:
    msg: "hi from prasa"  
 
-- name: message-1
+- name: message-3
   ansible.builtin.debug:
    msg: "hi from prassu"
-       
