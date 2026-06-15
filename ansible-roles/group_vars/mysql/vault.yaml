@@ -1,6 +1,6 @@
 # amazon secret manager
 
-MYSQL_ROOT_PASSWORD: "{{ lookup('amazon.aws.aws_secret', 'roboshop/dev/mysql_root_password', region='us-east-1', bypath=true) | from_json | json_query('MYSQL_ROOT_PASSWORD')}}"
+MYSQL_ROOT_PASSWORD: "{{ lookup('amazon.aws.aws_secret', 'roboshop/dev/mysql_root_password', region='us-east-1', bypath=true) | from_json | json_query).MYSQL_ROOT_PASSWORD }}"
 
 
 
