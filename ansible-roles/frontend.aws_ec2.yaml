@@ -94,7 +94,40 @@
 
 # =====================
 
-# 5.if we see for every output we can see address under hosts but we want to see frontend or any component then 
+# 5.if we see for every output we can see address 
+  # "all": {
+  #       "children": [
+  #           "ungrouped",
+  #           "aws_ec2"
+
+# plugin: amazon.aws.aws_ec2
+# regions:
+# - us-east-1
+# hostnames:
+# - private-ip-address
+# filters:
+#  instance-state-name : running
+#  tag:Name: frontend-dev
+# compose:
+#  # this sets the ansible_host variable to connect with the private ip address without changing the hostname 
+#   ansible_host: private-ip-address
+# keyed_groups:
+# - prefix: ""
+#   key: tags.Name 
+
+  # now we can see
+
+    # "all": {
+    #     "children": [
+    #         "ungrouped",
+    #         "aws_ec2",
+    #         "_frontend_dev"
+    #     ]
+    # },
+    
+
+ #=========================   
+ # Now if we want frontend group and under group frontend hosts then
 
 plugin: amazon.aws.aws_ec2
 regions:
@@ -109,4 +142,4 @@ compose:
   ansible_host: private-ip-address
 keyed_groups:
 - prefix: ""
-  key: tags.Name 
+  key: tags.component
