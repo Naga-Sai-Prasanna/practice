@@ -109,4 +109,4 @@ compose:
   ansible_host: private-ip-address
 keyed_groups:
 - prefix: ""
-  key: tags:Name 
+  key: tags.Name 
