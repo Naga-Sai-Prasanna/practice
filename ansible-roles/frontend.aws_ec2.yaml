@@ -129,6 +129,22 @@
  #=========================   
  # Now if we want frontend group and under group frontend hosts then
 
+#  "all": {
+#         "children": [
+#             "ungrouped",
+#             "aws_ec2",
+#             "_frontend"
+#         ]
+#     },
+#     "aws_ec2": {
+#         "hosts": [
+#             "172.31.19.163",
+#             "172.31.5.82"
+#         ]
+#     }
+# }
+
+
 plugin: amazon.aws.aws_ec2
 regions:
 - us-east-1
@@ -141,5 +157,5 @@ compose:
  # this sets the ansible_host variable to connect with the private ip address without changing the hostname 
   ansible_host: private-ip-address
 keyed_groups:
-- prefix: ""
+- seperator: ''
   key: tags.Component
