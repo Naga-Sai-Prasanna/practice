@@ -1,8 +1,32 @@
-# if we run this we will get all the instances under us-east-1.
+# 1. if we run this we will get all the instances under us-east-1.
+
+## plugin: amazon.aws.aws_ec2
+## regions:
+## - us-east-1
+
+# run --> ansible-inventory -i frontend.aws_ec2.yaml --list
+# # at end you can see like
+#    "hosts": [
+#             "ec2-54-242-36-98.compute-1.amazonaws.com",
+#             "ec2-100-54-44-254.compute-1.amazonaws.com",
+#             "ec2-98-80-206-19.compute-1.amazonaws.com",
+#             "ec2-3-219-31-160.compute-1.amazonaws.com",
+#             "ec2-13-218-221-191.compute-1.amazonaws.com",
+#             "ec2-44-204-208-134.compute-1.amazonaws.com",
+#             "ec2-44-200-12-145.compute-1.amazonaws.com",
+#             "ec2-100-31-199-215.compute-1.amazonaws.com",
+#             "ec2-44-202-203-43.compute-1.amazonaws.com",
+#             "ec2-3-239-121-15.compute-1.amazonaws.com",
+#             "ec2-44-197-187-82.compute-1.amazonaws.com",
+#             "ec2-32-197-31-199.compute-1.amazonaws.com"
+#         ]
 
 
+# 2. if we want to get public address
 
 plugin: amazon.aws.aws_ec2
 regions:
 - us-east-1
+hostnames:
+- public-ip-address
 
