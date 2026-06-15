@@ -51,8 +51,38 @@
 
  # 3.if we want private address
 
+# plugin: amazon.aws.aws_ec2
+# regions:
+# - us-east-1
+# hostnames:
+# - private-ip-address
+
+# at end we can see
+
+#  "aws_ec2": {
+#         "hosts": [
+#             "172.31.28.49",
+#             "172.31.9.61",
+#             "172.31.7.40",
+#             "172.31.4.55",
+#             "172.31.29.16",
+#             "172.31.1.62",
+#             "172.31.9.135",
+#             "172.31.2.153",
+#             "172.31.5.82",
+#             "172.31.9.98",
+#             "172.31.4.107",
+#             "172.31.7.192"
+#         ]
+#     }
+#====================================
+
+# 4. if we want to filter specific adddresses
 plugin: amazon.aws.aws_ec2
 regions:
 - us-east-1
 hostnames:
 - private-ip-address
+filters:
+ instance-state-name : running
+ tag:Name: frontend-dev
