@@ -1,0 +1,8 @@
+# if we run this we will get all the instances under us-east-1.
+
+
+
+plugin: amazon.aws.aws_ec2
+regions:
+- us-east-1
+
