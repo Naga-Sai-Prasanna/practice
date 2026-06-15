@@ -1,0 +1,12 @@
+- name: message-1
+  ansible.builtin.debug:
+   msg: "hi from prasanna"
+
+- name: message-1
+  ansible.builtin.debug:
+   msg: "hi from prasa"  
+
+- name: message-1
+  ansible.builtin.debug:
+   msg: "hi from prassu"
+       

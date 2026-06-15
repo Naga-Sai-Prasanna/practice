@@ -1,11 +1,16 @@
 - name: app setup
-  ansible.builtin.import_role:
+  tags:
+  - deployment
+  ansible.builtin.import_role: # it will respect the tag.sop only that particular tasks under role will run.
    name: common
    tasks_from: app-setup.yaml
 
 
 - name: nodejs setup
-  ansible.builtin.import_role:
+  tags:
+  - deployment
+  ansible.builtin.include_role:  # it wont respect the tag
+  #ansible.builtin.import_role:
    name: common
    tasks_from: nodejs-setup.yaml
 
@@ -36,6 +41,8 @@
   when: catalogue_output.stdout | int < 0
 
 - name: start and enable catalogue
+  tags:
+  - deployment
   ansible.builtin.service:
     name: catalogue
     state: restarted
