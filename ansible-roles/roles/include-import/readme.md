@@ -14,6 +14,14 @@ example-1: # Tags
    tasks_from: nodejs-setup.yaml
 
 
-3.now in under ansible-roles we have created the include-vs-import.yaml here we called the folder-> include-import under roles.and we have write our common tasks under common folder--> include-vs-import.yaml.now call the include-import.
+3.now in under ansible-roles we have created the include-vs-import.yaml here we called the folder-> include-import under roles.and we have write our common tasks under common folder--> include-vs-import.yaml.now call the include-import.yaml under ansible-roles
+ here both will give the same result.
+
+4.now in common folder under tasks just write some worng cmd.
+now if we use import playbook won't run beacsue import_roles parse the playbook before execution, it is static.
+but include _role directly execute the playbook,it will not parse like import_role before execution.
+
+
+
 
 
