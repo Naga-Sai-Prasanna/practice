@@ -159,3 +159,25 @@ compose:
 keyed_groups:
 - separator: ''
   key: tags.Component
+
+# now we cans ee
+#     },
+#     "all": {
+#         "children": [
+#             "ungrouped",
+#             "aws_ec2",
+#             "_frontend"
+#         ]
+#     },
+#     "aws_ec2": {
+#         "hosts": [
+#             "172.31.19.163",
+#             "172.31.5.82"
+#         ]
+#     }
+# }
+
+
+# scaling env, servers are dynamically created and destroyed based on traffic..we can't use static inventory file, we need to dynamically query the instances. we can use dynamic inventory plugin from aws passing region, name of the instances, running state etc.
+# now run
+# ansible-playbook -i frontend.aws_ec2.yaml -e component=frontend roboshop.yaml
