@@ -146,17 +146,48 @@
 
 
 
-- name: loops
+# - name: loops
+#   hosts: local
+#   connection: local
+#   become: yes
+#   tasks:
+#   - name: loops
+#     ansible.builtin.package:
+#      name: "{{ item.name }}"  
+#      state: "{{ item.state }}"  
+#     loop:
+#     - { name: "mysql", state: "absent" }
+#     - { name: "python", state: "present" }
+
+          
+- name: filters
   hosts: local
   connection: local
   become: yes
-  tasks:
-  - name: loops
-    ansible.builtin.package:
-     name: "{{ item.name }}"  
-     state: "{{ item.state }}"  
-    loop:
-    - { name: "mysql", state: "absent" }
-    - { name: "python", state: "present" }
+  vars:
+   tipics: linux,shell,ansible,terraform
+   course: "devops"   
+   myIp: "124.45.35.35"   
+   tagsMap:
+    name: ansible
+    project: roboshop
+    component: cat
 
-          
+   tagsList: [
+     { 
+       "key": "name",
+       "value": "ansible"
+       
+      },
+
+     { "key": "name",
+       "value": "ansible"
+     }
+   ]
+      
+  tasks:
+  - name: greet
+    ansible.builtin.debug:
+     msg: "hi prassu, {{ greet | default('gm') }}"
+
+
