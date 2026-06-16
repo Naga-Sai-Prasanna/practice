@@ -108,10 +108,10 @@
   
   - name: cmd
     ansible.builtin.command: date
-    register: user_sample
+    register: user
 
   - name: print
     ansible.builtin.debug:
-     msg: "{{ user_sample }}"  
+     msg: "{{ user }}"  
    
    
