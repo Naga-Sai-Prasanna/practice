@@ -96,14 +96,7 @@
     ansible.builtin.debug:
      msg: "{{ user_sample }}"  
 
-  
-  - name: cmd
-    ansible.builtin.command: cat /etc/passwd | grep "root"
-    register: user_sample
-
-  - name: print
-    ansible.builtin.debug:
-     msg: "{{ user_sample }}"  
+   
 
   
   - name: cmd
@@ -114,4 +107,11 @@
     ansible.builtin.debug:
      msg: "{{ user }}"  
    
-   
+  
+  - name: cmd
+    ansible.builtin.command: cat /etc/passwd | grep "root"
+    register: user_sample
+
+  - name: print
+    ansible.builtin.debug:
+     msg: "{{ user_sample }}"   
