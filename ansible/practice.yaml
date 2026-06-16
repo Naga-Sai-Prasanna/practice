@@ -209,3 +209,12 @@
   - name: convert yaml to json
     ansible.builtin.debug:
      msg: "{{ student | to_nice_json }}"
+
+  - name: convert yaml to json
+    ansible.builtin.debug:
+     msg: "{{ course | upper }}"
+   
+  - name: convert yaml to json
+    ansible.builtin.debug:
+     msg: "{{ course | lower }}"
+ 
