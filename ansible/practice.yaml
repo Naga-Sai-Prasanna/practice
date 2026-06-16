@@ -1,0 +1,22 @@
+- name: var prefernce
+  hosts: local
+  connection: local
+  become: yes
+  vars:
+   NAME: "prassu from playbook"
+  vars_file:
+   course.yaml
+  vars_prompt:
+  - name: NAME
+    prompt: pleas enter ur name
+    private: false
+  tasks:
+  - name: varss form task
+    vars:
+     NAME: "Vars form tasks"
+  - name: print the var
+    ansible.bultin.debug:
+     msg: "username is: {{ NAME }}"   
+
+
+    

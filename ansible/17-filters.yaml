@@ -30,7 +30,7 @@
   tasks:
   - name: greeting
     ansible.builtin.debug:
-      msg: "hi prassu, {{GREETING | default('good mrng ')}}"
+      msg: "hi prassu, {{GREETING | default('good mrng')}}"
   
   - name: convert string to list
     ansible.builtin.debug:
