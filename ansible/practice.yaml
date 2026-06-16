@@ -160,64 +160,79 @@
 #     - { name: "python", state: "present" }
 
           
-- name: filters
+# - name: filters
+#   hosts: local
+#   connection: local
+#   become: yes
+#   vars:
+#    topics: linux,shell,ansible,terraform
+#    course: "devops"   
+#    myIp: "124.45.35.35"   
+#    tagsMap:
+#     name: ansible
+#     project: roboshop
+#     component: cat
+
+#    tagsList: [
+#      { 
+#        "key": "name",
+#        "value": "ansible"
+       
+#       },
+
+#      { "key": "name",
+#        "value": "ansible"
+#      }
+#    ]
+      
+#   tasks:
+#   - name: greet
+#     ansible.builtin.debug:
+#      msg: "hi prassu, {{ greeting | default('gm') }}"
+
+#   - name: convert string to list 
+#     ansible.builtin.debug:
+#      msg: "{{ topics | split(',') }}"
+
+#   - name: convert map to list
+#     ansible.builtin.debug:
+#      msg: "{{ tagsMap | dict2items }}"  
+
+#   - name: convert  list to map 
+#     ansible.builtin.debug:
+#      msg: "{{ tagsList | items2dict }}"  
+   
+#   - name: set
+#     ansible.builtin.set_fact:
+#      student: "{{ lookup('file', 'students.yaml') | from_yaml }}"
+
+#   - name: convert yaml to json
+#     ansible.builtin.debug:
+#      msg: "{{ student | to_nice_json }}"
+
+#   - name: upper
+#     ansible.builtin.debug:
+#      msg: "{{ course | upper }}"
+   
+#   - name: lower
+#     ansible.builtin.debug:
+#      msg: "{{ course | lower }}"
+ 
+#   - name: iov4
+#     ansible.builtin.debug:
+#      msg: "{{ myIp | ansible.utils.ipv4 }}"
+
+
+
+- name: idempotency
   hosts: local
   connection: local
-  become: yes
-  vars:
-   topics: linux,shell,ansible,terraform
-   course: "devops"   
-   myIp: "124.45.35.35"   
-   tagsMap:
-    name: ansible
-    project: roboshop
-    component: cat
-
-   tagsList: [
-     { 
-       "key": "name",
-       "value": "ansible"
-       
-      },
-
-     { "key": "name",
-       "value": "ansible"
-     }
-   ]
-      
   tasks:
-  - name: greet
-    ansible.builtin.debug:
-     msg: "hi prassu, {{ greeting | default('gm') }}"
+  - name: error check
+    ansible.builtin.command: id roboshop
+    register: user_output
+    ignore_errors: true
 
-  - name: convert string to list 
+  - name: print  
     ansible.builtin.debug:
-     msg: "{{ topics | split(',') }}"
-
-  - name: convert map to list
-    ansible.builtin.debug:
-     msg: "{{ tagsMap | dict2items }}"  
-
-  - name: convert  list to map 
-    ansible.builtin.debug:
-     msg: "{{ tagsList | items2dict }}"  
-   
-  - name: set
-    ansible.builtin.set_fact:
-     student: "{{ lookup('file', 'students.yaml') | from_yaml }}"
-
-  - name: convert yaml to json
-    ansible.builtin.debug:
-     msg: "{{ student | to_nice_json }}"
-
-  - name: upper
-    ansible.builtin.debug:
-     msg: "{{ course | upper }}"
-   
-  - name: lower
-    ansible.builtin.debug:
-     msg: "{{ course | lower }}"
- 
-  - name: iov4
-    ansible.builtin.debug:
-     msg: "{{ myIp | ansible.utils.ipv4 }}"
+     msg: "{{ user_output }}"
