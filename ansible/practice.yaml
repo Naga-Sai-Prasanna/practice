@@ -117,32 +117,32 @@
 #      msg: "{{ user_sample }}"   
 
 
-- name: loops
-  hosts: local
-  connection: local
-  become: yes
-  tasks:
-  - name: loops
-    ansible.builtin.debug:
-     msg: " hello {{ item}}"
-    loop:
-    - p
-    - pr
-    - pra
+# - name: loops
+#   hosts: local
+#   connection: local
+#   become: yes
+#   tasks:
+#   - name: loops
+#     ansible.builtin.debug:
+#      msg: " hello {{ item}}"
+#     loop:
+#     - p
+#     - pr
+#     - pra
 
 
-- name: loops
-  hosts: local
-  connection: local
-  become: yes
-  tasks:
-  - name: loops
-    ansible.builtin.package:
-     name: "{{ item }}"  
-     state: present   
-    loop:
-    - mysql
-    - python
+# - name: loops
+#   hosts: local
+#   connection: local
+#   become: yes
+#   tasks:
+#   - name: loops
+#     ansible.builtin.package:
+#      name: "{{ item }}"  
+#      state: present   
+#     loop:
+#     - mysql
+#     - python
 
 
 
@@ -156,7 +156,7 @@
      name: "{{ item.name }}"  
      state: "{{ item.state }}"  
     loop:
-    - { "name: mysql", "state: absent" }
-    - { "name: python", "state: present" }
+    - { name: "mysql", state: "absent" }
+    - { name: "python", state: "present" }
 
           
