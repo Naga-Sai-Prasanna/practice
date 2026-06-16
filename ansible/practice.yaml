@@ -84,34 +84,48 @@
 #     when: ansible_facts.os_family == "RedHat"
 
 
-- name: shell vs cmd
+# - name: shell vs cmd
+#   hosts: local
+#   connection: local
+#   tasks:
+#   - name: shell
+#     ansible.builtin.shell: cat /etc/passwd | grep "root"
+#     register: user_sample
+
+#   - name: print
+#     ansible.builtin.debug:
+#      msg: "{{ user_sample }}"  
+
+   
+
+  
+#   - name: cmd
+#     ansible.builtin.command: date
+#     register: user
+
+#   - name: print
+#     ansible.builtin.debug:
+#      msg: "{{ user }}"  
+   
+  
+#   - name: cmd
+#     ansible.builtin.command: cat /etc/passwd | grep "root"
+#     register: user_sample
+
+#   - name: print
+#     ansible.builtin.debug:
+#      msg: "{{ user_sample }}"   
+
+
+- name: loops
   hosts: local
   connection: local
+  become: yes
   tasks:
-  - name: shell
-    ansible.builtin.shell: cat /etc/passwd | grep "root"
-    register: user_sample
-
-  - name: print
+  - name: loops
     ansible.builtin.debug:
-     msg: "{{ user_sample }}"  
-
-   
-
-  
-  - name: cmd
-    ansible.builtin.command: date
-    register: user
-
-  - name: print
-    ansible.builtin.debug:
-     msg: "{{ user }}"  
-   
-  
-  - name: cmd
-    ansible.builtin.command: cat /etc/passwd | grep "root"
-    register: user_sample
-
-  - name: print
-    ansible.builtin.debug:
-     msg: "{{ user_sample }}"   
+     msg: " hello {{ item}}"
+    loops:
+    - p
+    - pr
+    - pra
