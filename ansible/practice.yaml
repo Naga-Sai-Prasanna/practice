@@ -70,8 +70,8 @@
 
 
 - name: gather facts
-  connection: local
   hosts: local
+  connection: local
   become: yes
   tasks:
   - name: gathering teh facts
@@ -79,6 +79,6 @@
      msg: "{{ ansible_facts }}"
 
   - name: check redhat or not
-  ansible.builtin.debug:
-   msg: "package manager is redhat"
-  when: ansible_facts.os_family == "RedHat"
+    ansible.builtin.debug:
+     msg: "package manager is redhat"
+    when: ansible_facts.os_family == "RedHat"
