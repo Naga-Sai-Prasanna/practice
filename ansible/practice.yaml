@@ -227,6 +227,7 @@
 - name: idempotency
   hosts: local
   connection: local
+  become: yes
   tasks:
   - name: error check
     ansible.builtin.command: id roboshop
@@ -240,4 +241,4 @@
   - name: useradd
     ansible.builtin.command: useradd roboshop
     
-    when: user_output.rc !=0   
+    when: user_output.rc == 0  
