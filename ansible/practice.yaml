@@ -236,3 +236,8 @@
   - name: print  
     ansible.builtin.debug:
      msg: "{{ user_output }}"
+
+  - name: useradd
+    ansible.builtin.command: useradd roboshop
+    
+    when: user_output.rc == 1   
