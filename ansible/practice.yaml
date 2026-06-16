@@ -210,11 +210,14 @@
     ansible.builtin.debug:
      msg: "{{ student | to_nice_json }}"
 
-  - name: convert yaml to json
+  - name: upper
     ansible.builtin.debug:
      msg: "{{ course | upper }}"
    
-  - name: convert yaml to json
+  - name: lower
     ansible.builtin.debug:
      msg: "{{ course | lower }}"
  
+  - name: iov4
+    ansible.builtin.debug:
+     msg: "{{ myIp | ansible.utils.ipv4 }}"
