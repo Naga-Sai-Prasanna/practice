@@ -125,7 +125,7 @@
   - name: loops
     ansible.builtin.debug:
      msg: " hello {{ item}}"
-    loops:
+    loop:
     - p
     - pr
     - pra
