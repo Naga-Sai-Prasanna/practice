@@ -190,7 +190,12 @@
     ansible.builtin.debug:
      msg: "hi prassu, {{ greeting | default('gm') }}"
 
-  - name: convert list to string
+  - name: convert string to list 
     ansible.builtin.debug:
      msg: "{{ topics | split(',') }}"
+
+  - name: convert map to list
+    ansible.builtin.debug:
+     msg: "{{ tagsMap | dict2items }}"   
      
+
