@@ -69,16 +69,49 @@
 #     when: NUMBER_OF_SESSIONS > 5
 
 
-- name: gather facts
+# - name: gather facts
+#   hosts: local
+#   connection: local
+#   become: yes
+#   tasks:
+#   - name: gathering teh facts
+#     ansible.builtin.debug:
+#      msg: "{{ ansible_facts }}"
+
+#   - name: check redhat or not
+#     ansible.builtin.debug:
+#      msg: "package manager is redhat"
+#     when: ansible_facts.os_family == "RedHat"
+
+
+- name: shell vs cmd
   hosts: local
   connection: local
-  become: yes
   tasks:
-  - name: gathering teh facts
-    ansible.builtin.debug:
-     msg: "{{ ansible_facts }}"
+  - name: shell
+    ansible.builtin.shell: cat /etc/passwd | grep "root"
+    register: user_sample
 
-  - name: check redhat or not
+  - name: print
     ansible.builtin.debug:
-     msg: "package manager is redhat"
-    when: ansible_facts.os_family == "RedHat"
+     msg: "{{ user_sample }}"  
+
+  
+  - name: cmd
+    ansible.builtin.command: cat /etc/passwd | grep "root"
+    register: user_sample
+
+  - name: print
+    ansible.builtin.debug:
+     msg: "{{ user_sample }}"  
+
+  
+  - name: cmd
+    ansible.builtin.command: date
+    register: user_sample
+
+  - name: print
+    ansible.builtin.debug:
+     msg: "{{ user_sample }}"  
+   
+   
