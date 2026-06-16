@@ -12,8 +12,8 @@
     private: false
   tasks:
   - name: variables form task
-    vars:
-     NAME: "Vars form tasks"
+    # vars:
+    #  NAME: "Vars form tasks"
     ansible.builtin.debug:
      msg: "username is: {{ NAME }}"   
 
