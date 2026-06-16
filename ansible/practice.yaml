@@ -15,7 +15,7 @@
     vars:
      NAME: "Vars form tasks"
   - name: print the variable
-    ansible.bultin.debug:
+    ansible.builtin.debug:
      msg: "username is: {{ NAME }}"   
 
 
