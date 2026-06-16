@@ -188,6 +188,6 @@
   tasks:
   - name: greet
     ansible.builtin.debug:
-     msg: "hi prassu, {{ greet }}"
+     msg: "hi prassu, {{ greeting | default('gm') }}"
 
 
