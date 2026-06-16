@@ -11,10 +11,10 @@
     prompt: pleas enter ur name
     private: false
   tasks:
-  - name: varss form task
+  - name: variables form task
     vars:
      NAME: "Vars form tasks"
-  - name: print the var
+  - name: print the variable
     ansible.bultin.debug:
      msg: "username is: {{ NAME }}"   
 
