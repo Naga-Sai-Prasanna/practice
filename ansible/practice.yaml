@@ -19,23 +19,37 @@
 
 
 
-- name: demo on data types
+# - name: demo on data types
+#   hosts: local
+#   connection: local
+#   become: yes
+#   vars:
+#    PROGRAM: "devsecops" 
+#    DURATION: 140
+#    IS_LIVE: true
+#    DETAILS:
+#     MONTHS: 4
+#     TRAINER: "SIV" 
+#    TOPICS:
+#    - Linux
+#    - Shell
+#   tasks:
+#   - name: print var
+#     ansible.builtin.debug:
+#      msg: |
+#       program: {{ PROGRAM }}  
+#       duration: {{  DURATION }}
+
+
+- name: demo on conditions
   hosts: local
   connection: local
   become: yes
   vars:
-   PROGRAM: "devsecops" 
-   DURATION: 140
    IS_LIVE: true
-   DETAILS:
-    MONTHS: 4
-    TRAINER: "SIV" 
-   TOPICS:
-   - Linux
-   - Shell
   tasks:
-  - name: print var
+  - name: is it live
     ansible.builtin.debug:
-     msg: |
-      program: {{ PROGRAM }}  
-      duration: {{  DURATION }}
+      msg: "yes it is live"
+    when: IS_LIVE
+
