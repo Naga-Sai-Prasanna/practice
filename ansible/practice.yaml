@@ -202,5 +202,10 @@
     ansible.builtin.debug:
      msg: "{{ tagsList | items2dict }}"  
    
+  - name: set
+    ansible.builtin.set_fact:
+     students: "{{ lookup('file', students.yaml ) | from_json }}"
 
-
+  - name: convert yaml to json
+    ansible.builtin.debug:
+     msg: "{{ students | to_nice_json }}"
