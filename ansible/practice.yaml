@@ -1,21 +1,41 @@
-- name: var prefernce
+# - name: var prefernce
+#   hosts: local
+#   connection: local
+#   become: yes
+#   vars:
+#    NAME: "prassu from playbook"
+#   vars_files:
+#   - course.yaml
+#   vars_prompt:
+#   - name: NAME
+#     prompt: pleas enter ur name
+#     private: false
+#   tasks:
+#   - name: variables form task
+#     vars:
+#      NAME: "Vars form tasks"
+#     ansible.builtin.debug:
+#      msg: "username is: {{ NAME }}"   
+
+
+
+- name: demo on data types
   hosts: local
   connection: local
   become: yes
-  # vars:
-  #  NAME: "prassu from playbook"
-  vars_files:
-  # - course.yaml
-  vars_prompt:
-  # - name: NAME
-  #   prompt: pleas enter ur name
-  #   private: false
+  vars:
+   PROGRAM: "devsecops" 
+   DURATION: 140
+   IS_LIVE: true
+   DETAILS:
+    MONTHS: 4
+    TRAINER: "SIV" 
+   TOPICS:
+   - Linux
+   - Shell
   tasks:
-  - name: variables form task
-    # vars:
-    #  NAME: "Vars form tasks"
+  - name: print var
     ansible.builtin.debug:
-     msg: "username is: {{ NAME }}"   
-
-
-    
+     msg: |
+      program: {{ PROGRAM }}  
+      duration: {{  DURATION }}
