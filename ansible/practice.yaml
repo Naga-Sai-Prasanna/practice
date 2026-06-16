@@ -41,15 +41,29 @@
 #       duration: {{  DURATION }}
 
 
+# - name: demo on conditions
+#   hosts: local
+#   connection: local
+#   become: yes
+#   vars:
+#    IS_LIVE: true
+#   tasks:
+#   - name: is it live
+#     ansible.builtin.debug:
+#       msg: "yes it is live"
+#     when: IS_LIVE
+
+
+
+
 - name: demo on conditions
   hosts: local
   connection: local
   become: yes
   vars:
-   IS_LIVE: true
+   NUMBER_OF_SESSIONS: 7
   tasks:
   - name: is it live
     ansible.builtin.debug:
       msg: "yes it is live"
-    when: IS_LIVE
-
+    when: NUMBER_OF_SESSIONS > 5
