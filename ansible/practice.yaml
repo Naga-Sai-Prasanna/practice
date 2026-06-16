@@ -5,7 +5,7 @@
   vars:
    NAME: "prassu from playbook"
   vars_files:
-  - course.yaml
+  # - course.yaml
   vars_prompt:
   - name: NAME
     prompt: pleas enter ur name
