@@ -56,14 +56,25 @@
 
 
 
-- name: demo on conditions
-  hosts: local
+# - name: demo on conditions
+#   hosts: local
+#   connection: local
+#   become: yes
+#   vars:
+#    NUMBER_OF_SESSIONS: 7
+#   tasks:
+#   - name: is it live
+#     ansible.builtin.debug:
+#       msg: "yes it is live"
+#     when: NUMBER_OF_SESSIONS > 5
+
+
+- name: gather facts
   connection: local
+  hosts: local
   become: yes
-  vars:
-   NUMBER_OF_SESSIONS: 7
   tasks:
-  - name: is it live
+  - name: gathering teh facts
     ansible.builtin.debug:
-      msg: "yes it is live"
-    when: NUMBER_OF_SESSIONS > 5
+     msg: "{{ ansible_facts }}"
+
