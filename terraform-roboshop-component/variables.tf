@@ -24,7 +24,7 @@ variable "domain_name" {
 }
 
 
-variable "components" {
+variable "component" {
 
     type = map
 }

@@ -6,7 +6,7 @@ resource "aws_instance" "main" {
       
     tags = merge(
         {
-            Name = "${var.project}-${var.environment}-${var.components}"
+            Name = "${var.project}-${var.environment}-${var.component}"
         },
         local.common_tags
 
@@ -43,7 +43,7 @@ provisioner "remote-exec" {
     inline = [
        "chmod +x /tmp/bootstrap.sh",
       #  "sudo sh /tmp/bootstrap.sh main dev"
-       "sudo sh /tmp/bootstrap.sh ${var.components} ${var.environment} ${var.app_version}"
+       "sudo sh /tmp/bootstrap.sh ${var.component} ${var.environment} ${var.app_version}"
     ]
 }
 }
@@ -71,7 +71,7 @@ resource "aws_ami_from_instance" "main" {
 # target group
 
 resource "aws_lb_target_group" "main" {
-  name = "${var.project}-${var.environment}-${var.components}"
+  name = "${var.project}-${var.environment}-${var.component}"
   port = local.port_number
   protocol = "HTTP"
   vpc_id = local.vpc_id
@@ -92,7 +92,7 @@ resource "aws_lb_target_group" "main" {
 # launch template
 
 resource "aws_launch_template" "main" {
-  name = "${var.project}-${var.environment}-${var.components}"
+  name = "${var.project}-${var.environment}-${var.component}"
   image_id = aws_ami_from_instance.main.id
 
   # once autoscaling sees less traffic, it will terminate the instance
@@ -111,7 +111,7 @@ resource "aws_launch_template" "main" {
 
     tags = merge(
         {
-        Name = "${var.project}-${var.environment}-${var.components}"
+        Name = "${var.project}-${var.environment}-${var.component}"
     },
         local.common_tags
     )
@@ -125,7 +125,7 @@ resource "aws_launch_template" "main" {
 
     tags = merge(
         {
-        Name = "${var.project}-${var.environment}-${var.components}"
+        Name = "${var.project}-${var.environment}-${var.component}"
     },
         local.common_tags
     )
@@ -133,7 +133,7 @@ resource "aws_launch_template" "main" {
   # tags for launch template
   tags = merge(
         {
-        Name = "${var.project}-${var.environment}-${var.components}"
+        Name = "${var.project}-${var.environment}-${var.component}"
     },
         local.common_tags
   )
@@ -146,7 +146,7 @@ resource "aws_launch_template" "main" {
 
 
 resource "aws_autoscaling_group" "main" {
-  name                      = "${var.project}-${var.environment}-${var.components}"
+  name                      = "${var.project}-${var.environment}-${var.component}"
   max_size                  = 10
   min_size                  = 1
   health_check_grace_period = 120
@@ -192,7 +192,7 @@ resource "aws_autoscaling_group" "main" {
 
 resource "aws_autoscaling_policy" "main" {
   autoscaling_group_name =  aws_autoscaling_group.main.name
-  name = "${var.project}-${var.environment}-${var.components}"
+  name = "${var.project}-${var.environment}-${var.component}"
   # track the instances in autoscaling
   policy_type = "TargetTrackingScaling"
   estimated_instance_warmup = 120
