@@ -39,7 +39,7 @@ resource "terraform_data"  "bootstrap" {
 
 # giving executor access to the script
   
-provisioner "remote-exec" {
+  provisioner "remote-exec" {
     inline = [
        "chmod +x /tmp/bootstrap.sh",
        "sudo sh /tmp/bootstrap.sh mongodb ${var.environment}"
@@ -91,7 +91,7 @@ resource "terraform_data"  "bootstrap_redis" {
 
 # giving executor access to the script
   
-provisioner "remote-exec" {
+  provisioner "remote-exec" {
     inline = [
        "chmod +x /tmp/bootstrap.sh",
        "sudo sh /tmp/bootstrap.sh redis ${var.environment}"
@@ -143,7 +143,7 @@ resource "terraform_data"  "bootstrap_mysql" {
 
 # giving executor access to the script
   
-provisioner "remote-exec" {
+  provisioner "remote-exec" {
     inline = [
        "chmod +x /tmp/bootstrap.sh",
        "sudo sh /tmp/bootstrap.sh mysql ${var.environment}"
@@ -197,7 +197,7 @@ resource "terraform_data"  "bootstrap_rabbitmq" {
 
 # giving executor access to the script
   
-provisioner "remote-exec" {
+  provisioner "remote-exec" {
     inline = [
        "chmod +x /tmp/bootstrap.sh",
        "sudo sh /tmp/bootstrap.sh rabbitmq ${var.environment}"
