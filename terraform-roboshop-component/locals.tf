@@ -13,7 +13,7 @@ locals {
     backend_alb_listener_arn = data.aws_ssm_parameter.backend_alb_listener_arn.value
     frontend_alb_listener_arn = data.aws_ssm_parameter.frontend_alb_listener_arn
     alb_listener_arn = var.components == "frontend" ? local.frontend_alb_listener_arn : local.backend_alb_listener_arn
-    host_header =  var.components == "frontend" ? "${var.components}-${var.environment}.${var.domain_name}" : "${var.component}.backend-alb-${var.environment}.${var.domain_name}"
+    host_header =  var.components == "frontend" ? "${var.components}-${var.environment}.${var.domain_name}" : "${var.components}.backend-alb-${var.environment}.${var.domain_name}"
     vpc_id = data.ssm.parameter.vpc_id.value
 
 }    

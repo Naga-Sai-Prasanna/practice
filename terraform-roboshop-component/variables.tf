@@ -26,7 +26,7 @@ variable "domain_name" {
 
 variable "components" {
 
-    type = string
+    type = map
 }
 
 variable "health_check_path" {
@@ -43,6 +43,6 @@ variable "app_version" {
 }
 
 variable "rule_priority" {
-
+  type = number
   
 }
