@@ -19,7 +19,7 @@ resource "aws_instance" "bastion" {
     )
 
     }
-
+#ec2 tags
     tags = merge(
         {
             Name = "${var.project}-${var.environment}-bastion"

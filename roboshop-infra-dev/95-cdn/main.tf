@@ -16,7 +16,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled             = true
   is_ipv6_enabled     = true
   
-  # cdn url https://robohop-dev.prasanna.fun---for public an ddevelopers we will give this
+  # cdn url https://robohop-dev.prasanna.fun---for public and developers we will give this
   
   aliases = ["${var.project}-${var.environment}.${var.domain_name}"]
  
