@@ -368,7 +368,7 @@ resource "aws_security_group_rule" "frontend_alb_public" {
     security_group_id = local.frontend_alb_sg_id
 }
 
-# oprnvpn from public 443
+# openvpn from public 443
 
 resource "aws_security_group_rule" "openvpn_public_443" {
   type      = "ingress"
