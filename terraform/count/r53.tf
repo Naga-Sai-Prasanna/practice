@@ -17,5 +17,5 @@ resource "aws_route53_record" "www" {
     name = "${var.instances[count.index]}.${var.domain_name}"
     type = "A"
     ttl = 1
-    records = [aws_instance.example[index(var.instances)].public_ip]
+    records = [aws_instance.example[index(var.instances, "frontend")].public_ip]
     }

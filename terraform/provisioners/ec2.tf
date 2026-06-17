@@ -11,8 +11,8 @@ resource "aws_instance" "example" {
   }
 
 provisioner "local-exec" {
-     command = "exit 1" #here we are exiting with code 1 to simulate the failure of the provisioner and then we can see the effect of the failure in the terraform apply command."
-      on_failure = continue #here we are using on_failure to continue the execution of the next provisioner even if the previous provisioner fails. by default it will stop the execution of the next provisioner if the previous provisioner fails.
+    command = "exit 1" #here we are exiting with code 1 to simulate the failure of the provisioner and then we can see the effect of the failure in the terraform apply command."
+    on_failure = continue #here we are using on_failure to continue the execution of the next provisioner even if the previous provisioner fails. by default it will stop the execution of the next provisioner if the previous provisioner fails.
    
    }
  
@@ -28,7 +28,7 @@ provisioner "local-exec" {
 
  provisioner "local-exec" {
         when = destroy
-        command = "echo inventory.ini"
+        command = "echo > inventory.ini"
    
  }
 
@@ -49,7 +49,6 @@ provisioner "remote-exec" { # terraform will take the connection details later i
 
 provisioner "remote-exec" { # terraform will take the connection details later in this var it run below cmds.
     inline = [ #one_after_one exection
-        "sudo yum install nginx -y",
         "sudo systemctl stop nginx"
          ]        
      when = destroy   

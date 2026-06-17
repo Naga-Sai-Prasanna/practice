@@ -5,11 +5,11 @@ resource "aws_instance" "example" {
   instance_type = "t3.micro"
   vpc_security_group_ids   =  [aws_security_group.allow_tls.id]  #here attaching sec group to ec2
   
-  tags = merge {
+  tags = merge (
  
    var.common_tags,
    var.ec2_tags
-  }
+  )
 }
 
 
@@ -36,10 +36,10 @@ resource "aws_security_group" "allow_tls" {
 
   
    
-  tags = merge {
+  tags = merge (
     var.common_tags,
        var.ec2_tags
-  }
+  )
 }
 
 

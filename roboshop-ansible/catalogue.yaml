@@ -64,7 +64,7 @@
      name: mongodb-mongosh
      state: present
 
-  - name: load the data
+  - name: check the catalogue DB
     ansible.builtin.command: mongosh --host "{{ MONGODB_HOST }}" --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
     register: catalogue_output
 
@@ -72,7 +72,7 @@
     ansible.builtin.debug:
       msg: "{{ catalogue_output }}"
 
-  - name: load the products
+  - name: load data only if catalogue DB not found
     ansible.builtin.shell: mongosh --host  "{{ MONGODB_HOST }}"  </app/db/master-data.js   
     when: catalogue_output.stdout | int < 0
 

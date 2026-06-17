@@ -1,5 +1,7 @@
 - name: "configure {{ component }} server"
   hosts: "{{ component }}"
   become: yes
+  serial: 5 
+  # Controls how many hosts run per batch in a play
   roles:
   - "{{ component }}"

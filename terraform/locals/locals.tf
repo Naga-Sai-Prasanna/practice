@@ -19,6 +19,6 @@ locals {
     }
 
     ec2_final_tags = merge(local.common_tags, var.ec2_tags) #here we are merging the common tags with the ec2 specific tags and then we can use it in our code
-    ami_id = data.aws_ami.joindevops.id #but won't get result when run because no ami created.
+    ami_id = data.aws_ami.joindevops.id 
 }
 

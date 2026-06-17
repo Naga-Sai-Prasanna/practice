@@ -84,7 +84,7 @@
 # hostnames:
 # - private-ip-address
 # filters:
-#  instance-state-name : running
+#  instance-state-name: running
 #  tag:Name: frontend-dev
 
 #  at end we can see
@@ -94,7 +94,7 @@
 
 # =====================
 
-# 5.if we see for every output we can see address 
+# 5.if we see for every output we can see group names 
   # "all": {
   #       "children": [
   #           "ungrouped",
@@ -181,3 +181,22 @@ keyed_groups:
 # scaling env, servers are dynamically created and destroyed based on traffic..we can't use static inventory file, we need to dynamically query the instances. we can use dynamic inventory plugin from aws passing region, name of the instances, running state etc.
 # now run
 # ansible-playbook -i frontend.aws_ec2.yaml -e component=frontend roboshop.yaml
+
+
+# here for fork and serial example we can add the 15 frontend instances in ec2 but we missed to add components.so here we are chnaging
+
+
+# plugin: amazon.aws.aws_ec2
+# regions:
+# - us-east-1
+# hostnames:
+# - private-ip-address
+# filters:
+#  instance-state-name : running
+#  tag:Name: frontend-dev
+# compose:
+#  # this sets the ansible_host variable to connect with the private ip address without changing the hostname 
+#   ansible_host: private-ip-address
+# keyed_groups:
+# - separator: ''
+#   key: tags.Name | regex_replace('-.*$', '')

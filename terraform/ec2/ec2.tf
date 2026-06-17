@@ -35,10 +35,13 @@ resource "aws_security_group" "allow_tls" {
   tags = {
     Name = "allow-all-terraform"
   }
+
+  # we added beacsue first terraform will destroy everything and then it will create.but here it is reverse first create and then destroy. 
   lifecycle {
     create_before_destroy = true
   }
 }
+
 
 
 

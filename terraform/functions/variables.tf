@@ -22,3 +22,9 @@ variable "sg_tags" {
         
     }
 }
+
+
+variable "instances" {
+  type = list
+  default = ["mongodb", "redis", "mysql", "rabbitmq", "catalogue", "user", "cart", "shipping", "payment", "frontend"]
+}

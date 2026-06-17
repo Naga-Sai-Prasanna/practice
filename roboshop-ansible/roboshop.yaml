@@ -89,3 +89,9 @@
 
 # ansible-playbook -i localhost, -e '{"instances":["mongodb","catalogue",redis","cart","user","mysql","shipping","payment","rabbitmq","frontend"]}' roboshop.yaml
 # ansible-playbook -i localhost, -e '{"instances":["mongodb","catalogue","redis","cart","user","mysql","shipping","payment","rabbitmq","frontend"],"action":"destroy"}' roboshop.yaml
+
+# ansible-playbook -e component=catalogue -t deployment roboshop.yaml
+
+
+
+

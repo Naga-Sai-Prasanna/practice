@@ -56,3 +56,5 @@ so now in mysql--> vault.yaml we will remove the
 
 and add parameter using lookup
 
+and we can secret manager as well.here we can store passords as a key value pairs and we can stire multiple secrets and it is json format.
+
