@@ -377,7 +377,7 @@ resource "aws_security_group_rule" "openvpn_public_443" {
   protocol  = "tcp"
   # where traffic is coming from
   cidr_blocks = ["0.0.0.0/0"]
-  security_group_id        = local.openvpn_sg_id
+  security_group_id = local.openvpn_sg_id
 }
 
 # oprnvpn from public 943
@@ -389,7 +389,7 @@ resource "aws_security_group_rule" "openvpn_public_943" {
   protocol  = "tcp"
   # where traffic is coming from
   cidr_blocks = ["0.0.0.0/0"]
-  security_group_id        = local.openvpn_sg_id
+  security_group_id = local.openvpn_sg_id
 }
 
 # backend alb from openvpn
@@ -400,7 +400,7 @@ resource "aws_security_group_rule" "backend_alb_openvpn" {
   to_port   = 80
   protocol  = "tcp"
   # where traffic is coming from
-  #cidr_blocks = ["0.0.0.0/0"]
+ 
   source_security_group_id = local.openvpn_sg_id
   security_group_id        = local.backend_alb_sg_id
 }
