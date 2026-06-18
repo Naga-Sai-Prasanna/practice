@@ -1,4 +1,4 @@
-resource "aws_cloudfront_distribution" "s3_distribution" {
+resource "aws_cloudfront_distribution" "roboshop" {
   origin {
     # https://frontend-dev.prasanna.fun
     domain_name              = "frontend-${var.environment}.${var.domain_name}"
