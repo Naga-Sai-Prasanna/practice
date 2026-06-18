@@ -3,7 +3,7 @@ variable "project" {
 }
 
 variable "environment" {
-    default = "Dev"
+    default = "dev"
 }
 
 variable "zone_id" {
