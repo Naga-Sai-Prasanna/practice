@@ -225,8 +225,6 @@ resource "aws_lb_listener_rule" "main" {
   }
 }
 
-# destroy terraform
-
 resource "terraform_data" "main_delete" {
   triggers_replace = [
     aws_instance.main.id
