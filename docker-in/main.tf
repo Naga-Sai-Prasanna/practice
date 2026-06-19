@@ -1,10 +1,17 @@
 resource "aws_security_group" "docker" {
   name        = "docker-sg"
-  description = "Allow SSH and app port 8080"
+  description = "Allow SSH and HTTP on 80 and 8080"
 
   ingress {
     from_port   = 22
     to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -29,7 +36,6 @@ resource "aws_security_group" "docker" {
     Component = "dev"
   }
 }
-
 resource "aws_instance" "docker" {
   instance_type = "t3.micro"
   ami           = "ami-0220d79f3f480ecf5"
