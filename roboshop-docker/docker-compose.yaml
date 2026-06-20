@@ -17,6 +17,12 @@ services:
     depends_on: 
     - redis
 
+  shipping:
+   build: ./shipping
+   image: kopparthiprasanna/shipping:1.0.0   
+   depends_on:
+   - mysql
+
   frontend:
     build: ./frontend
     image:  kopparthiprasanna/frontend:1.0.0 
@@ -42,6 +48,13 @@ services:
     image: kopparthiprasanna/mysql:1.0.0 
     container_name: mysql
 
+  rabbitmq:
+    image: rabbitmq:3
+    environment:
+     RABBITMQ_DEFAULT_USER: roboshop
+     RABBITMQ_DEFAULT_PASS: roboshop123  
+    container_name: rabbitmq
+    
 networks:
  default:
   driver: bridge
