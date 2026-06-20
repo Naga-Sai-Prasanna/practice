@@ -1,0 +1,30 @@
+services:
+  catalogue:
+    build: ./catalogue
+    image: kopparthiprasanna/mongodb:1.0.0 
+    depends_on:
+    - mongodb  
+
+  user:
+    build: ./user
+    image:  kopparthiprasanna/user:1.0.0   
+    depends_on:
+    - redis
+
+  cart:
+    build: ./cart
+    image: kopparthiprasanna/cart:1.0.0   
+    depends_on: 
+    - redis
+
+  mongodb:
+    build: ./mongodb
+    image: kopparthiprasanna/mongodb:1.0.0 
+    container_name: mongodb
+
+  redis:
+    image: redis:7.0
+    container_name: redis
+
+
+
