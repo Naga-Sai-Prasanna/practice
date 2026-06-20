@@ -17,6 +17,14 @@ services:
     depends_on: 
     - redis
 
+  fontend:
+    build: ./frontend
+    image:  kopparthiprasanna/frontend:1.0.0   
+    depends_on:
+    - catalogue
+    - user
+    - cart
+
   mongodb:
     build: ./mongodb
     image: kopparthiprasanna/mongodb:1.0.0 
@@ -30,7 +38,7 @@ networks:
  default:
   driver: bridge
   name: roboshop
-  external: false # if true you ned to create network manually.
+  external: false # if true you need to create network manually.
 
 
 
