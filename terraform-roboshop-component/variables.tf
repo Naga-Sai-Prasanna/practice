@@ -26,7 +26,7 @@ variable "domain_name" {
 
 variable "component" {
 
-    type = string
+    type = string 
 }
 
 variable "health_check_path" {
