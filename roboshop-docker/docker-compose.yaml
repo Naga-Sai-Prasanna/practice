@@ -26,5 +26,13 @@ services:
     image: redis:7.0
     container_name: redis
 
+networks:
+ default:
+  driver: bridge
+  name: roboshop
+  external: false # if true you ned to create network manually.
+
+
+
 
 
