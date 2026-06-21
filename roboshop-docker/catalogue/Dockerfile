@@ -1,4 +1,4 @@
-# normal image
+#1. normal image
 # FROM node:20
 # WORKDIR /app
 # COPY package.json .
@@ -9,15 +9,32 @@
 # CMD ["node", "server.js"]
 
 
-# alpine img
+# 2. alpine img
 
-FROM node:20.20.2-alpine3.23
+# FROM node:20.20.2-alpine3.23
+# WORKDIR /app
+# COPY package.json .
+# COPY *.js .
+# RUN npm install
+# ENV MONGO="true" \
+#     MONGO_URL="mongodb://mongodb:27017/catalogue"
+# CMD ["node", "server.js"]
+
+
+# 3. multi branch
+
+FROM node:20.20.2-alpine3.23 AS builder
 WORKDIR /app
 COPY package.json .
 COPY *.js .
 RUN npm install
+
+
+
+FROM node:20.20.2-alpine3.23 
+WORKDIR /app
+EXPOSE 8080
+COPY --from=builder /app /app
 ENV MONGO="true" \
     MONGO_URL="mongodb://mongodb:27017/catalogue"
 CMD ["node", "server.js"]
-
-
