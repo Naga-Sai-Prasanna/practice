@@ -1,0 +1,2 @@
+mysql/db/master-data.sql filter=lfs diff=lfs merge=lfs -text
+shipping/db/master-data.sql filter=lfs diff=lfs merge=lfs -text
