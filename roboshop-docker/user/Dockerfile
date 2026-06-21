@@ -1,5 +1,5 @@
 FROM node:20
-WORKDIR /app
+WORKDIR /app1
 ENV MONGO="true" \
     MONGO_URL="mongodb://mongodb:27017/catalogue" \
     REDIS_URL="redis://redis:6379"
