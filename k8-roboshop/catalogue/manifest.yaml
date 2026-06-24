@@ -44,7 +44,7 @@ spec:
     spec:
      containers:
      - name: catalogue
-       image: prasanna/catalogue:1.0.0
+       image: kopparthiprasanna/catalogue:1.0.0
        envFrom:
        - configMapRef:
           name: catalogue
@@ -65,7 +65,7 @@ spec:
   selector:
   # labels are used as selectors.so service add the pod which is having these labels.
     project: roboshop
-    tier: blocalhost:8080/healthackend
+    tier: backend
     component: catalogue
   ports:
   - protocol: TCP
