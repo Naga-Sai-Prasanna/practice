@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-configmap
+data:
+ course: "kubernetes"
+ duration: "15hr"
+ trainer: "p"
