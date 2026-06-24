@@ -30,4 +30,5 @@ spec:
     spec:
      containers:
      - name: nginx
-       image: nginx:stable-alpine3.23-perl
+      #  image: nginx:stable-alpine3.23-perl
+       image: nginx:latest
