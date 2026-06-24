@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalogue
+  namespace: roboshop
+  # these labels are replicaset labels
+  labels:
+    project: roboshop
+    tier: backend
+    component: catalogue
+data:
+  MONGO: "true"  
+  MONGO_URL: "mongodb://mongodb:27017/catalogue"
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalogue
+  namespace: roboshop
+  # these labels are replicaset labels
+  labels:
+    project: roboshop
+    tier: backend
+    component: catalogue
+
+spec:
+  replicas: 1
+  selector: 
+    # using these labels replica set selects the pod    
+    matchLabels:
+     project: roboshop
+     tier: backend
+     component: catalogue
+
+    # this is pod definition, pod is subset of replica
+  template:
+    metadata: 
+      labels:
+        project: roboshop
+        tier: backend
+        component: catalogue
+    spec:
+     containers:
+     - name: catalogue
+       image: prasanna/catalogue:1.0.0
+       envFrom:
+       - configMapRef:
+          name: catalogue
+
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: catalogue
+  namespace: roboshop
+  labels:
+        project: roboshop
+        tier: backend
+        component: catalogue
+
+spec:  
+  selector:
+  # labels are used as selectors.so service add the pod which is having these labels.
+    project: roboshop
+    tier: blocalhost:8080/healthackend
+    component: catalogue
+  ports:
+  - protocol: TCP
+    port: 8080 # service port
+    targetPort: 8080 # container port  
