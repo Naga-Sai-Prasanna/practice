@@ -38,7 +38,7 @@ spec:
      component: rabbitmq
 
     # this is pod definition, pod is subset of replica
-  template:
+template:
     metadata: 
       labels:
         project: roboshop
