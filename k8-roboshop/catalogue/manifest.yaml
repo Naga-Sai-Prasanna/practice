@@ -45,6 +45,32 @@ spec:
      containers:
      - name: catalogue
        image: kopparthiprasanna/catalogue:1.0.0
+    # Adding resources and probes are the best practices.   
+       resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "100m"
+          memory: "128Mi" 
+        
+       readinessProbe:
+        # httpGet:
+        #   path: /health
+        #   port: 8080
+     # here you can give httpget ot tcp socket
+        tcpSocket:
+          port: 8080
+        failureThreshold: 2
+        periodSeconds: 10
+        initialDelaySeconds: 15   
+       livenessProbe:
+        httpGet:
+          path: /health
+          port: 8080  
+        failureThreshold: 2
+        periodSeconds: 10
+        initialDelaySeconds: 10  
        envFrom:
        - configMapRef:
           name: catalogue
