@@ -6,6 +6,6 @@ metadata:
 spec:
  containers:
  - name: debug
-   image: kopparthiprasanna/debug 
+   image: kopparthiprasanna/debug:1.4.0
 
 
