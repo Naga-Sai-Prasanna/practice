@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cart
+  namespace: roboshop
+  # these labels are replicaset labels
+  labels:
+    project: roboshop
+    tier: backend
+    component: cart
+data:
+  REDIS_HOST: "redis"
+  CATALOGUE_HOST: "catalogue"
+  CATALOGUE_PORT: "8080"
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+  namespace: roboshop
+  # these labels are replicaset labels
+  labels:
+    project: roboshop
+    tier: backend
+    component: cart
+
+spec:
+  replicas: 1
+  selector: 
+    # using these labels replica set selects the pod    
+    matchLabels:
+     project: roboshop
+     tier: backend
+     component: cart
+
+    # this is pod definition, pod is subset of replica
+  template:
+    metadata: 
+      labels:
+        project: roboshop
+        tier: backend
+        component: cart
+    spec:
+     containers:
+     - name: cart
+       image: kopparthiprasanna/cart:1.4.0
+       imagePullPolicy: Always # this is safe to pull everytime, tehre may be images with same version rebuild and pushed.
+    # Adding resources and probes are the best practices.   
+       resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "100m"
+          memory: "128Mi" 
+        
+       readinessProbe:
+        # httpGet:
+        #   path: /health
+        #   port: 8080
+     # here you can give httpget ot tcp socket
+        tcpSocket:
+          port: 8080
+        failureThreshold: 2
+        periodSeconds: 10
+        initialDelaySeconds: 15   
+       livenessProbe:
+        httpGet:
+          path: /health
+          port: 8080  
+        failureThreshold: 2
+        periodSeconds: 10
+        initialDelaySeconds: 10  
+       envFrom:
+       - configMapRef:
+          name: cart
+
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: cart
+  namespace: roboshop
+  labels:
+        project: roboshop
+        tier: backend
+        component: cart
+
+spec:  
+  selector:
+  # labels are used as selectors.so service add the pod which is having these labels.
+    project: roboshop
+    tier: backend
+    component: cart
+  ports:
+  - protocol: TCP
+    port: 8080 # service port
+    targetPort: 8080 # container port  
