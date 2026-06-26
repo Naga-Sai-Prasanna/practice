@@ -44,7 +44,8 @@ spec:
     spec:
      containers:
      - name: catalogue
-       image: kopparthiprasanna/catalogue:1.0.0
+       image: kopparthiprasanna/catalogue:1.4.0
+       imagePullPolicy: Always # this is safe to pull everytime, tehre may be images with same version rebuild and pushed.
     # Adding resources and probes are the best practices.   
        resources:
         requests:
