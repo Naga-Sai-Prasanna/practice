@@ -45,3 +45,10 @@ git clone https://github.com/ahmetb/kubectx.git ~/.kubectx
 COMPDIR=$(pkg-config --variable=completionsdir bash-completion)
 sudo ln -sf ~/.kubectx/completion/kubens.bash $COMPDIR/kubens
 export PATH=~/.kubectx:$PATH 
+
+cd ~ 
+K9S_VERSION=$(curl -s https://api.github.com/repos/derailed/k9s/releases/latest | grep '"tag_name"' | cut -d '"' -f4)
+curl -LO https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_amd64.tar.gz
+tar -xzf k9s_Linux_amd64.tar.gz
+sudo mv k9s /usr/local/bin/
+sudo chmod +x /usr/local/bin/k9s
