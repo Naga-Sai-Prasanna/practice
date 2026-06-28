@@ -11,4 +11,4 @@ spec:
   csi:
    driver: ebs.csi.aws.com
    fsType: ext4
-   volumeHandle:  #vol id take from cretaed volume
+   volumeHandle: vol-042be72ed78d7ab04  #vol id take from cretaed volume
