@@ -18,7 +18,7 @@ kind: Pod
 metadata:
   name: app
 spec:
-  conatiners:
+  containers:
   - name: nginx
     image: nginx
     volumeMounts: 
