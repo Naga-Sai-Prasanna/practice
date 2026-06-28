@@ -36,12 +36,12 @@ kind: Pod
 metadata:
   name: app
 spec:
-  conatiners:
+  containers:
   - name: nginx
     image: nginx
     volumeMounts: 
     - name: html-data
-    mountPath: /usr/share/nginx/html
+      mountPath: /usr/share/nginx/html
   volumes:
   - name: html-data
     persistentVolumeClaim:
