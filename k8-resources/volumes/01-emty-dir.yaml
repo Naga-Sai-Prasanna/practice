@@ -6,7 +6,7 @@ spec:
   containers:
   - image: nginx
     name: nginx
-    
+
     volumeMounts:
     - mountPath: /var/log/nginx
       name: nginx-logs
@@ -17,6 +17,7 @@ spec:
 
     volumeMounts: 
     - mountPath: /mnt/nginx-logs
+      name: nginx-logs
       readOnly: true
 
   # this is at the pod level
