@@ -1,0 +1,7 @@
+# sc is admin task
+apiVersion: storage.k8.io/v1
+kind: storageClass
+metadata:
+ name: roboshop-ebs
+provisioner: ebs.csi.aws.com
+volumeBindingMode: waitForFirstConsumer
