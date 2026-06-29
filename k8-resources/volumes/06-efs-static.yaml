@@ -17,3 +17,15 @@ spec:
 
 ---
 
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-static
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: "" # sc should be empty for static provisioning otherwise default storageclass will be set
+  resources:
+    requests:
+      storage: 5Gi
