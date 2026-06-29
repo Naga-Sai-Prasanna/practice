@@ -6,7 +6,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 5Gi #should be less than or equal to your disk size
+    storage: 2Gi #should be less than or equal to your disk size
   
   csi:
    driver: ebs.csi.aws.com
