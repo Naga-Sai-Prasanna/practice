@@ -22,7 +22,7 @@ metadata:
   name: ebs-static
 spec:
   storageClassName: "" # empty string must be explicity set otherwise default storageclass will be set
-  volumeName: ebs # this is PV name
+  volumeName: ebs-static # this is PV name
   accessModes:
     - ReadWriteOnce
   resources:
