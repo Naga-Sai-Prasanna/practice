@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ebs
+  name: ebs-static
 spec:
   accessModes:
     - ReadWriteOnce
@@ -11,7 +11,7 @@ spec:
   csi:
    driver: ebs.csi.aws.com
    fsType: ext4
-   volumeHandle: vol-042be72ed78d7ab04  #vol id take from cretaed volume
+   volumeHandle: vol-08156017e4b298a4f #vol id take from cretaed volume
 
 
 ---
@@ -19,7 +19,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs
+  name: ebs-static
 spec:
   storageClassName: "" # empty string must be explicity set otherwise default storageclass will be set
   volumeName: ebs # this is PV name
@@ -27,7 +27,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: 2Gi
 
 ---
 
@@ -43,8 +43,8 @@ spec:
     - name: html-data
       mountPath: /usr/share/nginx/html
       nodeSelector:
-      topology.kubernetes.io/zone: us-east-1f
+      topology.kubernetes.io/zone: us-east-1d
   volumes:
   - name: html-data
     persistentVolumeClaim:
-      claimName: ebs
+      claimName: ebs-static
