@@ -5,9 +5,9 @@ metadata:
   name: mongodb-headless
   namespace: roboshop
   labels:
-        project: roboshop
-        tier: db
-        component: mongodb
+    project: roboshop
+    tier: db
+    component: mongodb
 
 spec:  
   clusterIP: None # headless service
@@ -30,9 +30,9 @@ metadata:
   name: mongodb
   namespace: roboshop
   labels:
-        project: roboshop
-        tier: db
-        component: mongodb
+    project: roboshop
+    tier: db
+    component: mongodb
 spec:
   selector:
     matchLabels:
@@ -40,7 +40,7 @@ spec:
         project: roboshop
         tier: db
         component: mongodb
-  serviceName: "mongodb-headless" # we should attach headless service
+  serviceName: mongodb-headless # we should attach headless service
   replicas: 3 # by default is 1
   minReadySeconds: 10 # by default is 0
 
