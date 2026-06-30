@@ -36,11 +36,10 @@ metadata:
 spec:
   selector:
     matchLabels:
-      labels:
-        project: roboshop
-        tier: db
-        component: mongodb
-  serviceName: mongodb-headless # we should attach headless service
+      project: roboshop
+      tier: db
+      component: mongodb
+  serviceName: "mongodb-headless" # we should attach headless service
   replicas: 3 # by default is 1
   minReadySeconds: 10 # by default is 0
 
