@@ -54,7 +54,7 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: prasanna/mongodb:1.0.0
+        image: kopparthiprasanna/mongodb:1.0.0
         volumeMounts:
         - name: mongodb
           mountPath: /data/db #in docker we gave this path as data path. so we should give this path here also.
