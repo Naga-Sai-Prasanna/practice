@@ -42,6 +42,10 @@ kubectl version --client
 cd ~
 
 git clone https://github.com/ahmetb/kubectx.git ~/.kubectx
+sudo ln -sf ~/.kubectx/kubectx /usr/local/bin/kubectx
+sudo ln -sf ~/.kubectx/kubens /usr/local/bin/kubens
+sudo ln -sf ~/.kubectx/completion/kubectx.bash $COMPDIR/kubectx
+
 COMPDIR=$(pkg-config --variable=completionsdir bash-completion)
 sudo ln -sf ~/.kubectx/completion/kubens.bash $COMPDIR/kubens
 export PATH=~/.kubectx:$PATH 

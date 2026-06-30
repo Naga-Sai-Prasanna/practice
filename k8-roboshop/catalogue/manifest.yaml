@@ -59,12 +59,13 @@ spec:
         # httpGet:
         #   path: /health
         #   port: 8080
-     # here you can give httpget ot tcp socket
+           # here you can give httpget ot tcp socket
         tcpSocket:
           port: 8080
         failureThreshold: 2
         periodSeconds: 10
-        initialDelaySeconds: 15   
+        initialDelaySeconds: 15  
+
        livenessProbe:
         httpGet:
           path: /health
