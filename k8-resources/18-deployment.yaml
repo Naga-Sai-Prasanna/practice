@@ -14,7 +14,7 @@ metadata:
 
 
 spec:
-  replicas: 2
+  replicas: 4
   selector: 
     # using these labels replica set selects the pod    
     matchLabels:
