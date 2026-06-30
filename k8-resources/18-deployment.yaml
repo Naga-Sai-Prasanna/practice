@@ -9,9 +9,9 @@ spec:
     project: roboshop
     environment: dev
  ports:
-   protocol: TCP
+ - protocol: TCP
    port: 80
-   targetPort:   80  
+   targetPort: 80  
 
 
 
