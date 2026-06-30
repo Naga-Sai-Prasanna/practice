@@ -8,7 +8,7 @@ spec:
  clusterIP: None
  selector:
     project: roboshop
-    environment: dev
+    component: frontend
  ports:
  - protocol: TCP
    port: 80
@@ -67,7 +67,7 @@ metadata:
 spec:
  selector:
     project: roboshop
-    environment: dev
+    component: frontend
  ports:
  - protocol: TCP
    port: 80
