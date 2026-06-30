@@ -39,8 +39,6 @@ spec:
     # using these labels replica set selects the pod    
     matchLabels:
       project: roboshop
-      purpose: rs-demo
-      tier: frontend
       component: frontend
 
     # this is pod definition, pod is subset of replica
@@ -48,8 +46,6 @@ spec:
     metadata: 
       labels:
         project: roboshop
-        purpose: rs-demo
-        tier: frontend
         component: frontend 
     spec:
      containers:
