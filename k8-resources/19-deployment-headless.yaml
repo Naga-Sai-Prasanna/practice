@@ -1,0 +1,74 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-headless
+
+spec:
+ clusterIP: None
+ selector:
+    project: roboshop
+    environment: dev
+ ports:
+ - protocol: TCP
+   port: 80
+   targetPort: 80  
+
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  # these labels are replicaset labels
+  labels:
+    project: roboshop
+    purpose: rs-demo
+    tier: frontend
+    component: frontend
+  # for versioning adding
+  annotations:
+    kubernetes.io/change-cause: "moving to 1.29.7"  
+
+
+spec:
+  replicas: 4
+  selector: 
+    # using these labels replica set selects the pod    
+    matchLabels:
+      project: roboshop
+      purpose: rs-demo
+      tier: frontend
+      component: frontend
+
+    # this is pod definition, pod is subset of replica
+  template:
+    metadata: 
+      labels:
+        project: roboshop
+        purpose: rs-demo
+        tier: frontend
+        component: frontend 
+    spec:
+     containers:
+     - name: nginx
+      #  image: nginx:stable-alpine3.23-perl
+       image: nginx:1.29.7
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+
+spec:
+ selector:
+    project: roboshop
+    environment: dev
+ ports:
+ - protocol: TCP
+   port: 80
+   targetPort: 80  
