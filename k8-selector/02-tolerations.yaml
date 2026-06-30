@@ -1,0 +1,17 @@
+# toleration
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-tolerated
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+   
+  tolerations:
+  - key: "project"
+    operator: "Equal"
+    value: "roboshop"
+    effect: "NoSchedule"
