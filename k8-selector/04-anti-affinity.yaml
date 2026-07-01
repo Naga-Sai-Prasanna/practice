@@ -26,6 +26,33 @@
 
 # pod wont go to all nodes so it shows pending
 
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: nginx-anti-affinity
+#   labels:
+#     env: test
+# spec:
+#   affinity:
+#     nodeAffinity:
+#     # hard rule
+#       requiredDuringSchedulingIgnoredDuringExecution:
+#         nodeSelectorTerms:
+#         - matchExpressions:
+#           - key: topology.kubernetes.io/zone
+#             operator: NotIn
+#             values:     
+#             - us-east-1f 
+#             - us-east-1c
+#             # change to your zone
+#   containers:
+#   - name: nginx
+#     image: nginx       
+
+
+# now if i want in 1f (we have 2 nodes) in this we can select only one using labels
+
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -42,9 +69,12 @@ spec:
           - key: topology.kubernetes.io/zone
             operator: NotIn
             values:     
-            - us-east-1f 
             - us-east-1c
+          - key: project
+            operator: In
+            values:
+            - amazon  
             # change to your zone
   containers:
   - name: nginx
-    image: nginx          
+    image: nginx 
