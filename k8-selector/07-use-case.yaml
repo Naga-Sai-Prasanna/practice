@@ -33,6 +33,47 @@ spec:
 
 # now we have toncreate backend server for this we can slowly increase replicas from1 to 3 to understand how anti-affinity work.
 
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: web-server
+# spec:
+#   selector:
+#     matchLabels:
+#       app: web-store
+#   replicas: 3
+#   template:
+#     metadata:
+#       labels:
+#         app: web-store
+#     spec:
+#       affinity:
+#         podAntiAffinity:
+#           requiredDuringSchedulingIgnoredDuringExecution:
+#           - labelSelector:
+#               matchExpressions:
+#               - key: app
+#                 operator: In
+#                 values:
+#                 - web-store
+#             topologyKey: "kubernetes.io/hostname"
+#         podAffinity:
+#           requiredDuringSchedulingIgnoredDuringExecution:
+#           - labelSelector:
+#               matchExpressions:
+#               - key: app
+#                 operator: In
+#                 values:
+#                 - store
+#             topologyKey: "kubernetes.io/hostname"
+#       containers:
+#       - name: web-app
+#         image: nginx:1.16-alpine
+
+---
+# here we have only 3 node if we apply 5 replicas then other 2 will be in pending state.
+# if we wnat other 2 nodes also need to schedule then we use
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,16 +88,21 @@ spec:
       labels:
         app: web-store
     spec:
+      spec:
+      # edit podantiafinity  to schedule other 2 
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - web-store
-            topologyKey: "kubernetes.io/hostname"
+         preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - web-store
+              topologyKey: "kubernetes.io/zone"    
+    
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
