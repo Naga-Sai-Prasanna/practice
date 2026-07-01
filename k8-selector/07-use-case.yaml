@@ -1,5 +1,5 @@
-# affinity between backend and cace but anti-affinity between backend-backend and cache-cache.
-
+# affinity between backend and cache but anti-affinity between backend-backend and cache-cache.
+# after only run  redis-cache each node will have one one cache.
 
 apiVersion: apps/v1
 kind: Deployment
@@ -28,3 +28,44 @@ spec:
       containers:
       - name: redis-server
         image: redis:3.2-alpine
+
+---
+
+# now we have toncreate backend server for this we can slowly increase replicas from1 to 3 to understand how anti-affinity work.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+spec:
+  selector:
+    matchLabels:
+      app: web-store
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web-store
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - web-store
+            topologyKey: "kubernetes.io/hostname"
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - store
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: web-app
+        image: nginx:1.16-alpine
