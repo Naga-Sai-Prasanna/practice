@@ -19,6 +19,6 @@ spec:
   containers:
   - name: nginx
     image: nginx
-  nodeselector: 
+  nodeSelector: 
     project: roboshop  
 
