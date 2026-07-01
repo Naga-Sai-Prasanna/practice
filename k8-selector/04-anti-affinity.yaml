@@ -15,4 +15,6 @@ spec:
             operator: NotIn
             values:     
             - us-east-1f # change to your zone
-           
+  containers:
+  - name: nginx
+    image: nginx          
