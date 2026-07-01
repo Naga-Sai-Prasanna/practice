@@ -53,6 +53,35 @@
 # now if i want in 1f (we have 2 nodes) in this we can select only one using labels
 
 
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: nginx-anti-affinity
+#   labels:
+#     env: test
+# spec:
+#   affinity:
+#     nodeAffinity:
+#     # hard rule
+#       requiredDuringSchedulingIgnoredDuringExecution:
+#         nodeSelectorTerms:
+#         - matchExpressions:
+#           - key: topology.kubernetes.io/zone
+#             operator: NotIn
+#             values:     
+#             - us-east-1c
+#           - key: project
+#             operator: In
+#             values:
+#             - aws  
+#             # change to your zone
+#   containers:
+#   - name: nginx
+#     image: nginx 
+
+
+    # not in aws then
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -71,7 +100,7 @@ spec:
             values:     
             - us-east-1c
           - key: project
-            operator: In
+            operator: NotIn
             values:
             - aws  
             # change to your zone
