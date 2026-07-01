@@ -12,6 +12,8 @@ spec:
 
 ---
 
+# here 2 pods wont schedule on the same node
+
 apiVersion: v1
 kind: Pod
 metadata:
