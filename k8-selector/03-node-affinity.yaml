@@ -23,7 +23,7 @@ spec:
           - key: project
             operator: In
             values:
-            - roboshop
+            - roboshopp
   
           # for another pod with different affinity weight  rules
       - weight: 10
