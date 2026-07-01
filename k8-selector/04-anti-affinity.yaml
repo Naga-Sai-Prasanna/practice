@@ -80,7 +80,37 @@
 #     image: nginx 
 
 
-    # not in aws then
+    # not go to  aws then it go to last node in 1f 
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: nginx-anti-affinity
+#   labels:
+#     env: test
+# spec:
+#   affinity:
+#     nodeAffinity:
+#     # hard rule
+#       requiredDuringSchedulingIgnoredDuringExecution:
+#         nodeSelectorTerms:
+#         - matchExpressions:
+#           - key: topology.kubernetes.io/zone
+#             operator: NotIn
+#             values:     
+#             - us-east-1c
+#           - key: project
+#             operator: NotIn
+#             values:
+#             - aws  
+#             # change to your zone
+#   containers:
+#   - name: nginx
+#     image: nginx 
+
+
+# we tainted the last node now we have to use the tolerations to send the pod to the node.
+
 
 apiVersion: v1
 kind: Pod
@@ -104,6 +134,14 @@ spec:
             values:
             - aws  
             # change to your zone
-  containers:
-  - name: nginx
-    image: nginx 
+  
+  containers:    
+    - name: nginx
+      image: nginx
+  tolerations:
+    - key: "hardware"
+      operator: "Equal"
+      value: "gpu"     
+      effect: "NoExecute"          
+
+
