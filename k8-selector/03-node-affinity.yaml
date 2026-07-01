@@ -13,7 +13,26 @@ spec:
           - key: topology.kubernetes.io/zone
             operator: In
             values:     
-            - us-east-1f # change to your zone
+            - us-east-1f  # change to your zone
+            - us-east-1c    # for soft rule adding
+           # soft rule 
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: project
+            operator: In
+            values:
+            - roboshop
+  
+          # for another pod with different affinity weight  rules
+      - weight: 10
+        preference:
+          matchExpressions:
+          - key: project
+            operator: In
+            values:
+            - amazon      
   containers:
   - name: nginx
     image: nginx
