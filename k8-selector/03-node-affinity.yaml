@@ -12,8 +12,8 @@ spec:
         - matchExpressions:
           - key: topology.kubernetes.io/zone
             operator: 
-            values:     
-            - us-east-1f # change to your zone
+              values:     
+              - us-east-1f # change to your zone
   containers:
   - name: nginx
     image: nginx
