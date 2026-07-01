@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+  labels:
+    tier: database
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+  labels:
+    tier: backend
+spec:
+  affinity:
+    podAntiAffinity:
+    # hard rule
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: tier
+            operator: In
+            values:
+            - database
+        topologyKey: topology.kubernetes.io/zone
+        
+  containers:
+  - name: nginx
+    image: nginx
