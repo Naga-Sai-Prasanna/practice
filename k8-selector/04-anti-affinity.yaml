@@ -73,7 +73,7 @@ spec:
           - key: project
             operator: In
             values:
-            - amazon  
+            - aws  
             # change to your zone
   containers:
   - name: nginx
