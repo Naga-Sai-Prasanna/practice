@@ -1,0 +1,21 @@
+ansible_user: ec2-user
+ansible_password: DevOps321
+
+MONGODB_HOST: mongodb-{{ env }}.prasanna.fun
+REDIS_HOST: redis-{{ env }}.prasanna.fun
+MYSQL_HOST: mysql-{{ env }}.prasanna.fun
+RABBITMQ_HOST: rabbitmq-{{ env }}.prasanna.fun
+
+
+CATALOGUE_HOST: catalogue.backend-alb-{{ env }}.prasanna.fun
+
+USER_HOST: user.backend-alb-{{ env }}.prasanna.fun
+CART_HOST: cart.backend-alb-{{ env }}.prasanna.fun
+
+SHIPPING_HOST: shipping.backend-alb-{{ env }}.prasanna.fun
+
+PAYMENT_HOST: payment.backend-alb-{{ env }}.prasanna.fun
+
+
+app_version: v3
+
