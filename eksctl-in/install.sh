@@ -67,4 +67,8 @@ sudo ln -sf ~/.kubectx/completion/kubens.bash $COMPDIR/kubens
 export PATH=~/.kubectx:$PATH
 
 # Confirm install worked
+<<<<<<< HEAD
 which kubectx && which kubens && echo "kubectx/kubens installed successfully"
+=======
+which kubectx && which kubens && echo "kubectx/kubens installed successfully"
+>>>>>>> d3ae85eb04072b1828f42f1434c42649291157bf
