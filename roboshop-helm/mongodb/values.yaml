@@ -1,0 +1,3 @@
+deployment:
+  imageName: kopparthiprasanna/mongodb
+  imageVersion: "1.0.0"

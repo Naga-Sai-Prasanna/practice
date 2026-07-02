@@ -1,0 +1,5 @@
+apiVersion: v2 #k8s helm related
+name: mongodb
+version: 0.0.1 # this is chart version
+appVersion: 1.0.0 # this app version like catalogue version
+description: "installing 1.0.0"
