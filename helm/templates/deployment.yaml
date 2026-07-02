@@ -1,0 +1,36 @@
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  # these labels are replicaset labels
+  labels:
+    project: roboshop
+    purpose: rs-demo
+    tier: frontend
+    component: frontend
+  # for versioning adding
+  annotations:
+    kubernetes.io/change-cause: "{{ .Values.deployment.changeCause }}"
+
+
+spec:
+  replicas:  "{{ .Values.deployment.replicas }}"
+  selector: 
+    # using these labels replica set selects the pod    
+    matchLabels:
+      project: roboshop
+      component: frontend
+
+    # this is pod definition, pod is subset of replica
+  template:
+    metadata: 
+      labels:
+        project: roboshop
+        component: frontend 
+    spec:
+     containers:
+     - name: nginx
+      #  image: nginx:stable-alpine3.23-perl
+       image: nginx:"{{ .Values.deployment.imageVersion }}"

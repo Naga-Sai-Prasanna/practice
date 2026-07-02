@@ -40,7 +40,7 @@ spec:
       tier: db
       component: mongodb
   serviceName: "mongodb-headless" # we should attach headless service
-  replicas: 1 # by default is 1
+  replicas: 3 # by default is 1
   minReadySeconds: 10 # by default is 0
 
   # pod definition

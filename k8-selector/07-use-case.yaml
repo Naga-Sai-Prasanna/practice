@@ -31,7 +31,7 @@ spec:
 
 ---
 
-# now we have toncreate backend server for this we can slowly increase replicas from1 to 3 to understand how anti-affinity work.
+# now we have to create backend server for this we can slowly increase replicas from1 to 3 to understand how anti-affinity work.
 
 # apiVersion: apps/v1
 # kind: Deployment
@@ -88,13 +88,12 @@ spec:
       labels:
         app: web-store
     spec:
-      spec:
       # edit podantiafinity  to schedule other 2 
       affinity:
         podAntiAffinity:
          preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
-            podAffinityTerm:
+            podAffinityTerm:  # for prefered only we write
               labelSelector:
                 matchExpressions:
                 - key: app

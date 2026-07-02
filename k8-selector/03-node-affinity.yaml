@@ -23,7 +23,7 @@ spec:
           - key: project
             operator: In
             values:
-            - roboshopppppp
+            - roboshop # if u want pod go to another node then give wrogn value here.
   
           # for another pod with different affinity weight  rules
       - weight: 10

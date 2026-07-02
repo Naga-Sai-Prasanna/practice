@@ -140,7 +140,7 @@ spec:
         initialDelaySeconds: 10  
       # ad dmounted volume
         volumeMounts:
-        - name: nginx-config
+        - name: nginx-config   # must match the volume name above
           mountPath: "/etc/nginx/nginx.conf"
           subPath: nginx.conf # a specific folder or file inside a volume
           readOnly: true      

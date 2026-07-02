@@ -11,6 +11,7 @@
 
 # image optimization
 
+# Contains: full JDK (Java Development Kit) + Maven build tool
 FROM maven:3.9.14 AS builder
 WORKDIR /app
 COPY pom.xml .
@@ -18,6 +19,7 @@ COPY src ./src
 RUN mvn clean package && \
     mv target/shipping-1.0.jar shipping.jar
    
+ #only the JRE (Java Runtime Environment   
 FROM eclipse-temurin:17-jre-alpine
 EXPOSE 8080
 WORKDIR /app
