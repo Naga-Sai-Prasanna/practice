@@ -5,7 +5,7 @@ metadata:
   name: nginx-headless
 
 spec:
- type: "{{ .Values.service.type }}"
+ type: {{ .Values.service.type }}
  selector:
     project: roboshop
     component: frontend
