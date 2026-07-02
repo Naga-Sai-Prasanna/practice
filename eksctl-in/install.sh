@@ -41,7 +41,22 @@ kubectl version --client
 
 cd ~
 
-git clone https://github.com/ahmetb/kubectx.git ~/.kubectx
+cd ~
+
+# Clone kubectx with retry logic (handles transient network failures)
+rm -rf ~/.kubectx
+for i in 1 2 3; do
+    git clone https://github.com/ahmetb/kubectx.git ~/.kubectx && break
+    echo "Clone attempt $i failed, retrying..."
+    sleep 3
+done
+
+# Verify the clone actually succeeded before symlinking
+if [ ! -f ~/.kubectx/kubectx ] || [ ! -f ~/.kubectx/kubens ]; then
+    echo "ERROR: kubectx clone failed or incomplete. Aborting."
+    exit 1
+fi
+
 sudo ln -sf ~/.kubectx/kubectx /usr/local/bin/kubectx
 sudo ln -sf ~/.kubectx/kubens /usr/local/bin/kubens
 
@@ -51,9 +66,5 @@ sudo ln -sf ~/.kubectx/completion/kubens.bash $COMPDIR/kubens
 
 export PATH=~/.kubectx:$PATH
 
-cd ~
-K9S_VERSION=$(curl -s https://api.github.com/repos/derailed/k9s/releases/latest | grep '"tag_name"' | cut -d '"' -f4)
-curl -LO https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_amd64.tar.gz
-tar -xzf k9s_Linux_amd64.tar.gz
-sudo mv k9s /usr/local/bin/
-sudo chmod +x /usr/local/bin/k9s
+# Confirm install worked
+which kubectx && which kubens && echo "kubectx/kubens installed successfully"
