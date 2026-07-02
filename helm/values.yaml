@@ -9,7 +9,7 @@
 # deployment:
 #  replicas: "1"
 #  changeCause: "installing latest version"
-#  imageVersion: "installing 1.29.8 version"
+#  imageVersion: "1.29.8"
 
 # service:
 #  type: LoadBalancer
@@ -19,7 +19,7 @@
 deployment:
  replicas: "1"
  changeCause: "installing 1.29-trixie version"
- imageVersion: "installing 1.29-trixie version"
+ imageVersion: "1.29-trixie"
 
 service:
  type: LoadBalancer
