@@ -5,7 +5,14 @@
 # appVersion: latest # this is the version of the app that will be deployed
 
 
+# apiVersion: v2
+# name: nginx
+# version: 0.0.2 # this is chart version
+# appVersion: 1.29.8 # this is the version of the app that will be deployed
+
+
 apiVersion: v2
 name: nginx
-version: 0.0.2 # this is chart version
-appVersion: 1.29.8 # this is the version of the app that will be deployed
+version: 0.0.3 # this is chart version
+appVersion: 1.29-trixie # this is the version of the app that will be deployed
+description: "upgrading to 1.29-trixie version"
