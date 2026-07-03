@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+  # these labels are replicaset labels
+  labels:
+    project: roboshop
+    tier: frontend
+    component: app1
+spec:
+  replicas: 2
+  selector: 
+    # using these labels replica set selects the pod    
+    matchLabels:
+      project: roboshop
+      tier: frontend
+      component: app1
+
+    # this is pod definition, pod is subset of replica
+  template:
+    metadata: 
+      labels:
+       project: roboshop
+       tier: frontend
+       component: app1
+    spec:
+     containers:
+     - name: app1
+       image: kopparthiprasanna/app1:1.0.0
+
+
+---
+# for headless  we have attached this service to deployment and we have not given cluster ip to this service so that we can access the pod directly using dns name of the pod.
+apiVersion: v1
+kind: Service
+metadata: 
+  name: app1
+spec:  
+  selector:
+  # labels are used as selectors.so service add the pod which is having these labels.
+    project: roboshop
+    tier: frontend
+    environment: app1
+  ports:
+  - protocol: TCP
+    port: 80 # service port
+    targetPort: 80 # container port  
+
