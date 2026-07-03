@@ -19,11 +19,11 @@ data:
     
     - groups:
       - roboshop-trainee
-      userarn: arn:aws:iam::160885265516:user/prasa
+      userarn: arn:aws:iam::370400270361::user/prasa
       username: prasa
     - groups:
       - roboshop-admin
-      userarn: arn:aws:iam::160885265516:user/pr
+      userarn: arn:aws:iam::1370400270361::user/pr
       username: pr
 
 kind: ConfigMap
