@@ -23,7 +23,7 @@ kind: ClusterRoleBinding
 metadata:
   name: roboshop-cluster-reader
 subjects:
-- kind: user
+- kind: User
   name: phani # Name is case sensitive
   apiGroup: rbac.authorization.k8s.io
 roleRef:
