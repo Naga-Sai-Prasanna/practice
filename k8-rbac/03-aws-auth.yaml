@@ -16,6 +16,15 @@ data:
       - roboshop-admin
       userarn: arn:aws:iam::370400270361:user/phani
       username: phani  
+    
+    - groups:
+      - roboshop-trainee
+      userarn: arn:aws:iam::160885265516:user/prasa
+      username: prasa
+    - groups:
+      - roboshop-admin
+      userarn: arn:aws:iam::160885265516:user/pr
+      username: pr
 
 kind: ConfigMap
 metadata:
