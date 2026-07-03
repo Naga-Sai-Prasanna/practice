@@ -13,7 +13,7 @@ data:
       userarn: arn:aws:iam::370400270361:user/prassu
       username: prassu  
     - groups:
-      - roboshop-trainee
+      - roboshop-admin
       userarn: arn:aws:iam::370400270361:user/phani
       username: phani  
 
