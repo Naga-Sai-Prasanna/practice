@@ -35,15 +35,8 @@ apiVersion: v1
 kind: Service
 metadata: 
   name: app1
-  annotations:
-     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:370400270361:certificate/bc1ed7e1-0a72-4081-8c3b-113878872411 #we have to give our  certificate arn
-     alb.ingress.kubernetes.io/scheme: internet facing
-     alb.ingress.kubernetes.io/tags: Environment=dev, Project=roboshop
-     alb.ingress.kubernetes.io/target-type: ip
-spec:
-  ingressClassName: alb  
-  
+spec:  
+
   selector:
   # labels are used as selectors.so service add the pod which is having these labels.
     project: roboshop
@@ -61,7 +54,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app1
+  annotations:
+     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:370400270361:certificate/bc1ed7e1-0a72-4081-8c3b-113878872411 #we have to give our  certificate arn
+     alb.ingress.kubernetes.io/scheme: internet facing
+     alb.ingress.kubernetes.io/tags: Environment=dev, Project=roboshop
+     alb.ingress.kubernetes.io/target-type: ip
 spec:
+  ingressClassName: alb  
   rules:
   - host: "app1.prasanna.fun"
     http:
