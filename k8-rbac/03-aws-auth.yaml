@@ -7,14 +7,11 @@ data:
       - system:nodes
       username: system:node:{{EC2PrivateDNSName}}
    # add this name here is the username and and roboshop-trinee is role name
-mapUsers: |
-  - groups:
-    - roboshop-trainee
-    userarn: arn:aws:iam::370400270361:user/prassu
-    username: prassu  
-
-
-
+  mapUsers: |
+    - groups:
+      - roboshop-trainee
+      userarn: arn:aws:iam::370400270361:user/prassu
+      username: prassu  
 
 kind: ConfigMap
 metadata:
