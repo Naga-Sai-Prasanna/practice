@@ -12,6 +12,10 @@ data:
       - roboshop-trainee
       userarn: arn:aws:iam::370400270361:user/prassu
       username: prassu  
+    - groups:
+      - roboshop-trainee
+      userarn: arn:aws:iam::370400270361:user/phani
+      username: phani  
 
 kind: ConfigMap
 metadata:
