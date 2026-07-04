@@ -28,7 +28,7 @@ resource "aws_ssm_parameter" "database_subnet_ids" {
 # for rds
 
 resource "aws_ssm_parameter" "database_subnet_group_name" {
-  name  = "/${var.project}/${var.environment}/database_subnet_ids"
+  name  = "/${var.project}/${var.environment}/database_subnet_group_name"
   type  = "String"
   value = module.vpc.database_subnet_group_name
   overwrite = true 
