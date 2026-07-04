@@ -24,3 +24,12 @@ resource "aws_ssm_parameter" "database_subnet_ids" {
   value = join(",",module.vpc.database_subnet_ids)
   overwrite = true 
 }
+
+# for rds
+
+resource "aws_ssm_parameter" "database_subnet_group_name" {
+  name  = "/${var.project}/${var.environment}/database_subnet_ids"
+  type  = "String"
+  value = module.vpc.database_subnet_group_name
+  overwrite = true 
+}
