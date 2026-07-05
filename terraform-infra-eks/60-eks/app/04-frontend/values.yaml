@@ -1,0 +1,6 @@
+deployment:
+  replicas: "1"
+  imageName: "kopparthiprasanna/frontend"
+  imageVersion: "1.4.0"
+ingress:
+  host: "roboshop-dev.daws88s.online"
