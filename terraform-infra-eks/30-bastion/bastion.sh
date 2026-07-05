@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# we are creating 50gb root, but only 20gb is partitioned
+# remaining 30gb we need to extend using below commands
 growpart /dev/nvme0n1 4
 lvextend -r -L+30G /dev/mapper/RootVG-homeVol
 xfs_growfs /home

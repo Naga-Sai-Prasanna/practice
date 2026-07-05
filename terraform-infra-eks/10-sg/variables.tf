@@ -20,7 +20,7 @@ variable "sg_names" {
         "bastion",
         #openvpn
         "openvpn",
-        "eks_control_pane",
+        "eks_control_plane",
         "eks_node"
     ]
 }

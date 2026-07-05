@@ -48,14 +48,26 @@ resource "aws_security_group_rule" "redis_bastion" {
 
 resource "aws_security_group_rule" "mysql_bastion" {
     type = "ingress"
-    from_port = 22
-    to_port = 22
+    from_port = 3306 # in rds mysql allow bastion on port 3306 not 22
+    to_port = 3306
     protocol = "tcp"
     # which sg you are creating this rule
     source_security_group_id = local.bastion_sg_id
     security_group_id = local.mysql_sg_id
 }
 
+
+# connection from eksnode to mysql
+
+resource "aws_security_group_rule" "mysql_eks_node" {
+  type      = "ingress"
+  from_port = 3306
+  to_port   = 3306
+  protocol  = "tcp"
+  # where traffic is coming from
+  source_security_group_id = local.eks_node_sg_id
+  security_group_id        = local.mysql_sg_id
+}
 
 
 

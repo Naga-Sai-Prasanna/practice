@@ -14,6 +14,7 @@ module "db" {
   # we can manage our own pass
   manage_master_user_password = false
   password_wo = "RoboShop#123"
+  password_wo_version = 1
 
  # iam_database_authentication_enabled = true # no need
 
