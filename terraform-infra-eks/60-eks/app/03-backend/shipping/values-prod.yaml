@@ -1,6 +1,7 @@
 configMap:
   CART_ENDPOINT: "cart:8080"
-  DB_HOST: "roboshop-dev.cw1eikkk698o.us-east-1.rds.amazonaws.com"
+  DB_HOST: "roboshop-dev.csnm4k0ikyug.us-east-1.rds.amazonaws.com" # here everytimechange rds endpoint
+
 deployment:
   replicas: "1"
   imageName: "kopparthiprasanna/shipping"
