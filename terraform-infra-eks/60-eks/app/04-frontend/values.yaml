@@ -3,4 +3,4 @@ deployment:
   imageName: "kopparthiprasanna/frontend"
   imageVersion: "1.4.0"
 ingress:
-  host: "roboshop-dev.daws88s.online"
+  host: "roboshop-dev.prasanna.fun"
