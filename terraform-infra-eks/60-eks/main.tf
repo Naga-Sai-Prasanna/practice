@@ -17,9 +17,9 @@ module "eks" {
       instance_types = ["t3.small", "t3.medium"]
       # instance_types     = ["c3.large", "c4.large", "c5.large", "c5d.large", "c5n.large", "c5a.large"]
       capacity_type  = "SPOT"
-      min_size       = 2
+      min_size       = 3
       max_size       = 10
-      desired_size   = 2
+      desired_size   = 3
       labels         = { nodegroup = "blue" }
       iam_role_additional_policies = {
         amazonEBS = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
@@ -33,9 +33,9 @@ module "eks" {
       # instance_types     = ["c3.large", "c4.large", "c5.large", "c5d.large", "c5n.large", "c5a.large"]
      instance_types = ["t3.small", "t3.medium"]
       capacity_type      = "SPOT"
-      min_size           = 2
+      min_size           = 3
       max_size           = 10
-      desired_size       = 2
+      desired_size       = 3
       labels             = { nodegroup = "green" }
       iam_role_additional_policies = {
         amazonEBS = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
