@@ -1,9 +1,13 @@
-variable "project" {
-  default = "roboshop"
-}
-
 variable "environment" {
-  default = "dev"
+    type = string
+    default = "dev"
+   
+  
+}
+variable "project" {
+    type = string
+    default = "roboshop"
+  
 }
 
 variable "eks_version" {
