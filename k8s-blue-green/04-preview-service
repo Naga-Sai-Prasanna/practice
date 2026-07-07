@@ -7,9 +7,9 @@ spec:
   type: LoadBalancer
   selector:
   # labels are used as selectors.so service add the pod which is having these labels.
-    project: roboshop
+    tier: frontend
     component: frontend
-    version: green
+    version: green 
   ports:
   - protocol: TCP
     port: 80 # service port
