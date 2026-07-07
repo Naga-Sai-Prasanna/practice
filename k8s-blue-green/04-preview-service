@@ -4,7 +4,7 @@ kind: Service
 metadata: 
   name: nginx-preview
 spec:  
-  type: LoadBalancer
+  # type: LoadBalancer
   selector:
   # labels are used as selectors.so service add the pod which is having these labels.
     tier: frontend
