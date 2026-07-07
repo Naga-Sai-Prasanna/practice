@@ -30,4 +30,4 @@ spec:
     spec:
      containers:
      - name: nginx-green
-       image: koparthiprasanna/green-green:0.0.2
+       image: kopparthiprasanna/green-green:0.0.2
