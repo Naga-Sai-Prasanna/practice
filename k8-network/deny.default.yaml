@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: default-deny
-  namespace: engineering
+  namespace: roboshop
 spec:
 # denying all incoming requests including with in roboshop namespace
   podSelector: {} # all pods
