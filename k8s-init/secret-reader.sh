@@ -1,8 +1,13 @@
+
+#!/bin/bash
+
+
+
 # 1.check location exist or not
 # 2.if exisy, read it and export it.then call the mysql entrypoint script
 # 3.if it does not exist throw the error.
 
-#!/bin/bash
+
 
 if [ -f /secrets/mysql-secret-reader.txt ]; then
     PASSWORD=$(cat /secrets/mysql-secret-reader.txt)
