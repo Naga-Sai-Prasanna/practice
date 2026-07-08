@@ -8,42 +8,43 @@ metadata:
     project: roboshop
     tier: db
     component: mysql
-
 spec:
-  selector: 
-    # using these labels replica set selects the pod    
+  replicas: 1
+  selector:
+    # using these labels replica set selects the pod
     matchLabels:
-     project: roboshop
-     tier: db
-     component: mysql
-
-    # this is pod definition, pod is subset of replica
+      project: roboshop
+      tier: db
+      component: mysql
+  # This is pod definition, pod is subset of replicaset
   template:
-    metadata: 
+    metadata:
       labels:
         project: roboshop
         tier: db
         component: mysql
     spec:
-     initContainers:
-     - name: secret-reader
-       image: amazon/aws-cli
-       command:
-       - sh
-       - c
-       - aws secret manager get-secret-value --secret-id robosshop/dev/mysql_root_password 
-          --query SecretString --output text | jq -r .MYSQL_ROOT_PASSWORD > /secrets/mysql-secret-reader.txt
-          echo "secret placed successfully"
-          cat /secrets/mysql-secret-reader.txt # just for verification, should not do actually.
-       volumeMounts:
-       - name: mysql-secret
-         mountPath: /secrets
-     containers:
-     - name: mysql
-       image: kopparthiprasanna/mysql:1.5.0
-       volumeMounts:
-       - name: mysql-secret
-         mountPath: /secrets
-     volumes:
-     - name: mysql-secret
-       emptyDir: {}
+      serviceAccount: mysql-secret-reader
+      initContainers:
+      - name: secret-reader
+        image: amazon/aws-cli
+        command: 
+        - sh
+        - -c
+        - |
+            aws secretsmanager get-secret-value --secret-id roboshop/dev/mysql_root_password \
+            --query SecretString --output text | jq -r .MYSQL_ROOT_PASSWORD > /secrets/mysql-secret-reader.txt
+            echo "Secret placed successfully"
+            cat /secrets/mysql-secret-reader.txt  
+        volumeMounts:
+        - name: mysql-secret
+          mountPath: /secrets
+      containers:
+      - name: mysql
+        image: kopparthiprasanna/mysql:1.5.0
+        volumeMounts:
+        - name: mysql-secret
+          mountPath: /secrets
+      volumes:
+      - name: mysql-secret
+        emptyDir: {}
