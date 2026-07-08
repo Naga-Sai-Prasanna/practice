@@ -24,7 +24,7 @@ spec:
         tier: db
         component: mysql
     spec:
-      serviceAccount: mysql-secret-reader
+      serviceAccount: mysql-secret-manager
       initContainers:
       - name: secret-reader
         image: amazon/aws-cli
