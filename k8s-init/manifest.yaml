@@ -40,7 +40,7 @@ spec:
          mountPath: /secrets
      containers:
      - name: mysql
-       image: prasanna/mysql:1.4.
+       image: kopparthiprasanna/mysql:1.4.
        volumeMounts:
        - name: mysql-secret
          mountPath: /secrets
