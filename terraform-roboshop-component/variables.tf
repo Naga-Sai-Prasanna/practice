@@ -14,7 +14,7 @@ variable "project" {
 
 
 variable "zone_id" {
-  default = "Z08746742X3NL30KWK535"
+  default = "Z00012023QHMSESC7X34Q"
 
 }
 
