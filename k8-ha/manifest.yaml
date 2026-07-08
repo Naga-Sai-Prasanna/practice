@@ -31,7 +31,7 @@ spec:
       # here add topology
       topologySpreadConstraints:
       - maxSkew: 1
-        topologyKey: topology.kubernetes.io/zone —>  # need to put correct key or else pods will be in pending state.
+        topologyKey: topology.kubernetes.io/zone   # need to put correct key or else pods will be in pending state.
         whenUnsatisfiable: DoNotSchedule # ScheduleAnyway is soft rule
         labelSelector: 
           matchLabels:
@@ -54,15 +54,15 @@ spec:
 ---
 #pda
 
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: nginx
-spec:
-  minAvailable: "60%"   # change to 40%
-  selector:
-    matchLabels:
-      project: roboshop
-      purpose: rs-demo
-      tier: frontend
-      component: frontend
+# apiVersion: policy/v1
+# kind: PodDisruptionBudget
+# metadata:
+#   name: nginx
+# spec:
+#   minAvailable: "60%"   # change to 40%
+#   selector:
+#     matchLabels:
+#       project: roboshop
+#       purpose: rs-demo
+#       tier: frontend
+#       component: frontend
