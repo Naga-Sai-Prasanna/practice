@@ -3,7 +3,7 @@
 # 3.if it does not exist throw the error.
 
 if [ -f /secrets/mysql-secret-reader.txt ]; then
-   PASSWORD=$(cat secrets/mysql-secret-reader.txt)
+   PASSWORD=$(cat /secrets/mysql-secret-reader.txt)
    echo "Password accessed successfully"
 
 else 
