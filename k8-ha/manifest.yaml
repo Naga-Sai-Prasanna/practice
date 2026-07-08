@@ -54,15 +54,15 @@ spec:
 ---
 #pda
 
-# apiVersion: policy/v1
-# kind: PodDisruptionBudget
-# metadata:
-#   name: nginx
-# spec:
-#   minAvailable: "60%"   # change to 40%
-#   selector:
-#     matchLabels:
-#       project: roboshop
-#       purpose: rs-demo
-#       tier: frontend
-#       component: frontend
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: nginx
+spec:
+  minAvailable: "60%"   # change to 40%
+  selector:
+    matchLabels:
+      project: roboshop
+      purpose: rs-demo
+      tier: frontend
+      component: frontend
