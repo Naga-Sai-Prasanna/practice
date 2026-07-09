@@ -37,6 +37,48 @@
 // agent
 
 
+// pipeline {
+//     agent {
+//         node {
+//             label 'ROBOSHOP'
+//         }
+//     }
+//     stages {
+//         stage('Build') {
+//             steps {
+//                 script{
+//                     sh """
+//                         echo "building"
+//                     """
+//                 }
+//             }
+//         }
+//         stage('Test') {
+//             steps {
+//                 script{
+//                     sh """
+//                         echo "testing"
+//                     """
+//                 }
+//             }
+//         }
+//         stage('Deploy') {
+//             steps {
+//                 script{
+//                     sh """
+//                         echo "deploying"
+//                     """
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
+
+
+//3.post-build
+
 pipeline {
     agent {
         node {
@@ -46,30 +88,37 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script{
+                script {
                     sh """
-                        echo "building"
-                    """
+                       echo "Building"
+                    """   
                 }
+                
             }
         }
         stage('Test') {
             steps {
-                script{
+                script {
                     sh """
-                        echo "testing"
-                    """
-                }
+                       echo "Testing"
+                    """   
+                
             }
         }
         stage('Deploy') {
             steps {
-                script{
+               script {
                     sh """
-                        echo "deploying"
-                    """
-                }
+                       echo "Deploying"
+                    """   
+                
             }
+        }
+    }
+    // post build
+    post {
+        always {
+            echo 'i will always say Hello again!'
         }
     }
 }
