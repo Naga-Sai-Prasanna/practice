@@ -269,7 +269,7 @@ pipeline {
     agent {
         node {
             label 'ROBOSHOP' 
-        }
+        } 
     }
     environment {
         COURSE = "Jenkins"
