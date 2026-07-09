@@ -3,17 +3,29 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building"
+                script{
+                    sh """
+                        echo "building"
+                    """
+                }
             }
         }
         stage('Test') {
             steps {
-                echo "Testing"
+                script{
+                    sh """
+                        echo "testing"
+                    """
+                }
             }
         }
         stage('Deploy') {
             steps {
-                echo "Deploying"
+                script{
+                    sh """
+                        echo "deploying"
+                    """
+                }
             }
         }
     }
