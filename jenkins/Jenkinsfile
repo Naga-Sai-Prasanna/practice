@@ -79,6 +79,11 @@
 
 //3.post-build
 
+
+
+
+
+
 pipeline {
     agent {
         node {
@@ -88,37 +93,36 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
+                script{
                     sh """
-                       echo "Building"
-                    """   
+                        echo "building"
+                    """
                 }
-                
             }
         }
         stage('Test') {
             steps {
-                script {
+                script{
                     sh """
-                       echo "Testing"
-                    """   
-                
+                        echo "testing"
+                    """
+                }
             }
         }
         stage('Deploy') {
             steps {
-               script {
+                script{
                     sh """
-                       echo "Deploying"
-                    """   
-                
+                        echo "deploying"
+                    """
+                }
             }
         }
     }
-    // post build
+    
     post {
         always {
-            echo 'i will always say Hello again!'
+            echo 'I will always say Hello again!'
         }
     }
 }
