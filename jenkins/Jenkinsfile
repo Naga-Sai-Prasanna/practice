@@ -263,7 +263,7 @@
 
 
 
-# parameters
+// parameters
 
 pipeline {
     agent {
