@@ -40,7 +40,7 @@ pipeline {
             steps {
                   dir('catalogue') {
                         script{
-                            withAWS( credentials: 'aws-creds-id', region: "${region}") {
+                            withAWS( credentials: 'aws-creds', region: "${region}") {
                         
                             // commands here have AWS authentication 
                                 sh """
