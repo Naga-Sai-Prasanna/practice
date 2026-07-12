@@ -320,33 +320,39 @@ pipeline {
                 message "Should we continue?"
                 ok "Yes, we should."
                 submitter "alice,bob"
-                steps {
-                    script{
-                        sh """
-                            echo "deploying"
-                        """
+                parameters {
+                        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                    }
+                
+                }
+
+            steps {
+                script{
+                    sh """
+                        echo "deploying"
+                    """
                     }
                 }
             }
         }
     //postbuild always--even pipeline success or fail it will run
 
-        post {
-            always {
-                echo 'I will always say Hello again!'
-            }
-            success {
-                echo "pipeline success"
-            }
-            failure {
-                echo "pipeline failure"
-            }
-        
-        
+    post {
+        always {
+            echo 'I will always say Hello again!'
         }
-    }
+        success {
+            echo "pipeline success"
+        }
+        failure {
+            echo "pipeline failure"
+        }
 
+        
+    }
 }
+
+
 
 
 
