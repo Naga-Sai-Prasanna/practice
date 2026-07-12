@@ -17,21 +17,28 @@ pipeline {
     stages {
         stage('Read version') {
             steps {
-                script{
-                    // load and parse the json file
-                    def packageJson = readJSON file: 'package.json'
+                dir_('catalogue') {
+                    script{
+                        // load and parse the json file
+                        def packageJson = readJSON file: 'package.json'
 
-                    //Access fields directly
-                    appVersion = packageJson.version
-                    echo "Building version ${appVersion}"
-                }
+                        //Access fields directly
+                        appVersion = packageJson.version
+                        echo "Building version ${appVersion}" 
+                    }
+               
+                }   
+            
+            
             }
+       
+       
         }
         stage('Build image') {
             steps {
                 script{
                     sh """
-                        docker build -t catalogue:$appVersion
+                        docker build -t catalogue:$appVersion .
                     """    
                     
                 }
