@@ -1,7 +1,7 @@
 resource "aws_instance" "jenkins" {
   count = var.jenkins ? 1 : 0
   ami           = local.ami_id
-  instance_type = "t3.small"
+  instance_type = "t3.micro"
   subnet_id = local.public_subnet_id
   vpc_security_group_ids = [local.jenkins_sg_id]
   user_data = file("jenkins.sh")
@@ -83,13 +83,13 @@ resource "aws_instance" "runner" {
 resource "aws_instance" "sonarqube" {
   count = var.sonar ? 1 : 0
   ami           = local.sonar_ami_id
-  instance_type = "t3.large"
+  instance_type = "t3.micro"
   vpc_security_group_ids = [local.sonar_sg_id]
   subnet_id = local.public_subnet_id #replace your Subnet in default VPC
   key_name = "prasanna" 
   # need more for terraform
   root_block_device {
-    volume_size = 50
+    volume_size = 20
     volume_type = "gp3" # or "gp2", depending on your preference
   }
   tags = merge(
