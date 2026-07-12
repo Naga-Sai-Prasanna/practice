@@ -220,7 +220,7 @@ resource "aws_security_group_rule" "jenkins_agent_ssh" {
 }
 
 
-# sonar
+#sonar
 resource "aws_security_group_rule" "sonar_web" {
   type              = "ingress"
   from_port         = 9000
