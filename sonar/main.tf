@@ -71,7 +71,7 @@ resource "aws_instance" "sonarqube" {
     volume_type = "gp3"
   }
 
-  user_data = templatefile("${path.module}/user_data.sh.tpl", {
+  user_data = templatefile("${path.module}/user_data.sh", {
     sonar_db_password = var.sonar_db_password
   })
 
@@ -92,5 +92,5 @@ output "sonarqube_url" {
 
 output "ssh_command" {
   description = "Command to SSH into the instance"
-  value       = "ssh -i <path-to-your-key>.pem ubuntu@${aws_instance.sonarqube.public_ip}"
+  value       = "ssh -i prasanna.pem ubuntu@${aws_instance.sonarqube.public_ip}"
 }
