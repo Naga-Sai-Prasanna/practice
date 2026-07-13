@@ -17,7 +17,7 @@ variable "key_name" {
 
 variable "my_ip" {
   description = "Your public IP in CIDR form, e.g. 1.2.3.4/32 (used to restrict SSH and port 9000 access)"
-  type        = string
+  type        = list
 }
 
 variable "sonar_db_password" {
