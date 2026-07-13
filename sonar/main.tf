@@ -94,3 +94,16 @@ output "ssh_command" {
   description = "Command to SSH into the instance"
   value       = "ssh -i prasanna.pem ubuntu@${aws_instance.sonarqube.public_ip}"
 }
+
+resource "aws_eip" "sonarqube_eip" {
+  instance = aws_instance.sonarqube.id
+  domain   = "vpc"
+
+  tags = {
+    Name = "sonarqube-eip"
+  }
+}
+
+output "elastic_ip" {
+  value = aws_eip.sonarqube_eip.public_ip
+}
