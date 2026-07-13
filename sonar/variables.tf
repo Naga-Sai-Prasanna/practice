@@ -15,10 +15,10 @@ variable "key_name" {
   type        = string
 }
 
-variable "my_ip" {
-  description = "Your public IP in CIDR form, e.g. 1.2.3.4/32 (used to restrict SSH and port 9000 access)"
-  type        = list
-}
+# variable "my_ip" {
+#   description = "Your public IP in CIDR form, e.g. 1.2.3.4/32 (used to restrict SSH and port 9000 access)"
+#   type        = list
+# }
 
 variable "sonar_db_password" {
   description = "Password for the sonar Postgres DB user"

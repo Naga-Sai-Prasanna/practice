@@ -36,7 +36,7 @@ resource "aws_security_group" "sonarqube_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [var.my_ip]
+    cidr_blocks = [local.my_ip]
   }
 
   ingress {
@@ -44,7 +44,7 @@ resource "aws_security_group" "sonarqube_sg" {
     from_port   = 9000
     to_port     = 9000
     protocol    = "tcp"
-    cidr_blocks = [var.my_ip]
+    cidr_blocks = [local.my_ip]
   }
 
   egress {
