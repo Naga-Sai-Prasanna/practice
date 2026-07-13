@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "instance_type" {
   description = "EC2 instance type (needs >=2GB RAM for SonarQube)"
   type        = string
-  default     = "t3.small"
+  default     = "t3.micro"
 }
 
 variable "key_name" {
