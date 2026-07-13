@@ -107,3 +107,21 @@ resource "aws_eip" "sonarqube_eip" {
 output "elastic_ip" {
   value = aws_eip.sonarqube_eip.public_ip
 }
+
+
+data "aws_route53_zone" "main" {
+  name         = "prasanna.fun"   # replace with your actual domain, must end in a dot-free root, Route53 matches internally
+  private_zone = false
+}
+
+resource "aws_route53_record" "sonarqube" {
+  zone_id = data.aws_route53_zone.main.zone_id
+  name    = "sonarqube.prasanna.fun"   # the subdomain you want
+  type    = "A"
+  ttl     = 300
+  records = [aws_eip.sonarqube_eip.public_ip]
+}
+
+output "sonarqube_dns" {
+  value = "http://${aws_route53_record.sonarqube.name}:9000"
+}
