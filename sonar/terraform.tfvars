@@ -3,5 +3,5 @@ instance_type       = "t3.micro"
 key_name            = "prasanna"
 sonar_db_password   = "ChangeMe123!"
 domain_name         = "prasanna.fun"
-jenkins_ip          = "32.199.194.255/32"
+jenkins_ips = ["98.92.36.63/32", "34.232.44.246/32"]
 jenkins_webhook_url = "http://jenkins.prasanna.fun:8080/sonarqube-webhook/"

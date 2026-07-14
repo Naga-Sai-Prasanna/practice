@@ -65,7 +65,7 @@ resource "aws_security_group" "sonarqube_sg" {
     from_port   = 9000
     to_port     = 9000
     protocol    = "tcp"
-    cidr_blocks = [var.jenkins_ip]
+    cidr_blocks = var.jenkins_ips
   }
 
   egress {

@@ -27,9 +27,9 @@ variable "domain_name" {
   type        = string
 }
 
-variable "jenkins_ip" {
-  description = "Public IP of the Jenkins agent, in CIDR form, e.g. 32.199.194.255/32. Needed so Jenkins can reach SonarQube on port 9000."
-  type        = string
+variable "jenkins_ips" {
+  description = "Public IPs (CIDR form) that need to reach SonarQube on port 9000 — typically both the Jenkins controller/master AND the Jenkins agent, since they can be on different instances/VPCs with different public IPs. e.g. [\"98.92.36.63/32\", \"34.232.44.246/32\"]"
+  type        = list(string)
 }
 
 variable "jenkins_webhook_url" {
