@@ -1,6 +1,6 @@
 aws_region          = "us-east-1"
 instance_type       = "t3.micro"
-key_name            = "your-actual-keypair-name"
+key_name            = "prasanna"
 sonar_db_password   = "ChangeMe123!"
 domain_name         = "prasanna.fun"
 jenkins_ip          = "32.199.194.255/32"
