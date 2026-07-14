@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 
 variable "instance_type" {
-  description = "EC2 instance type (needs >=2GB RAM for SonarQube)"
+  description = "EC2 instance type. t3.micro is Free Tier eligible; SonarQube needs the swap file (added automatically) to run on its 1GB RAM."
   type        = string
   default     = "t3.micro"
 }
@@ -15,14 +15,25 @@ variable "key_name" {
   type        = string
 }
 
-# variable "my_ip" {
-#   description = "Your public IP in CIDR form, e.g. 1.2.3.4/32 (used to restrict SSH and port 9000 access)"
-#   type        = list
-# }
-
 variable "sonar_db_password" {
   description = "Password for the sonar Postgres DB user"
   type        = string
   default     = "sonar"
   sensitive   = true
+}
+
+variable "domain_name" {
+  description = "Root domain already hosted in Route53 (e.g. prasanna.fun). The record sonarqube.<domain_name> is created automatically."
+  type        = string
+}
+
+variable "jenkins_ip" {
+  description = "Public IP of the Jenkins agent, in CIDR form, e.g. 32.199.194.255/32. Needed so Jenkins can reach SonarQube on port 9000."
+  type        = string
+}
+
+variable "jenkins_webhook_url" {
+  description = "Full Jenkins webhook URL SonarQube should call after each analysis, e.g. http://jenkins.prasanna.fun:8080/sonarqube-webhook/. Leave empty string to skip webhook registration."
+  type        = string
+  default     = ""
 }

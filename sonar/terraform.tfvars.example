@@ -1,0 +1,7 @@
+aws_region          = "us-east-1"
+instance_type       = "t3.micro"
+key_name            = "your-ec2-keypair-name"
+sonar_db_password   = "ChangeMe123!"
+domain_name         = "prasanna.fun"
+jenkins_ip          = "32.199.194.255/32"
+jenkins_webhook_url = "http://jenkins.prasanna.fun:8080/sonarqube-webhook/"

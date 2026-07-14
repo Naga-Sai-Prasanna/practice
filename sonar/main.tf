@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+    http = {
+      source  = "hashicorp/http"
+      version = "~> 3.4"
+    }
   }
 }
 
@@ -11,7 +15,16 @@ provider "aws" {
   region = var.aws_region
 }
 
-# Get the latest Ubuntu 22.04 AMI
+# --- Auto-detect your current public IP (used to lock down SSH/9000 access) ---
+data "http" "my_ip" {
+  url = "https://ipv4.icanhazip.com"
+}
+
+locals {
+  my_ip = "${chomp(data.http.my_ip.response_body)}/32"
+}
+
+# --- Latest Ubuntu 22.04 AMI ---
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"] # Canonical
@@ -29,10 +42,10 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_security_group" "sonarqube_sg" {
   name        = "sonarqube-practice-sg"
-  description = "Allow SSH and SonarQube UI access from my IP only"
+  description = "Allow SSH and SonarQube UI access from my IP and Jenkins agent only"
 
   ingress {
-    description = "SSH"
+    description = "SSH - my laptop"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -40,11 +53,19 @@ resource "aws_security_group" "sonarqube_sg" {
   }
 
   ingress {
-    description = "SonarQube UI"
+    description = "SonarQube UI - my laptop"
     from_port   = 9000
     to_port     = 9000
     protocol    = "tcp"
     cidr_blocks = [local.my_ip]
+  }
+
+  ingress {
+    description = "SonarQube UI - Jenkins agent"
+    from_port   = 9000
+    to_port     = 9000
+    protocol    = "tcp"
+    cidr_blocks = [var.jenkins_ip]
   }
 
   egress {
@@ -71,8 +92,9 @@ resource "aws_instance" "sonarqube" {
     volume_type = "gp3"
   }
 
-  user_data = templatefile("${path.module}/user_data.sh", {
-    sonar_db_password = var.sonar_db_password
+  user_data = templatefile("${path.module}/user_data.sh.tpl", {
+    sonar_db_password  = var.sonar_db_password
+    jenkins_webhook_url = var.jenkins_webhook_url
   })
 
   tags = {
@@ -80,21 +102,7 @@ resource "aws_instance" "sonarqube" {
   }
 }
 
-output "public_ip" {
-  description = "Public IP of the SonarQube instance"
-  value       = aws_instance.sonarqube.public_ip
-}
-
-output "sonarqube_url" {
-  description = "URL to access SonarQube once it's finished booting (~3-5 min)"
-  value       = "http://${aws_instance.sonarqube.public_ip}:9000"
-}
-
-output "ssh_command" {
-  description = "Command to SSH into the instance"
-  value       = "ssh -i prasanna.pem ubuntu@${aws_instance.sonarqube.public_ip}"
-}
-
+# --- Elastic IP so the address survives every stop/start ---
 resource "aws_eip" "sonarqube_eip" {
   instance = aws_instance.sonarqube.id
   domain   = "vpc"
@@ -104,24 +112,36 @@ resource "aws_eip" "sonarqube_eip" {
   }
 }
 
-output "elastic_ip" {
-  value = aws_eip.sonarqube_eip.public_ip
-}
-
-
+# --- Route53 record pointing your subdomain at the Elastic IP ---
 data "aws_route53_zone" "main" {
-  name         = "prasanna.fun"   # replace with your actual domain, must end in a dot-free root, Route53 matches internally
+  name         = var.domain_name
   private_zone = false
 }
 
 resource "aws_route53_record" "sonarqube" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "sonarqube.prasanna.fun"   # the subdomain you want
+  name    = "sonarqube.${var.domain_name}"
   type    = "A"
   ttl     = 300
   records = [aws_eip.sonarqube_eip.public_ip]
 }
 
-output "sonarqube_dns" {
-  value = "http://${aws_route53_record.sonarqube.name}:9000"
+output "public_ip" {
+  description = "Elastic IP of the SonarQube instance (static, survives stop/start)"
+  value       = aws_eip.sonarqube_eip.public_ip
+}
+
+output "sonarqube_url_ip" {
+  description = "SonarQube URL via IP"
+  value       = "http://${aws_eip.sonarqube_eip.public_ip}:9000"
+}
+
+output "sonarqube_url_dns" {
+  description = "SonarQube URL via DNS"
+  value       = "http://sonarqube.${var.domain_name}:9000"
+}
+
+output "ssh_command" {
+  description = "Command to SSH into the instance"
+  value       = "ssh -i <path-to-your-key> ubuntu@${aws_eip.sonarqube_eip.public_ip}"
 }
