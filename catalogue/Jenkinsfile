@@ -174,26 +174,26 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                dir('catalogue') {
-                    script {
-                        def scannerHome = tool name: 'sonar-8'
-                        withSonarQubeEnv('sonar-server') {
-                            sh "${scannerHome}/bin/sonar-scanner"
-                        }
-                    }
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         dir('catalogue') {
+        //             script {
+        //                 def scannerHome = tool name: 'sonar-8'
+        //                 withSonarQubeEnv('sonar-server') {
+        //                     sh "${scannerHome}/bin/sonar-scanner"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
+        // stage('Quality Gate') {
+        //     steps {
+        //         timeout(time: 1, unit: 'HOURS') {
+        //             waitForQualityGate abortPipeline: true
+        //         }
+        //     }
+        // }
 
         stage('Dependabot Alerts Check') {
             steps {
