@@ -79,7 +79,7 @@ systemctl start sonarqube
 echo "Waiting for SonarQube to become available..."
 for i in $(seq 1 60); do
   STATUS=$(curl -s -u admin:admin http://localhost:9000/api/system/status | grep -o '"status":"[A-Z]*"' || true)
-  if [[ "$STATUS" == '"status":"UP"' ]]; then
+  if [[ "$${STATUS}" == '"status":"UP"' ]]; then
     echo "SonarQube is UP"
     break
   fi
@@ -91,36 +91,36 @@ GATE_NAME="practice-quality-gate"
 
 GATE_ID=$(curl -s -u admin:admin -X POST \
   "http://localhost:9000/api/qualitygates/create" \
-  -d "name=${GATE_NAME}" | grep -o '"id":[0-9]*' | grep -o '[0-9]*' || true)
+  -d "name=$${GATE_NAME}" | grep -o '"id":[0-9]*' | grep -o '[0-9]*' || true)
 
-if [ -z "$GATE_ID" ]; then
+if [ -z "$${GATE_ID}" ]; then
   GATE_ID=$(curl -s -u admin:admin \
-    "http://localhost:9000/api/qualitygates/show?name=${GATE_NAME}" | grep -o '"id":[0-9]*' | grep -o '[0-9]*' || true)
+    "http://localhost:9000/api/qualitygates/show?name=$${GATE_NAME}" | grep -o '"id":[0-9]*' | grep -o '[0-9]*' || true)
 fi
 
-if [ -n "$GATE_ID" ]; then
+if [ -n "$${GATE_ID}" ]; then
   curl -s -u admin:admin -X POST "http://localhost:9000/api/qualitygates/create_condition" \
-    -d "gateId=${GATE_ID}&metric=new_coverage&op=LT&error=80"
+    -d "gateId=$${GATE_ID}&metric=new_coverage&op=LT&error=80"
 
   curl -s -u admin:admin -X POST "http://localhost:9000/api/qualitygates/create_condition" \
-    -d "gateId=${GATE_ID}&metric=new_duplicated_lines_density&op=GT&error=3"
+    -d "gateId=$${GATE_ID}&metric=new_duplicated_lines_density&op=GT&error=3"
 
   curl -s -u admin:admin -X POST "http://localhost:9000/api/qualitygates/create_condition" \
-    -d "gateId=${GATE_ID}&metric=new_maintainability_rating&op=GT&error=1"
+    -d "gateId=$${GATE_ID}&metric=new_maintainability_rating&op=GT&error=1"
 
   curl -s -u admin:admin -X POST "http://localhost:9000/api/qualitygates/create_condition" \
-    -d "gateId=${GATE_ID}&metric=new_reliability_rating&op=GT&error=1"
+    -d "gateId=$${GATE_ID}&metric=new_reliability_rating&op=GT&error=1"
 
   curl -s -u admin:admin -X POST "http://localhost:9000/api/qualitygates/create_condition" \
-    -d "gateId=${GATE_ID}&metric=new_security_rating&op=GT&error=1"
+    -d "gateId=$${GATE_ID}&metric=new_security_rating&op=GT&error=1"
 
   curl -s -u admin:admin -X POST "http://localhost:9000/api/qualitygates/create_condition" \
-    -d "gateId=${GATE_ID}&metric=new_security_hotspots_reviewed&op=LT&error=100"
+    -d "gateId=$${GATE_ID}&metric=new_security_hotspots_reviewed&op=LT&error=100"
 
   curl -s -u admin:admin -X POST "http://localhost:9000/api/qualitygates/set_as_default" \
-    -d "id=${GATE_ID}"
+    -d "id=$${GATE_ID}"
 
-  echo "Quality gate '${GATE_NAME}' created with conditions and set as default."
+  echo "Quality gate '$${GATE_NAME}' created with conditions and set as default."
 else
   echo "WARNING: Could not determine gate ID — quality gate setup skipped."
 fi
