@@ -59,3 +59,7 @@ output "public_ip" {
 output "url" {
   value = "http://${aws_instance.sonarqube.public_ip}:9000"
 }
+
+output "dns_url" {
+  value = "http://${aws_route53_record.sonarqube.name}:9000"
+}
